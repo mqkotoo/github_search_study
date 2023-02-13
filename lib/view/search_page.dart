@@ -52,15 +52,14 @@ class SearchPage extends StatelessWidget {
           Divider(color: Colors.black12),
           // total count
           Padding(
-            padding: const EdgeInsets.only(right: 10),
+            padding: EdgeInsets.only(right: 10),
             child: Align(
               alignment: AlignmentDirectional.centerEnd,
-              child: SafeArea(child: Text("result: 12345")),
+              child: Text("result: 12345"),
             ),
           ),
 
           Expanded(
-            flex: 8,
             child: ListView.separated(
                 itemCount: 15,
                 itemBuilder: (context, index) => _listItem(context),
