@@ -13,7 +13,6 @@ class RepositoryDataModel with _$RepositoryDataModel {
 
   factory RepositoryDataModel.fromJson(Map<String, dynamic> json) =>
       _$RepositoryDataModelFromJson(json);
-
 }
 
 @freezed
