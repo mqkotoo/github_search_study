@@ -25,6 +25,7 @@ class SearchPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
             child: TextFormField(
               decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search,color: Colors.grey),
                 fillColor: const Color(0xffe1eedf),
                 filled: true,
                 enabledBorder: OutlineInputBorder(
@@ -36,7 +37,7 @@ class SearchPage extends StatelessWidget {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                   borderSide: const BorderSide(
-                    color: Colors.black87,
+                    color: Colors.grey,
                   ),
                 ),
               ),
