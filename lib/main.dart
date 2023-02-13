@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:github_search_study/view/search_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,8 +10,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return const MaterialApp(
+      home: SearchPage(),
     );
   }
 }
