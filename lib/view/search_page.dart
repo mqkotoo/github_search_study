@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'detail_page.dart';
+
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
 
@@ -61,7 +63,7 @@ class SearchPage extends StatelessWidget {
             flex: 8,
             child: ListView.separated(
                 itemCount: 15,
-                itemBuilder: (context, index) => _listItem(),
+                itemBuilder: (context, index) => _listItem(context),
                 separatorBuilder: (context, index) => const Divider(
                       color: Color(0xffBBBBBB),
                     )),
@@ -71,8 +73,14 @@ class SearchPage extends StatelessWidget {
     );
   }
 
-  Widget _listItem() {
+  Widget _listItem(context) {
     return ListTile(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DetailPage()),
+        );
+      },
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
