@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../repository/data_repository.dart';
 import 'detail_page.dart';
 
 class SearchPage extends StatelessWidget {
@@ -75,10 +76,11 @@ class SearchPage extends StatelessWidget {
   Widget _listItem(context) {
     return ListTile(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => DetailPage()),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => DetailPage()),
+        // );
+        DataRepository().getData("Flutter");
       },
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
