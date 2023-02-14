@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:github_search_study/domain/repository_data_model.dart';
 
+import 'package:github_search_study/domain/repository_data_model.dart';
 import 'mock_data.dart';
 
 void main() {
