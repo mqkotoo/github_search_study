@@ -15,6 +15,7 @@ class DataRepository{
     }
 
     final jsonData = json.decode(response.body);
+    print(json.encode(RepositoryDataModel.fromJson(jsonData)));
 
     return RepositoryDataModel.fromJson(jsonData);
   }
