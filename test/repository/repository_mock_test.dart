@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:github_search_study/domain/repository_data_model.dart';
 import 'package:github_search_study/repository/data_repository.dart';
 import 'package:mockito/annotations.dart';
@@ -20,8 +19,8 @@ void main() {
     final client = MockClient();
     when(client.get(any)).thenAnswer((_) async => http.Response(data, 200));
 
-    //  DI setting
-    GetIt.I.registerLazySingleton<http.Client>(() => client);
+    // //  DI setting
+    // GetIt.I.registerLazySingleton<http.Client>(() => client);
 
     final dataRepository = DataRepository();
     final result = await dataRepository.getData("flutter");
