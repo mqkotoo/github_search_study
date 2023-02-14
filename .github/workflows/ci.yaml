@@ -3,9 +3,8 @@ on:
   pull_request:
     branch:
       - main
-  push:
-    branches:
-      - main
+      - develop
+
 
 jobs:
   widget_test:

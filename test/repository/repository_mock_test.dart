@@ -8,7 +8,6 @@ import 'package:mockito/mockito.dart';
 
 import 'package:github_search_study/domain/repository_data_model.dart';
 import 'package:github_search_study/main.dart';
-import 'package:github_search_study/repository/data_repository.dart';
 import 'package:github_search_study/repository/http_client.dart';
 import '../repository/repository_mock_data.dart';
 import 'repository_mock_test.mocks.dart';

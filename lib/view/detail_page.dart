@@ -22,7 +22,7 @@ class DetailPage extends StatelessWidget {
       body: Column(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.only(top: 20),
             child: ClipOval(
               child: Image.network(
                 "https://avatars.githubusercontent.com/u/14101776?v=4",
@@ -31,25 +31,25 @@ class DetailPage extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
             child: Text(
               "flutter/flutter",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.fromLTRB(20, 0, 20, 5),
             child: Text(
               "これはFlutterのリポジトリです。FlutterはGOOGLEさんが開発したいい感じのフレームワークです。",
               style: TextStyle(color: Colors.black54, fontSize: 13),
             ),
           ),
-          Divider(),
+          const Divider(),
 
           //リポジトリのスター数など
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             child: Column(
               children: [
                 verDetailElement(
@@ -98,19 +98,19 @@ class DetailPage extends StatelessWidget {
   Widget verDetailElement(
       {iconBackgroundColor, icon, iconColor, elementLabel, element}) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.only(bottom: 20),
       child: Row(
         children: [
           CircleAvatar(
             backgroundColor: iconBackgroundColor,
             child: Icon(icon, size: 20, color: iconColor),
           ),
-          SizedBox(width: 12),
-          Text(elementLabel, style: TextStyle(fontSize: 16)),
+          const SizedBox(width: 12),
+          Text(elementLabel, style: const TextStyle(fontSize: 16)),
           const Spacer(),
           Text(
             element,
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           )
         ],
       ),
