@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../main.dart';
 import '../repository/data_repository.dart';
-import 'detail_page.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPage extends ConsumerWidget {
   const SearchPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    // final dataRepository = ref.watch(dataRepositoryProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xffFCFDF6),
@@ -75,12 +77,11 @@ class SearchPage extends StatelessWidget {
 
   Widget _listItem(context) {
     return ListTile(
-      onTap: () {
+      onTap: () async{
         // Navigator.push(
         //   context,
         //   MaterialPageRoute(builder: (context) => DetailPage()),
         // );
-        DataRepository().getData("Flutter");
       },
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,4 +108,6 @@ class SearchPage extends StatelessWidget {
       ),
     );
   }
+
+
 }

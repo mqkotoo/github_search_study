@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_search_study/repository/data_repository.dart';
+import 'package:github_search_study/repository/http_client.dart';
 import 'package:github_search_study/view/search_page.dart';
-import 'package:http/http.dart' as http;
+
+
+final dataRepositoryProvider = Provider.autoDispose<DataRepository>((ref) {
+  return DataRepository(client: ref.watch(httpClientProvider));
+});
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
