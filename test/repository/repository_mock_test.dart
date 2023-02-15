@@ -24,7 +24,7 @@ void main() {
       overrides: [httpClientProvider.overrideWithValue(mockClient)],
     );
 
-    //上でオーバーライドされたHTTPクライアントのインスタンスをみれてる
+    //上でオーバーライドされたmockのHTTPクライアントのインスタンスをみれてる
     final result =
         await container.read(dataRepositoryProvider).getData("flutter");
 

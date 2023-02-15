@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
+
+import '../main.dart';
+import 'controller/controllers.dart';
 
 class SearchPage extends ConsumerWidget {
   const SearchPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final dataRepository = ref.watch(dataRepositoryProvider);
+    final repoData = ref.watch(apiFamilyProvider(ref.watch(inputRepoNameProvider)));
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xffFCFDF6),
@@ -46,36 +50,76 @@ class SearchPage extends ConsumerWidget {
               ),
               //入力キーボードのdone→searchに変更
               textInputAction: TextInputAction.search,
-              //search押したらデータ取得
-              // onFieldSubmitted: (text) => print(text),
+              //search押したらデータ取得 データ渡す
+              // onFieldSubmitted: (text) => dataRepository.getData(text),
+              onFieldSubmitted: (text) => ref.read(inputRepoNameProvider.notifier).update((state) => text),
             ),
           ),
           const Divider(color: Colors.black12),
           // total count
-          const Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: Align(
-              alignment: AlignmentDirectional.centerEnd,
-              child: Text("result: 12345"),
+          (() {
+            //初期状態
+            if(ref.watch(inputRepoNameProvider) == "" ){
+              //この場合は「リポジトリ名を入力してください」みたいな
+              return Text('初期状態');
+            }
+            if (repoData.value != null && repoData.value!.totalCount != 0) {
+              //resultをカンマ区切りで表示
+              String totalCount =
+              NumberFormat('#,##0').format(repoData.value!.totalCount);
+              return Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: Text("result: $totalCount"),
+                ),
+              );
+            }
+            if (repoData.value != null && repoData.value!.totalCount == 0) {
+              //この場合は「見つかりませんでした」みたいな
+              return const Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  //横画面にした時にノッチで隠れないようにsafeareaで囲む
+                  child: Text("result: 0"),
+                ),
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
+          })(),
+
+          Expanded(
+            flex: 8,
+            child: repoData.when(
+              data: (data) => ListView.separated(
+                  itemCount: data.items.length,
+                  itemBuilder: (context, index) => _listItem(
+                    fullName: data.items[index].fullName,
+                    description: data.items[index].description,
+                    onTap: () {
+                    },
+                  ),
+                  separatorBuilder: (context, index) => const Divider(
+                    color: Color(0xffBBBBBB),
+                  )),
+              error: (error, stack) => Text(error.toString()),
+              loading: () => const Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
           ),
 
-          Expanded(
-            child: ListView.separated(
-                itemCount: 15,
-                itemBuilder: (context, index) => _listItem(context),
-                separatorBuilder: (context, index) => const Divider(
-                      color: Color(0xffBBBBBB),
-                    )),
-          )
         ],
       ),
     );
   }
 
-  Widget _listItem(context) {
+  Widget _listItem({fullName,description,onTap}) {
     return ListTile(
       onTap: () async {
+        //画面遷移する処理と、プロバイダーにそのインデックスの情報を渡す処理をする
         // Navigator.push(
         //   context,
         //   MaterialPageRoute(builder: (context) => DetailPage()),
@@ -83,21 +127,21 @@ class SearchPage extends ConsumerWidget {
       },
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           Padding(
             padding: EdgeInsets.only(bottom: 5),
-            child: Text("flutter/flutter",
+            child: Text(fullName,
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
           ),
         ],
       ),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const <Widget>[
+        children: <Widget>[
           Padding(
             padding: EdgeInsets.only(bottom: 5),
             child: Text(
-              "description--------------------------------------------あいうろあいうえお",
+              description,
               overflow: TextOverflow.ellipsis,
               maxLines: 3,
             ),
