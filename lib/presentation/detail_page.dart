@@ -34,80 +34,82 @@ class DetailPage extends StatelessWidget {
         iconTheme: const IconThemeData(
           color: Colors.black,
         ),
-        title: const Text("Repo Detail"),
+        title: const Text("Repo Detail",key: Key("detailAppBar")),
       ),
-      body: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: ClipOval(
-              child: Image.network(
-                repoData.owner.avatarUrl,
-                width: 120,
-                height: 120,
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: ClipOval(
+                child: Image.network(
+                  repoData.owner.avatarUrl,
+                  width: 120,
+                  height: 120,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Text(
-              repoData.fullName,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Text(
+                repoData.fullName,
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 5),
-            child: Text(
-              repoData.description ?? "No Description",
-              style: const TextStyle(color: Colors.black54, fontSize: 13),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 5),
+              child: Text(
+                repoData.description ?? "No Description",
+                style: const TextStyle(color: Colors.black54, fontSize: 13),
+              ),
             ),
-          ),
-          const Divider(),
+            const Divider(),
 
-          //リポジトリのスター数など
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: Column(
-              children: [
-                verDetailElement(
-                  icon: Icons.language,
-                  elementLabel: "Language",
-                  element: repoData.language ?? "No Language",
-                  iconBackgroundColor: Colors.blueAccent,
-                  iconColor: Colors.white,
-                ),
-                verDetailElement(
-                  icon: Icons.star_border,
-                  elementLabel: "Star",
-                  element: starsCount,
-                  iconBackgroundColor: Colors.yellowAccent,
-                  iconColor: Colors.black87,
-                ),
-                verDetailElement(
-                  icon: Icons.remove_red_eye_outlined,
-                  elementLabel: "Watch",
-                  element: watchersCount,
-                  iconBackgroundColor: Colors.brown,
-                  iconColor: Colors.white,
-                ),
-                verDetailElement(
-                  icon: Icons.fork_right_sharp,
-                  elementLabel: "Fork",
-                  element: forksCount,
-                  iconBackgroundColor: Colors.purpleAccent,
-                  iconColor: Colors.white,
-                ),
-                verDetailElement(
-                  icon: Icons.info_outline,
-                  elementLabel: "Issue",
-                  element: issuesCount,
-                  iconBackgroundColor: Colors.greenAccent,
-                  iconColor: Colors.white,
-                ),
-              ],
+            //リポジトリのスター数など
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+              child: Column(
+                children: [
+                  verDetailElement(
+                    icon: Icons.language,
+                    elementLabel: "Language",
+                    element: repoData.language ?? "No Language",
+                    iconBackgroundColor: Colors.blueAccent,
+                    iconColor: Colors.white,
+                  ),
+                  verDetailElement(
+                    icon: Icons.star_border,
+                    elementLabel: "Star",
+                    element: starsCount,
+                    iconBackgroundColor: Colors.yellowAccent,
+                    iconColor: Colors.black87,
+                  ),
+                  verDetailElement(
+                    icon: Icons.remove_red_eye_outlined,
+                    elementLabel: "Watch",
+                    element: watchersCount,
+                    iconBackgroundColor: Colors.brown,
+                    iconColor: Colors.white,
+                  ),
+                  verDetailElement(
+                    icon: Icons.fork_right_sharp,
+                    elementLabel: "Fork",
+                    element: forksCount,
+                    iconBackgroundColor: Colors.purpleAccent,
+                    iconColor: Colors.white,
+                  ),
+                  verDetailElement(
+                    icon: Icons.info_outline,
+                    elementLabel: "Issue",
+                    element: issuesCount,
+                    iconBackgroundColor: Colors.greenAccent,
+                    iconColor: Colors.white,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
