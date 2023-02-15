@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../main.dart';
 import 'controller/controllers.dart';
 
 class SearchPage extends ConsumerWidget {
@@ -13,6 +12,7 @@ class SearchPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final repoData = ref.watch(apiFamilyProvider(ref.watch(inputRepoNameProvider)));
     return Scaffold(
+      backgroundColor: const Color(0xffFCFDF6),
       appBar: AppBar(
         backgroundColor: const Color(0xffFCFDF6),
         elevation: 0,
@@ -116,35 +116,24 @@ class SearchPage extends ConsumerWidget {
     );
   }
 
-  Widget _listItem({fullName,description,onTap}) {
+  Widget _listItem({required String fullName,String? description,required void Function() onTap}) {
     return ListTile(
-      onTap: () async {
-        //画面遷移する処理と、プロバイダーにそのインデックスの情報を渡す処理をする
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => DetailPage()),
-        // );
-      },
+      onTap: onTap,
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.only(bottom: 5),
-            child: Text(fullName,
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-          ),
+          Text(fullName,
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 5,)
         ],
       ),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(bottom: 5),
-            child: Text(
-              description,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 3,
-            ),
+          Text(
+            description ?? "No Description",
+            overflow: TextOverflow.ellipsis,
+            maxLines: 3,
           ),
         ],
       ),
