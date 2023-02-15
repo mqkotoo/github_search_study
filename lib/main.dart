@@ -1,10 +1,13 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// Project imports:
+import 'package:github_search_study/presentation/search_page.dart';
 import 'package:github_search_study/repository/data_repository.dart';
 import 'package:github_search_study/repository/http_client.dart';
-import 'package:github_search_study/view/search_page.dart';
 
 final dataRepositoryProvider = Provider.autoDispose<DataRepository>((ref) {
   return DataRepository(client: ref.watch(httpClientProvider));

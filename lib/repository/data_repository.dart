@@ -1,7 +1,10 @@
+// Dart imports:
 import 'dart:convert';
 
+// Package imports:
 import 'package:http/http.dart' as http;
 
+// Project imports:
 import '../domain/repository_data_model.dart';
 
 class DataRepository {
@@ -16,7 +19,7 @@ class DataRepository {
     http.Response response = await client.get(apiUri);
 
     if (response.statusCode != 200) {
-      throw Exception("No repository data: $repositoryName");
+      throw Exception("Status Code: ${response.statusCode}");
     }
 
     final jsonData = json.decode(response.body);
