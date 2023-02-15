@@ -1,6 +1,4 @@
-
 class MockData {
-
   static const String jsonData = '''
  {
   "total_count": 40,
@@ -113,5 +111,4 @@ class MockData {
   ]
 }
   ''';
-
 }

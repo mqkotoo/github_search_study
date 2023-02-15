@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 class SearchPage extends ConsumerWidget {
   const SearchPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // final dataRepository = ref.watch(dataRepositoryProvider);
     return Scaffold(
       appBar: AppBar(
@@ -29,7 +28,7 @@ class SearchPage extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
             child: TextFormField(
               decoration: InputDecoration(
-                prefixIcon: const Icon(Icons.search,color: Colors.grey),
+                prefixIcon: const Icon(Icons.search, color: Colors.grey),
                 fillColor: const Color(0xffe1eedf),
                 filled: true,
                 enabledBorder: OutlineInputBorder(
@@ -76,7 +75,7 @@ class SearchPage extends ConsumerWidget {
 
   Widget _listItem(context) {
     return ListTile(
-      onTap: () async{
+      onTap: () async {
         // Navigator.push(
         //   context,
         //   MaterialPageRoute(builder: (context) => DetailPage()),
@@ -107,6 +106,4 @@ class SearchPage extends ConsumerWidget {
       ),
     );
   }
-
-
 }
