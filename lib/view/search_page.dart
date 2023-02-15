@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../main.dart';
-import '../repository/data_repository.dart';
-
 class SearchPage extends ConsumerWidget {
   const SearchPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // final dataRepository = ref.watch(dataRepositoryProvider);
     return Scaffold(
       appBar: AppBar(
@@ -31,7 +28,7 @@ class SearchPage extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
             child: TextFormField(
               decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search,color: Colors.grey),
+                prefixIcon: const Icon(Icons.search, color: Colors.grey),
                 fillColor: const Color(0xffe1eedf),
                 filled: true,
                 enabledBorder: OutlineInputBorder(
@@ -50,12 +47,12 @@ class SearchPage extends ConsumerWidget {
               //入力キーボードのdone→searchに変更
               textInputAction: TextInputAction.search,
               //search押したらデータ取得
-              onFieldSubmitted: (text) => print(text),
+              // onFieldSubmitted: (text) => print(text),
             ),
           ),
-          Divider(color: Colors.black12),
+          const Divider(color: Colors.black12),
           // total count
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(right: 10),
             child: Align(
               alignment: AlignmentDirectional.centerEnd,
@@ -78,7 +75,7 @@ class SearchPage extends ConsumerWidget {
 
   Widget _listItem(context) {
     return ListTile(
-      onTap: () async{
+      onTap: () async {
         // Navigator.push(
         //   context,
         //   MaterialPageRoute(builder: (context) => DetailPage()),
@@ -86,7 +83,7 @@ class SearchPage extends ConsumerWidget {
       },
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: const [
           Padding(
             padding: EdgeInsets.only(bottom: 5),
             child: Text("flutter/flutter",
@@ -109,6 +106,4 @@ class SearchPage extends ConsumerWidget {
       ),
     );
   }
-
-
 }
