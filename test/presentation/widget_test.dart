@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:github_search_study/main.dart';
-import 'package:github_search_study/repository/http_client.dart';
-import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
+import 'package:mockito/mockito.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 
+import 'package:github_search_study/main.dart';
+import 'package:github_search_study/repository/http_client.dart';
 import '../repository/repository_mock_data.dart';
 import '../repository/repository_mock_test.mocks.dart';
 
-
 void main() {
   testWidgets('入力、画面遷移ができるかのテスト', (WidgetTester tester) async {
-
     const data = RepositoryMockData.jsonData;
     final mockClient = MockClient();
     when(mockClient.get(any)).thenAnswer((_) async => http.Response(data, 200));
 
-    mockNetworkImagesFor(() async{
+    mockNetworkImagesFor(() async {
       await tester.pumpWidget(
         ProviderScope(
             overrides: [httpClientProvider.overrideWithValue(mockClient)],

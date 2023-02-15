@@ -15,12 +15,11 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('検索と画面遷移の統合テスト', (tester) async {
-
     const data = RepositoryMockData.jsonData;
     final mockClient = MockClient();
     when(mockClient.get(any)).thenAnswer((_) async => http.Response(data, 200));
 
-    await mockNetworkImagesFor(() async{
+    await mockNetworkImagesFor(() async {
       await tester.pumpWidget(
         ProviderScope(
             overrides: [httpClientProvider.overrideWithValue(mockClient)],
@@ -59,6 +58,5 @@ void main() {
       expect(find.byKey(const Key("detailAppBar")), findsOneWidget);
       expect(find.text("Fork"), findsOneWidget);
     });
-
   });
 }

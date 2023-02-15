@@ -1,10 +1,7 @@
-// Dart imports:
 import 'dart:convert';
 
-// Package imports:
 import 'package:flutter_test/flutter_test.dart';
 
-// Project imports:
 import 'package:github_search_study/domain/repository_data_model.dart';
 import 'mock_data.dart';
 

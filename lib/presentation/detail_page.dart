@@ -1,10 +1,7 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
 import 'package:intl/intl.dart';
 
-// Project imports:
 import '../domain/repository_data_model.dart';
 
 class DetailPage extends StatelessWidget {
@@ -34,7 +31,7 @@ class DetailPage extends StatelessWidget {
         iconTheme: const IconThemeData(
           color: Colors.black,
         ),
-        title: const Text("Repo Detail",key: Key("detailAppBar")),
+        title: const Text("Repo Detail", key: Key("detailAppBar")),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -53,7 +50,8 @@ class DetailPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: Text(
                 repoData.fullName,
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
             ),
             Padding(
