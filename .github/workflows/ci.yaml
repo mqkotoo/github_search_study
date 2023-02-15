@@ -5,6 +5,11 @@ on:
       - main
       - develop
 
+  push:
+    branch:
+      - main
+      - develop
+
 jobs:
   widget_test:
     name: Run flutter test and analyze
