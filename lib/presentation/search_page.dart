@@ -1,11 +1,8 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-// Project imports:
 import 'package:github_search_study/presentation/detail_page.dart';
 import 'controller/controllers.dart';
 
@@ -38,7 +35,10 @@ class SearchPage extends ConsumerWidget {
           iconTheme: const IconThemeData(
             color: Colors.black,
           ),
-          title: const Text("GitHub Repo Search"),
+          title: const Text(
+            "GitHub Repo Search",
+            key: Key("searchAppBar"),
+          ),
         ),
         body: Column(
           children: <Widget>[
@@ -46,6 +46,7 @@ class SearchPage extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
               //search field
               child: TextFormField(
+                key: const Key("inputForm"),
                 controller: textController,
                 onChanged: (text) {
                   ref
@@ -56,6 +57,7 @@ class SearchPage extends ConsumerWidget {
                   prefixIcon: const Icon(Icons.search, color: Colors.grey),
                   suffixIcon: isClearVisible
                       ? IconButton(
+                          key: const Key("clearButton"),
                           icon: const Icon(Icons.clear),
                           onPressed: () {
                             textController.clear();
