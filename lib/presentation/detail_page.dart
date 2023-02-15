@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import '../domain/repository_data_model.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({Key? key}) : super(key: key);
+  const DetailPage({
+    required this.repoData,
+    Key? key
+  }) : super(key: key);
+
+  final RepositoryDataItems repoData;
 
   @override
   Widget build(BuildContext context) {
+
+    // データの数をカンマ区切りで表示
+    final starsCount = NumberFormat('#,##0').format(repoData.stargazersCount);
+    final watchersCount = NumberFormat('#,##0').format(repoData.watchersCount);
+    final forksCount = NumberFormat('#,##0').format(repoData.forksCount);
+    final issuesCount = NumberFormat('#,##0').format(repoData.openIssuesCount);
+
     return Scaffold(
       backgroundColor: const Color(0xffFCFDF6),
       appBar: AppBar(
@@ -26,23 +41,23 @@ class DetailPage extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20),
             child: ClipOval(
               child: Image.network(
-                "https://avatars.githubusercontent.com/u/14101776?v=4",
+                repoData.owner.avatarUrl,
                 width: 120,
                 height: 120,
               ),
             ),
           ),
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
             child: Text(
-              "flutter/flutter",
+              repoData.fullName,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
           ),
-          const Padding(
+          Padding(
             padding: EdgeInsets.fromLTRB(20, 0, 20, 5),
             child: Text(
-              "これはFlutterのリポジトリです。FlutterはGOOGLEさんが開発したいい感じのフレームワークです。",
+              repoData.description ?? "No Description",
               style: TextStyle(color: Colors.black54, fontSize: 13),
             ),
           ),
@@ -56,35 +71,35 @@ class DetailPage extends StatelessWidget {
                 verDetailElement(
                   icon: Icons.language,
                   elementLabel: "Language",
-                  element: "dart",
+                  element: repoData.language,
                   iconBackgroundColor: Colors.blueAccent,
                   iconColor: Colors.white,
                 ),
                 verDetailElement(
                   icon: Icons.star_border,
                   elementLabel: "Star",
-                  element: 100.toString(),
+                  element: starsCount,
                   iconBackgroundColor: Colors.yellowAccent,
                   iconColor: Colors.black87,
                 ),
                 verDetailElement(
                   icon: Icons.remove_red_eye_outlined,
                   elementLabel: "Watch",
-                  element: 200.toString(),
+                  element: watchersCount,
                   iconBackgroundColor: Colors.brown,
                   iconColor: Colors.white,
                 ),
                 verDetailElement(
                   icon: Icons.fork_right_sharp,
                   elementLabel: "Fork",
-                  element: 300.toString(),
+                  element: forksCount,
                   iconBackgroundColor: Colors.purpleAccent,
                   iconColor: Colors.white,
                 ),
                 verDetailElement(
                   icon: Icons.info_outline,
                   elementLabel: "Issue",
-                  element: 400.toString(),
+                  element: issuesCount,
                   iconBackgroundColor: Colors.greenAccent,
                   iconColor: Colors.white,
                 ),

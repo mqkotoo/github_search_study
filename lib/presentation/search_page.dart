@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_search_study/presentation/detail_page.dart';
 import 'package:intl/intl.dart';
 
 import 'controller/controllers.dart';
@@ -81,7 +82,6 @@ class SearchPage extends ConsumerWidget {
                 padding: EdgeInsets.only(right: 10),
                 child: Align(
                   alignment: AlignmentDirectional.centerEnd,
-                  //横画面にした時にノッチで隠れないようにsafeareaで囲む
                   child: Text("result: 0"),
                 ),
               );
@@ -99,6 +99,10 @@ class SearchPage extends ConsumerWidget {
                     fullName: data.items[index].fullName,
                     description: data.items[index].description,
                     onTap: () {
+                      Navigator.push(context,
+                        MaterialPageRoute(builder: (context)
+                        => DetailPage(repoData: data.items[index])),
+                      );
                     },
                   ),
                   separatorBuilder: (context, index) => const Divider(
