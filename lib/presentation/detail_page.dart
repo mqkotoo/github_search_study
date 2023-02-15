@@ -21,6 +21,7 @@ class DetailPage extends StatelessWidget {
     final issuesCount = NumberFormat('#,##0').format(repoData.openIssuesCount);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xffFCFDF6),
       appBar: AppBar(
         backgroundColor: const Color(0xffFCFDF6),
