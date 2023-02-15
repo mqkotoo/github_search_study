@@ -1,6 +1,15 @@
 include: package:flutter_lints/flutter.yaml
 
+
+#freezedとjsonSerializableで出る警告無視
+analyzer:
+  exclude:
+    - lib/domain/repository_data_model.g.dart
+
+
 linter:
 
   rules:
+
+
 
