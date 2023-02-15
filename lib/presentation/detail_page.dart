@@ -72,7 +72,7 @@ class DetailPage extends StatelessWidget {
                 verDetailElement(
                   icon: Icons.language,
                   elementLabel: "Language",
-                  element: repoData.language,
+                  element: repoData.language ?? "No Language",
                   iconBackgroundColor: Colors.blueAccent,
                   iconColor: Colors.white,
                 ),
