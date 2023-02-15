@@ -1,7 +1,11 @@
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_search_study/domain/repository_data_model.dart';
 
+// Package imports:
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+// Project imports:
+import 'package:github_search_study/domain/repository_data_model.dart';
 import '../../main.dart';
 
 //入力された文字を管理する

@@ -1,9 +1,12 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_search_study/presentation/detail_page.dart';
 import 'package:intl/intl.dart';
 
+// Project imports:
+import 'package:github_search_study/presentation/detail_page.dart';
 import 'controller/controllers.dart';
 
 class SearchPage extends ConsumerWidget {
@@ -124,8 +127,9 @@ class SearchPage extends ConsumerWidget {
               flex: 8,
               child: repoData.when(
                 data: (data) => ListView.separated(
-                  //スクロールでキーボードを閉じるようにした
-                    keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                    //スクロールでキーボードを閉じるようにした
+                    keyboardDismissBehavior:
+                        ScrollViewKeyboardDismissBehavior.onDrag,
                     itemCount: data.items.length,
                     itemBuilder: (context, index) => _listItem(
                           fullName: data.items[index].fullName,

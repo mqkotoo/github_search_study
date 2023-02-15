@@ -1,19 +1,19 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:intl/intl.dart';
 
+// Project imports:
 import '../domain/repository_data_model.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({
-    required this.repoData,
-    Key? key
-  }) : super(key: key);
+  const DetailPage({required this.repoData, Key? key}) : super(key: key);
 
   final RepositoryDataItems repoData;
 
   @override
   Widget build(BuildContext context) {
-
     // データの数をカンマ区切りで表示
     final starsCount = NumberFormat('#,##0').format(repoData.stargazersCount);
     final watchersCount = NumberFormat('#,##0').format(repoData.watchersCount);
@@ -49,17 +49,17 @@ class DetailPage extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 10),
             child: Text(
               repoData.fullName,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 5),
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 5),
             child: Text(
               repoData.description ?? "No Description",
-              style: TextStyle(color: Colors.black54, fontSize: 13),
+              style: const TextStyle(color: Colors.black54, fontSize: 13),
             ),
           ),
           const Divider(),
