@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:github_search_study/presentation/controller/controllers.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -32,5 +31,4 @@ void main() {
     expect(result,
         RepositoryDataModel.fromJson(jsonDecode(data) as Map<String, dynamic>));
   });
-
 }

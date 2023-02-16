@@ -1,16 +1,14 @@
-import 'dart:async';
-
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:github_search_study/repository/connectivity.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 
 import 'package:github_search_study/main.dart';
+import 'package:github_search_study/repository/connectivity.dart';
 import 'package:github_search_study/repository/http_client.dart';
 import '../repository/repository_mock_data.dart';
 import '../repository/repository_mock_test.mocks.dart';
@@ -93,7 +91,6 @@ void main() {
   });
 
   testWidgets('通信状態でなくて入力してエラーが返るか', (WidgetTester tester) async {
-
     const data = RepositoryMockData.jsonData;
     final mockClient = MockClient();
     when(mockClient.get(any)).thenAnswer((_) async => http.Response(data, 200));
@@ -104,14 +101,13 @@ void main() {
 
     mockNetworkImagesFor(() async {
       await tester.pumpWidget(
-        ProviderScope(
-            overrides: [
-              httpClientProvider.overrideWithValue(mockClient),
-              connectivityProvider.overrideWithProvider(
-                FutureProvider.autoDispose((ref) => Future.value(ConnectivityResult.none)),
-              ),
-            ],
-            child: const MyApp()),
+        ProviderScope(overrides: [
+          httpClientProvider.overrideWithValue(mockClient),
+          connectivityProvider.overrideWithProvider(
+            FutureProvider.autoDispose(
+                (ref) => Future.value(ConnectivityResult.none)),
+          ),
+        ], child: const MyApp()),
       );
 
       final formField = find.byKey(const ValueKey("inputForm"));
@@ -129,9 +125,6 @@ void main() {
       //想定エラー文
       final target = find.text("Network Error!!");
       expect(target, findsNothing);
-
     });
   });
-
-
 }

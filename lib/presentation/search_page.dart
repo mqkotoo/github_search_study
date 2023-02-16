@@ -1,11 +1,11 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_search_study/repository/connectivity.dart';
 import 'package:intl/intl.dart';
 
 import 'package:github_search_study/presentation/detail_page.dart';
+import 'package:github_search_study/repository/connectivity.dart';
 import 'controller/controllers.dart';
 
 class SearchPage extends ConsumerWidget {
@@ -92,12 +92,8 @@ class SearchPage extends ConsumerWidget {
                 textInputAction: TextInputAction.search,
                 //search押したらデータ取得 データ渡す
                 onFieldSubmitted: (text) async {
-                  //通信状況確認用
-                  final connectivityResult =
-                      await (Connectivity().checkConnectivity());
-
                   //通信がなかったら何もその後の処理はせず、エラーを出す
-                  if (connectivityResult == ConnectivityResult.none) {
+                  if (connectivityResult == connectivityResult.none) {
                     ref
                         .read(errorMessageProvider.notifier)
                         .update((state) => "Network Error!!");
