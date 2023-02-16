@@ -48,50 +48,54 @@ class SearchPage extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
               //search field
               child: TextFormField(
-                key: const Key("inputForm"),
-                controller: textController,
-                onChanged: (text) {
-                  ref
-                      .watch(isClearButtonVisibleProvider.notifier)
-                      .update((state) => text.isNotEmpty);
-                },
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                  suffixIcon: isClearVisible
-                      ? IconButton(
-                          key: const Key("clearButton"),
-                          icon: const Icon(Icons.clear),
-                          onPressed: () {
-                            textController.clear();
-                            ref
-                                .watch(isClearButtonVisibleProvider.notifier)
-                                .update((state) => false);
-                          },
-                          color: Colors.grey)
-                      : const SizedBox.shrink(),
-                  fillColor: const Color(0xffe1eedf),
-                  filled: true,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: const BorderSide(
-                      color: Colors.transparent,
+                  key: const Key("inputForm"),
+                  controller: textController,
+                  onChanged: (text) {
+                    ref
+                        .watch(isClearButtonVisibleProvider.notifier)
+                        .update((state) => text.isNotEmpty);
+                  },
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                    suffixIcon: isClearVisible
+                        ? IconButton(
+                            key: const Key("clearButton"),
+                            icon: const Icon(Icons.clear),
+                            onPressed: () {
+                              textController.clear();
+                              ref
+                                  .watch(isClearButtonVisibleProvider.notifier)
+                                  .update((state) => false);
+                            },
+                            color: Colors.grey)
+                        : const SizedBox.shrink(),
+                    fillColor: const Color(0xffe1eedf),
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: const BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: const BorderSide(
+                        color: Colors.grey,
+                      ),
                     ),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: const BorderSide(
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
-                //入力キーボードのdone→searchに変更
-                textInputAction: TextInputAction.search,
-                //search押したらデータ取得 データ渡す
-                // onFieldSubmitted: (text) => dataRepository.getData(text),
-                onFieldSubmitted: (text) => ref
-                    .read(inputRepoNameProvider.notifier)
-                    .update((state) => text),
-              ),
+                  //入力キーボードのdone→searchに変更
+                  textInputAction: TextInputAction.search,
+                  //search押したらデータ取得 データ渡す
+                  // onFieldSubmitted: (text) => dataRepository.getData(text),
+                  onFieldSubmitted: (text) {
+                    ref
+                        .read(inputRepoNameProvider.notifier)
+                        .update((state) => text);
+
+                    //エラーメッセージに値が入るかをエラー表示のフラグにしているから検索ごとに初期化
+                    ref.refresh(errorMessageProvider);
+                  }),
             ),
             const Divider(color: Colors.black12),
 
@@ -148,11 +152,11 @@ class SearchPage extends ConsumerWidget {
 
             repoData.value == null
                 ? Column(
-                  children: [
-                    const SizedBox(height: 35),
-                    Text(errorMessage.toString()),
-                  ],
-                )
+                    children: [
+                      const SizedBox(height: 35),
+                      Text(errorMessage.toString()),
+                    ],
+                  )
                 : Expanded(
                     flex: 8,
                     child: ListView.separated(
