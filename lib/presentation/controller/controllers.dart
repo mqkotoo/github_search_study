@@ -19,9 +19,9 @@ final isClearButtonVisibleProvider = StateProvider<bool>((ref) => false);
 final apiFamilyProvider = FutureProvider.autoDispose
     .family<RepositoryDataModel?, String>((ref, repoName) async {
 
-      if(repoName.isEmpty){
-        return null;
-      }
+      // if(repoName.isEmpty){
+      //   return null;
+      // }
 
   final dataRepository = ref.watch(dataRepositoryProvider);
   return await dataRepository.getData(repoName).catchError((e) {

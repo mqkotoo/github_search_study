@@ -101,23 +101,6 @@ class SearchPage extends ConsumerWidget {
 
             // total count,メッセージ
             (() {
-              //初期状態
-              if (ref.watch(inputRepoNameProvider) == "") {
-                //この場合は「リポジトリ名を入力してください」みたいな
-                return Column(
-                  children: const [
-                    Padding(
-                      padding: EdgeInsets.only(right: 10),
-                      child: Align(
-                        alignment: AlignmentDirectional.centerEnd,
-                        child: Text("result: 0"),
-                      ),
-                    ),
-                    SizedBox(height: 30),
-                    Text("Please Enter Text!"),
-                  ],
-                );
-              }
               if (repoData.value != null && repoData.value!.totalCount != 0) {
                 //resultをカンマ区切りで表示
                 String totalCount =
@@ -153,14 +136,14 @@ class SearchPage extends ConsumerWidget {
             errorMessage.isNotEmpty
                 ? Column(
                     children: [
-                      const SizedBox(height: 35),
+                      const SizedBox(height: 40),
                       Text(errorMessage.toString()),
                     ],
                   )
                 : Expanded(
                     flex: 8,
                     child: ListView.separated(
-                      itemCount: repoData.value!.items.length,
+                      itemCount: (repoData.valueOrNull?.items ?? []).length,
                       itemBuilder: (context, index) => _listItem(
                         fullName: repoData.value!.items[index].fullName,
                         description: repoData.value!.items[index].description,
