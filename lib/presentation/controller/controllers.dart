@@ -6,7 +6,10 @@ import '../../main.dart';
 
 
 //入力された文字を管理する
-final inputRepoNameProvider = StateProvider<String>((ref) => "");
+final inputRepoNameProvider = StateProvider.autoDispose<String>((ref) => "");
+//キャッチしたエラーメッセージを格納
+final errorMessageProvider = StateProvider.autoDispose<String>((ref) => "");
+//
 
 final textEditingControllerProvider =
     Provider<TextEditingController>((ref) => TextEditingController());
@@ -21,5 +24,8 @@ final apiFamilyProvider = FutureProvider.autoDispose
       }
 
   final dataRepository = ref.watch(dataRepositoryProvider);
-  return await dataRepository.getData(repoName);
+  return await dataRepository.getData(repoName).catchError((e) {
+    ref.read(errorMessageProvider.notifier).update((state) => e.toString());
+  });
 });
+

@@ -18,6 +18,8 @@ class SearchPage extends ConsumerWidget {
     final textController = ref.read(textEditingControllerProvider);
     //クリアボタンの表示、非表示切り替え
     bool isClearVisible = ref.watch(isClearButtonVisibleProvider);
+    //エラーメッセージ
+    final errorMessage = ref.watch(errorMessageProvider);
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -92,7 +94,8 @@ class SearchPage extends ConsumerWidget {
               ),
             ),
             const Divider(color: Colors.black12),
-            // total count
+
+            // total count,メッセージ
             (() {
               //初期状態
               if (ref.watch(inputRepoNameProvider) == "") {
@@ -143,38 +146,34 @@ class SearchPage extends ConsumerWidget {
               }
             })(),
 
-            Expanded(
-              flex: 8,
-              child: repoData.when(
-                data: (data) => data == null
-                    ? const SizedBox.shrink()
-                    : ListView.separated(
-                        //スクロールでキーボードを閉じるようにした
-                        keyboardDismissBehavior:
-                            ScrollViewKeyboardDismissBehavior.onDrag,
-                        itemCount: data.items.length,
-                        itemBuilder: (context, index) => _listItem(
-                          fullName: data.items[index].fullName,
-                          description: data.items[index].description,
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      DetailPage(repoData: data.items[index])),
-                            );
-                          },
-                        ),
-                        separatorBuilder: (context, index) => const Divider(
-                          color: Color(0xffBBBBBB),
-                        ),
+            repoData.value == null
+                ? Column(
+                  children: [
+                    const SizedBox(height: 35),
+                    Text(errorMessage.toString()),
+                  ],
+                )
+                : Expanded(
+                    flex: 8,
+                    child: ListView.separated(
+                      itemCount: repoData.value!.items.length,
+                      itemBuilder: (context, index) => _listItem(
+                        fullName: repoData.value!.items[index].fullName,
+                        description: repoData.value!.items[index].description,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetailPage(
+                                    repoData: repoData.value!.items[index])),
+                          );
+                        },
                       ),
-                error: (error, _) => Text(error.toString()),
-                loading: () => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              ),
-            ),
+                      separatorBuilder: (context, index) => const Divider(
+                        color: Color(0xffBBBBBB),
+                      ),
+                    ),
+                  ),
           ],
         ),
       ),
