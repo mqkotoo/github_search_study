@@ -2,6 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_search_study/repository/connectivity.dart';
 import 'package:intl/intl.dart';
 
 import 'package:github_search_study/presentation/detail_page.dart';
@@ -21,6 +22,8 @@ class SearchPage extends ConsumerWidget {
     bool isClearVisible = ref.watch(isClearButtonVisibleProvider);
     //エラーメッセージ
     final errorMessage = ref.watch(errorMessageProvider);
+    //通信状況
+    final connectivityResult = ref.watch(connectivityProvider);
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -100,6 +103,7 @@ class SearchPage extends ConsumerWidget {
                         .update((state) => "Network Error!!");
                     return;
                   }
+
                   ref
                       .read(inputRepoNameProvider.notifier)
                       .update((state) => text);
