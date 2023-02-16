@@ -150,7 +150,7 @@ class SearchPage extends ConsumerWidget {
               }
             })(),
 
-            repoData.value == null
+            errorMessage.isNotEmpty
                 ? Column(
                     children: [
                       const SizedBox(height: 35),

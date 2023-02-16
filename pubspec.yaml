@@ -10,6 +10,7 @@ environment:
   sdk: '>=2.18.4 <3.0.0'
 
 dependencies:
+  connectivity_plus: ^3.0.3
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.1.3
