@@ -49,59 +49,62 @@ class SearchPage extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
               //search field
               child: TextFormField(
-                  key: const Key("inputForm"),
-                  controller: textController,
-                  onChanged: (text) {
-                    ref
-                        .read(isClearButtonVisibleProvider.notifier)
-                        .update((state) => text.isNotEmpty);
-                  },
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                    suffixIcon: isClearVisible
-                        ? IconButton(
-                            key: const Key("clearButton"),
-                            icon: const Icon(Icons.clear),
-                            onPressed: () {
-                              textController.clear();
-                              ref
-                                  .watch(isClearButtonVisibleProvider.notifier)
-                                  .update((state) => false);
-                            },
-                            color: Colors.grey)
-                        : const SizedBox.shrink(),
-                    fillColor: const Color(0xffe1eedf),
-                    filled: true,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: const BorderSide(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: const BorderSide(
-                        color: Colors.grey,
-                      ),
+                key: const Key("inputForm"),
+                controller: textController,
+                onChanged: (text) {
+                  ref
+                      .read(isClearButtonVisibleProvider.notifier)
+                      .update((state) => text.isNotEmpty);
+                },
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                  suffixIcon: isClearVisible
+                      ? IconButton(
+                          key: const Key("clearButton"),
+                          icon: const Icon(Icons.clear),
+                          onPressed: () {
+                            textController.clear();
+                            ref
+                                .watch(isClearButtonVisibleProvider.notifier)
+                                .update((state) => false);
+                          },
+                          color: Colors.grey)
+                      : const SizedBox.shrink(),
+                  fillColor: const Color(0xffe1eedf),
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: const BorderSide(
+                      color: Colors.transparent,
                     ),
                   ),
-                  //入力キーボードのdone→searchに変更
-                  textInputAction: TextInputAction.search,
-                  //search押したらデータ取得 データ渡す
-                  onFieldSubmitted: (text) async{
-                    //通信状況確認用
-                    final connectivityResult = await (Connectivity().checkConnectivity());
-                    //通信がなかったら何もその後の処理はせず、エラーを出す
-                    if(connectivityResult == ConnectivityResult.none){
-                      ref.read(errorMessageProvider.notifier)
-                          .update((state) => "Network Error!!");
-                      return;
-                    }
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: const BorderSide(
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+                //入力キーボードのdone→searchに変更
+                textInputAction: TextInputAction.search,
+                //search押したらデータ取得 データ渡す
+                onFieldSubmitted: (text) async {
+                  //通信状況確認用
+                  final connectivityResult =
+                      await (Connectivity().checkConnectivity());
 
+                  //通信がなかったら何もその後の処理はせず、エラーを出す
+                  if (connectivityResult == ConnectivityResult.none) {
                     ref
-                        .read(inputRepoNameProvider.notifier)
-                        .update((state) => text);
-                  }),
+                        .read(errorMessageProvider.notifier)
+                        .update((state) => "Network Error!!");
+                    return;
+                  }
+                  ref
+                      .read(inputRepoNameProvider.notifier)
+                      .update((state) => text);
+                },
+              ),
             ),
             const Divider(color: Colors.black12),
 

@@ -14,7 +14,7 @@ class DataRepository {
   final http.Client client;
 
   Future<RepositoryDataModel?> getData(String repositoryName) async {
-    try{
+    try {
       final apiUri = Uri.parse(
           'https://api.github.com/search/repositories?q=$repositoryName&per_page=20');
       http.Response response = await client.get(apiUri);
@@ -28,7 +28,7 @@ class DataRepository {
         default:
           throw "error occurred!!";
       }
-    }on SocketException catch(_){
+    } on SocketException catch (_) {
       throw "Internet Error　立ち上げ時";
     }
   }
