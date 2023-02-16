@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:github_search_study/domain/repository_data_model.dart';
 import '../../main.dart';
+
 
 //入力された文字を管理する
 final inputRepoNameProvider = StateProvider<String>((ref) => "");

@@ -13,14 +13,13 @@ class DataRepository {
     final apiUri = Uri.parse(
         'https://api.github.com/search/repositories?q=$repositoryName');
 
-    http.Response response = await client.get(apiUri);
-
-    if (response.statusCode != 200) {
-      throw "error occurred! 🥺";
+    try{
+      http.Response response = await client.get(apiUri);
+      final jsonData = json.decode(response.body);
+      return RepositoryDataModel.fromJson(jsonData);
+    }catch(e){
+      throw "error occurred 🥺";
     }
-
-    final jsonData = json.decode(response.body);
-
-    return RepositoryDataModel.fromJson(jsonData);
   }
+
 }

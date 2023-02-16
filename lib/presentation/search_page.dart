@@ -97,7 +97,19 @@ class SearchPage extends ConsumerWidget {
               //初期状態
               if (ref.watch(inputRepoNameProvider) == "") {
                 //この場合は「リポジトリ名を入力してください」みたいな
-                return const Text('初期状態');
+                return Column(
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.only(right: 10),
+                      child: Align(
+                        alignment: AlignmentDirectional.centerEnd,
+                        child: Text("result: 0"),
+                      ),
+                    ),
+                    SizedBox(height: 30),
+                    Text("Please Enter Text!"),
+                  ],
+                );
               }
               if (repoData.value != null && repoData.value!.totalCount != 0) {
                 //resultをカンマ区切りで表示
@@ -113,12 +125,18 @@ class SearchPage extends ConsumerWidget {
               }
               if (repoData.value != null && repoData.value!.totalCount == 0) {
                 //この場合は「見つかりませんでした」みたいな
-                return const Padding(
-                  padding: EdgeInsets.only(right: 10),
-                  child: Align(
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: Text("result: 0"),
-                  ),
+                return Column(
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.only(right: 10),
+                      child: Align(
+                        alignment: AlignmentDirectional.centerEnd,
+                        child: Text("result: 0"),
+                      ),
+                    ),
+                    SizedBox(height: 30),
+                    Text("not found search result!")
+                  ],
                 );
               } else {
                 return const SizedBox.shrink();
