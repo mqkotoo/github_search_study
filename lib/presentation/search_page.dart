@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -52,7 +53,7 @@ class SearchPage extends ConsumerWidget {
                   controller: textController,
                   onChanged: (text) {
                     ref
-                        .watch(isClearButtonVisibleProvider.notifier)
+                        .read(isClearButtonVisibleProvider.notifier)
                         .update((state) => text.isNotEmpty);
                   },
                   decoration: InputDecoration(
@@ -87,14 +88,19 @@ class SearchPage extends ConsumerWidget {
                   //入力キーボードのdone→searchに変更
                   textInputAction: TextInputAction.search,
                   //search押したらデータ取得 データ渡す
-                  // onFieldSubmitted: (text) => dataRepository.getData(text),
-                  onFieldSubmitted: (text) {
+                  onFieldSubmitted: (text) async{
+                    //通信状況確認用
+                    final connectivityResult = await (Connectivity().checkConnectivity());
+                    //通信がなかったら何もその後の処理はせず、エラーを出す
+                    if(connectivityResult == ConnectivityResult.none){
+                      ref.read(errorMessageProvider.notifier)
+                          .update((state) => "Network Error!!");
+                      return;
+                    }
+
                     ref
                         .read(inputRepoNameProvider.notifier)
                         .update((state) => text);
-
-                    //エラーメッセージに値が入るかをエラー表示のフラグにしているから検索ごとに初期化
-                    ref.refresh(errorMessageProvider);
                   }),
             ),
             const Divider(color: Colors.black12),
