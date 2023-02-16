@@ -16,7 +16,7 @@ class DataRepository {
     http.Response response = await client.get(apiUri);
 
     if (response.statusCode != 200) {
-      throw Exception("Status Code: ${response.statusCode}");
+      throw "error occurred! 🥺";
     }
 
     final jsonData = json.decode(response.body);

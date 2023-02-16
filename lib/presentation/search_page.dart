@@ -148,7 +148,7 @@ class SearchPage extends ConsumerWidget {
                     separatorBuilder: (context, index) => const Divider(
                           color: Color(0xffBBBBBB),
                         )),
-                error: (error, stack) => Text(error.toString()),
+                error: (error,_) => Text(error.toString()),
                 loading: () => const Center(
                   child: CircularProgressIndicator(),
                 ),
