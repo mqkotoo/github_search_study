@@ -11,15 +11,17 @@ class DataRepository {
 
   Future<RepositoryDataModel> getData(String repositoryName) async {
     final apiUri = Uri.parse(
-        'https://api.github.com/search/repositories?q=$repositoryName');
+        'https://api.github.com/search/repositories?q=$repositoryName&per_page=20');
 
-    try{
       http.Response response = await client.get(apiUri);
+
+      if(response.statusCode != 200) {
+        print(response.statusCode);
+        throw "error occurred!!";
+      }
+
       final jsonData = json.decode(response.body);
       return RepositoryDataModel.fromJson(jsonData);
-    }catch(e){
-      throw "error occurred 🥺";
-    }
   }
 
 }

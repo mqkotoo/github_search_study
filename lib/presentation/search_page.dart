@@ -146,12 +146,14 @@ class SearchPage extends ConsumerWidget {
             Expanded(
               flex: 8,
               child: repoData.when(
-                data: (data) => ListView.separated(
-                    //スクロールでキーボードを閉じるようにした
-                    keyboardDismissBehavior:
-                        ScrollViewKeyboardDismissBehavior.onDrag,
-                    itemCount: data.items.length,
-                    itemBuilder: (context, index) => _listItem(
+                data: (data) => data == null
+                    ? const SizedBox.shrink()
+                    : ListView.separated(
+                        //スクロールでキーボードを閉じるようにした
+                        keyboardDismissBehavior:
+                            ScrollViewKeyboardDismissBehavior.onDrag,
+                        itemCount: data.items.length,
+                        itemBuilder: (context, index) => _listItem(
                           fullName: data.items[index].fullName,
                           description: data.items[index].description,
                           onTap: () {
@@ -163,10 +165,11 @@ class SearchPage extends ConsumerWidget {
                             );
                           },
                         ),
-                    separatorBuilder: (context, index) => const Divider(
+                        separatorBuilder: (context, index) => const Divider(
                           color: Color(0xffBBBBBB),
-                        )),
-                error: (error,_) => Text(error.toString()),
+                        ),
+                      ),
+                error: (error, _) => Text(error.toString()),
                 loading: () => const Center(
                   child: CircularProgressIndicator(),
                 ),

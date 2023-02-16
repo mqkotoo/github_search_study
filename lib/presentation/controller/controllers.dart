@@ -14,8 +14,12 @@ final textEditingControllerProvider =
 final isClearButtonVisibleProvider = StateProvider<bool>((ref) => false);
 
 final apiFamilyProvider = FutureProvider.autoDispose
-    .family<RepositoryDataModel, String>((ref, repoName) async {
-  final dataRepository = ref.watch(dataRepositoryProvider);
+    .family<RepositoryDataModel?, String>((ref, repoName) async {
 
+      if(repoName.isEmpty){
+        return null;
+      }
+
+  final dataRepository = ref.watch(dataRepositoryProvider);
   return await dataRepository.getData(repoName);
 });
