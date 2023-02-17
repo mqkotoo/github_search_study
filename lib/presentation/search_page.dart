@@ -151,22 +151,24 @@ class SearchPage extends ConsumerWidget {
             Expanded(
                 flex: 8,
                 child: repoData.when(
-                  data: (data) => ListView.separated(
-                    itemCount: (repoData.valueOrNull?.items ?? []).length,
-                    itemBuilder: (context, index) => _listItem(
-                      fullName: repoData.value!.items[index].fullName,
-                      description: repoData.value!.items[index].description,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DetailPage(
-                                  repoData: repoData.value!.items[index])),
-                        );
-                      },
-                    ),
-                    separatorBuilder: (context, index) => const Divider(
-                      color: Color(0xffBBBBBB),
+                  data: (data) => Scrollbar(
+                    child: ListView.separated(
+                      itemCount: (repoData.valueOrNull?.items ?? []).length,
+                      itemBuilder: (context, index) => _listItem(
+                        fullName: repoData.value!.items[index].fullName,
+                        description: repoData.value!.items[index].description,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetailPage(
+                                    repoData: repoData.value!.items[index])),
+                          );
+                        },
+                      ),
+                      separatorBuilder: (context, index) => const Divider(
+                        color: Color(0xffBBBBBB),
+                      ),
                     ),
                   ),
                   //上でハンドリングしているため、ここではつかわない
