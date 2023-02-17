@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_search_study/presentation/components/loading_shimmer.dart';
 import 'package:intl/intl.dart';
 
+import 'package:github_search_study/presentation/components/loading_shimmer.dart';
 import 'package:github_search_study/presentation/detail_page.dart';
 import 'package:github_search_study/repository/connectivity.dart';
 import 'controller/controllers.dart';

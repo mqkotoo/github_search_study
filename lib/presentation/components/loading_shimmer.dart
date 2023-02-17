@@ -1,6 +1,5 @@
-
-
 import 'package:flutter/material.dart';
+
 import 'package:shimmer/shimmer.dart';
 
 class LoadingShimmer extends StatelessWidget {
@@ -22,20 +21,18 @@ class LoadingShimmer extends StatelessWidget {
             color: Color(0xffBBBBBB),
           ),
         ),
-
-
       ),
     );
   }
 
-   Widget _listItem() {
+  Widget _listItem() {
     return ListTile(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 15),
           //title
-          _shimmer(width:150, height: 14),
+          _shimmer(width: 150, height: 14),
           const SizedBox(height: 10)
         ],
       ),
@@ -48,9 +45,9 @@ class LoadingShimmer extends StatelessWidget {
         ],
       ),
     );
-   }
+  }
 
-   Widget _shimmer({required double width, required double height}) {
+  Widget _shimmer({required double width, required double height}) {
     return Container(
       height: height,
       width: width,
@@ -59,5 +56,5 @@ class LoadingShimmer extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(6)),
       ),
     );
-   }
+  }
 }

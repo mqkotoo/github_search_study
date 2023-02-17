@@ -19,8 +19,6 @@ final isClearButtonVisibleProvider = StateProvider<bool>((ref) => false);
 
 final apiFamilyProvider = FutureProvider.autoDispose
     .family<RepositoryDataModel?, String>((ref, repoName) async {
-
-
   //エラーメッセージに値が入るかをエラー表示のフラグにしているから検索ごとに初期化
   //android studioのバグなのか、refreshが使われていない判定になる
   // ignore: unused_result
@@ -28,7 +26,6 @@ final apiFamilyProvider = FutureProvider.autoDispose
 
   final dataRepository = ref.watch(dataRepositoryProvider);
   return await dataRepository.getData(repoName).catchError((e) {
-
     ref.read(errorMessageProvider.notifier).update((state) => e.toString());
     return null;
   });
