@@ -4,6 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import 'package:github_search_study/presentation/components/loading_shimmer.dart';
 import 'package:github_search_study/presentation/detail_page.dart';
 import 'package:github_search_study/repository/connectivity.dart';
 import 'controller/controllers.dart';
@@ -111,67 +112,67 @@ class SearchPage extends ConsumerWidget {
             const Divider(color: Colors.black12),
 
             // total count,メッセージ
-            (() {
-              if (repoData.value != null && repoData.value!.totalCount != 0) {
-                //resultをカンマ区切りで表示
-                String totalCount =
-                    NumberFormat('#,##0').format(repoData.value!.totalCount);
-                return Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Align(
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: Text("result: $totalCount"),
+            if (repoData.value != null && repoData.value!.totalCount != 0)
+              //resultをカンマ区切りで表示
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: Text(
+                    "result: ${NumberFormat('#,##0').format(repoData.value?.totalCount)}",
                   ),
-                );
-              }
-              if (repoData.value != null && repoData.value!.totalCount == 0) {
-                //この場合は「見つかりませんでした」みたいな
-                return Column(
-                  children: const [
-                    Padding(
-                      padding: EdgeInsets.only(right: 10),
-                      child: Align(
-                        alignment: AlignmentDirectional.centerEnd,
-                        child: Text("result: 0"),
-                      ),
-                    ),
-                    SizedBox(height: 30),
-                    Text("not found search result!")
-                  ],
-                );
-              } else {
-                return const SizedBox.shrink();
-              }
-            })(),
+                ),
+              ),
 
-            errorMessage.isNotEmpty
-                ? Column(
-                    children: [
-                      const SizedBox(height: 40),
-                      Text(errorMessage.toString()),
-                    ],
-                  )
-                : Expanded(
-                    flex: 8,
-                    child: ListView.separated(
-                      itemCount: (repoData.valueOrNull?.items ?? []).length,
-                      itemBuilder: (context, index) => _listItem(
-                        fullName: repoData.value!.items[index].fullName,
-                        description: repoData.value!.items[index].description,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DetailPage(
-                                    repoData: repoData.value!.items[index])),
-                          );
-                        },
-                      ),
-                      separatorBuilder: (context, index) => const Divider(
-                        color: Color(0xffBBBBBB),
-                      ),
+            if (repoData.value != null && repoData.value!.totalCount == 0)
+              //この場合は「見つかりませんでした」みたいな
+              Column(
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.only(right: 10),
+                    child: Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: Text("result: 0"),
                     ),
                   ),
+                  SizedBox(height: 30),
+                  Text("not found search result!")
+                ],
+              ),
+
+            if (errorMessage.isNotEmpty)
+              Column(
+                children: [
+                  const SizedBox(height: 40),
+                  Text(errorMessage.toString()),
+                ],
+              ),
+
+            Expanded(
+                flex: 8,
+                child: repoData.when(
+                  data: (data) => ListView.separated(
+                    itemCount: (repoData.valueOrNull?.items ?? []).length,
+                    itemBuilder: (context, index) => _listItem(
+                      fullName: repoData.value!.items[index].fullName,
+                      description: repoData.value!.items[index].description,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DetailPage(
+                                  repoData: repoData.value!.items[index])),
+                        );
+                      },
+                    ),
+                    separatorBuilder: (context, index) => const Divider(
+                      color: Color(0xffBBBBBB),
+                    ),
+                  ),
+                  //上でハンドリングしているため、ここではつかわない
+                  error: (_, stack) => const SizedBox.shrink(),
+                  loading: () => const LoadingShimmer(),
+                ))
           ],
         ),
       ),

@@ -9,7 +9,8 @@ import '../../main.dart';
 final inputRepoNameProvider = StateProvider.autoDispose<String>((ref) => "");
 //キャッチしたエラーメッセージを格納
 final errorMessageProvider = StateProvider.autoDispose<String>((ref) => "");
-//
+// //ロード状況を管理
+// final loadingStateProvider = StateProvider.autoDispose((ref) => false);
 
 final textEditingControllerProvider =
     Provider<TextEditingController>((ref) => TextEditingController());
