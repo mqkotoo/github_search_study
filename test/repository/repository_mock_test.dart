@@ -12,7 +12,7 @@ import 'package:github_search_study/repository/http_client.dart';
 import '../repository/repository_mock_data.dart';
 import 'repository_mock_test.mocks.dart';
 
-@GenerateMocks([http.Client])
+@GenerateNiceMocks([MockSpec<http.Client>()])
 void main() {
   test("getメソッドのテスト", () async {
     const data = RepositoryMockData.jsonData;

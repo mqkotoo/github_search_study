@@ -56,6 +56,34 @@ void main() {
       expect(find.byKey(const Key("detailAppBar")), findsOneWidget);
       expect(find.text("Fork"), findsOneWidget);
     });
-    // await tester.pumpAndSettle();
+  });
+
+  testWidgets('空文字を入力してエラーが返るか', (WidgetTester tester) async {
+    const data = RepositoryMockData.jsonData;
+    final mockClient = MockClient();
+    //空文字を送信すると422が返ってくる
+    when(mockClient.get(any)).thenAnswer((_) async => http.Response(data, 422));
+
+    mockNetworkImagesFor(() async {
+      await tester.pumpWidget(
+        ProviderScope(
+            overrides: [httpClientProvider.overrideWithValue(mockClient)],
+            child: const MyApp()),
+      );
+
+      final formField = find.byKey(const ValueKey("inputForm"));
+
+      //""と入力して1番上のをタップする
+      await tester.enterText(formField, "");
+      //検索ボタンを押す
+      await tester.tap(formField);
+      await tester.testTextInput.receiveAction(TextInputAction.search);
+
+      await tester.pumpAndSettle();
+
+      //エラーが返ってくる
+      final target = find.text("Please Enter Text!");
+      expect(target, findsOneWidget);
+    });
   });
 }
