@@ -23,7 +23,7 @@ class SearchPage extends ConsumerWidget {
     //エラーメッセージ
     final errorMessage = ref.watch(errorMessageProvider);
     //通信状況
-    final connectivityResult = ref.watch(connectivityProvider);
+    final connectivity = ref.watch(connectivityProvider);
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -92,8 +92,10 @@ class SearchPage extends ConsumerWidget {
                 textInputAction: TextInputAction.search,
                 //search押したらデータ取得 データ渡す
                 onFieldSubmitted: (text) async {
+                  final connectivityResult =
+                      await connectivity.checkConnectivity();
                   //通信がなかったら何もその後の処理はせず、エラーを出す
-                  if (connectivityResult == connectivityResult.none) {
+                  if (connectivityResult == ConnectivityResult.none) {
                     ref
                         .read(errorMessageProvider.notifier)
                         .update((state) => "Network Error!!");

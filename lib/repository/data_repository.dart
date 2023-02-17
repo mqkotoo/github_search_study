@@ -29,7 +29,7 @@ class DataRepository {
           throw "error occurred!!";
       }
     } on SocketException catch (_) {
-      throw "Internet Error　立ち上げ時";
+      throw "Network Error!!";
     }
   }
 }
