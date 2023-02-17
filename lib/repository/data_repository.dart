@@ -13,7 +13,7 @@ class DataRepository {
   Future<RepositoryDataModel?> getData(String repositoryName) async {
     try {
       final apiUri = Uri.parse(
-          'https://api.github.com/search/repositories?q=$repositoryName&per_page=20');
+          'https://api.github.com/search/repositories?q=$repositoryName&per_page=40');
       http.Response response = await client.get(apiUri);
 
       switch (response.statusCode) {
