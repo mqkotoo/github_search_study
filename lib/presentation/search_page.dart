@@ -4,9 +4,10 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import 'package:github_search_study/presentation/components/loading_shimmer.dart';
+import 'package:github_search_study/presentation/components/widget/loading_shimmer.dart';
 import 'package:github_search_study/presentation/detail_page.dart';
 import 'package:github_search_study/repository/connectivity.dart';
+import 'components/theme/theme.dart';
 import 'controller/controllers.dart';
 
 class SearchPage extends ConsumerWidget {
@@ -30,22 +31,17 @@ class SearchPage extends ConsumerWidget {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       behavior: HitTestBehavior.opaque,
       child: Scaffold(
-        backgroundColor: const Color(0xffFCFDF6),
         appBar: AppBar(
-          backgroundColor: const Color(0xffFCFDF6),
-          elevation: 0,
-          titleTextStyle: const TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-          iconTheme: const IconThemeData(
-            color: Colors.black,
-          ),
           title: const Text(
             "GitHub Repo Search",
             key: Key("searchAppBar"),
           ),
+          // //APPBARの右側
+          // actions: [
+          //   Switch(
+          //       value: value,
+          //       onChanged: onChanged)
+          // ],
         ),
         body: Column(
           children: <Widget>[
@@ -61,7 +57,7 @@ class SearchPage extends ConsumerWidget {
                       .update((state) => text.isNotEmpty);
                 },
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                  prefixIcon: const Icon(Icons.search),
                   suffixIcon: isClearVisible
                       ? IconButton(
                           key: const Key("clearButton"),
@@ -74,20 +70,6 @@ class SearchPage extends ConsumerWidget {
                           },
                           color: Colors.grey)
                       : const SizedBox.shrink(),
-                  fillColor: const Color(0xffe1eedf),
-                  filled: true,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: const BorderSide(
-                      color: Colors.transparent,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: const BorderSide(
-                      color: Colors.grey,
-                    ),
-                  ),
                 ),
                 //入力キーボードのdone→searchに変更
                 textInputAction: TextInputAction.search,
@@ -155,6 +137,7 @@ class SearchPage extends ConsumerWidget {
                     child: ListView.separated(
                       itemCount: (repoData.valueOrNull?.items ?? []).length,
                       itemBuilder: (context, index) => _listItem(
+                        context: context,
                         fullName: repoData.value!.items[index].fullName,
                         description: repoData.value!.items[index].description,
                         onTap: () {
@@ -166,9 +149,7 @@ class SearchPage extends ConsumerWidget {
                           );
                         },
                       ),
-                      separatorBuilder: (context, index) => const Divider(
-                        color: Color(0xffBBBBBB),
-                      ),
+                      separatorBuilder: (context, index) => const Divider(),
                     ),
                   ),
                   //上でハンドリングしているため、ここではつかわない
@@ -184,6 +165,7 @@ class SearchPage extends ConsumerWidget {
   Widget _listItem(
       {required String fullName,
       String? description,
+      required BuildContext context,
       required void Function() onTap}) {
     return ListTile(
       onTap: onTap,
@@ -203,6 +185,7 @@ class SearchPage extends ConsumerWidget {
         children: <Widget>[
           Text(
             description ?? "No Description",
+            style: TextStyle(color: Theme.of(context).hoverColor),
             overflow: TextOverflow.ellipsis,
             maxLines: 3,
           ),

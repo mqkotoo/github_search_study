@@ -10,16 +10,17 @@ class LoadingShimmer extends StatelessWidget {
     return SingleChildScrollView(
       child: Shimmer.fromColors(
         period: const Duration(milliseconds: 750),
+        //light
         baseColor: Colors.grey[300]!,
         highlightColor: Colors.grey[200]!,
-        // child: _listItem();
+        //dark
+        // baseColor: Colors.grey[700]!,
+        // highlightColor: Colors.grey[600]!,
         child: ListView.separated(
           shrinkWrap: true,
           itemCount: 20,
           itemBuilder: (context, index) => _listItem(),
-          separatorBuilder: (context, index) => const Divider(
-            color: Color(0xffBBBBBB),
-          ),
+          separatorBuilder: (context, index) => const Divider(),
         ),
       ),
     );

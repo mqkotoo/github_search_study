@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../domain/repository_data_model.dart';
+import 'components/theme/theme.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({required this.repoData, Key? key}) : super(key: key);
@@ -19,18 +20,7 @@ class DetailPage extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: const Color(0xffFCFDF6),
       appBar: AppBar(
-        backgroundColor: const Color(0xffFCFDF6),
-        elevation: 0,
-        titleTextStyle: const TextStyle(
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
-          fontSize: 20,
-        ),
-        iconTheme: const IconThemeData(
-          color: Colors.black,
-        ),
         title: const Text("Repo Detail", key: Key("detailAppBar")),
       ),
       body: SingleChildScrollView(
@@ -58,7 +48,7 @@ class DetailPage extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 5),
               child: Text(
                 repoData.description ?? "No Description",
-                style: const TextStyle(color: Colors.black54, fontSize: 13),
+                style: TextStyle(color: Theme.of(context).hoverColor),
               ),
             ),
             const Divider(),

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_search_study/presentation/search_page.dart';
 import 'package:github_search_study/repository/data_repository.dart';
 import 'package:github_search_study/repository/http_client.dart';
+import 'package:github_search_study/presentation/components/theme/theme.dart';
 
 final dataRepositoryProvider = Provider.autoDispose<DataRepository>((ref) {
   return DataRepository(client: ref.watch(httpClientProvider));
@@ -19,8 +20,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: SearchPage(),
+    return MaterialApp(
+      theme: lightTheme,
+      home: const SearchPage(),
     );
   }
 }
