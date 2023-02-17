@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_search_study/presentation/components/loading_shimmer.dart';
 import 'package:intl/intl.dart';
 
 import 'package:github_search_study/presentation/detail_page.dart';
@@ -96,10 +97,11 @@ class SearchPage extends ConsumerWidget {
                       await connectivity.checkConnectivity();
                   //通信がなかったら何もその後の処理はせず、エラーを出す
                   if (connectivityResult == ConnectivityResult.none) {
-                    ref
-                        .read(errorMessageProvider.notifier)
-                        .update((state) => "Network Error!!");
-                    return;
+                    // ref
+                    //     .read(errorMessageProvider.notifier)
+                    //     .update((state) => "Network Error!!");
+                    // return;
+                    throw "Network Error!!";
                   }
 
                   ref
@@ -144,16 +146,18 @@ class SearchPage extends ConsumerWidget {
               }
             })(),
 
-            errorMessage.isNotEmpty
-                ? Column(
-                    children: [
-                      const SizedBox(height: 40),
-                      Text(errorMessage.toString()),
-                    ],
-                  )
-                : Expanded(
-                    flex: 8,
-                    child: ListView.separated(
+            if (errorMessage.isNotEmpty)
+              Column(
+                children: [
+                  const SizedBox(height: 40),
+                  Text(errorMessage.toString()),
+                ],
+              ),
+
+            Expanded(
+              flex: 8,
+                child: repoData.when(
+                    data: (data) => ListView.separated(
                       itemCount: (repoData.valueOrNull?.items ?? []).length,
                       itemBuilder: (context, index) => _listItem(
                         fullName: repoData.value!.items[index].fullName,
@@ -171,7 +175,31 @@ class SearchPage extends ConsumerWidget {
                         color: Color(0xffBBBBBB),
                       ),
                     ),
-                  ),
+                    //上でハンドリングしているため、ここではつかわない
+                    error: (_,stack) => const SizedBox.shrink(),
+                    loading: () => const LoadingShimmer(),
+                ))
+                // : Expanded(
+                //     flex: 8,
+                //     child: ListView.separated(
+                //       itemCount: (repoData.valueOrNull?.items ?? []).length,
+                //       itemBuilder: (context, index) => _listItem(
+                //         fullName: repoData.value!.items[index].fullName,
+                //         description: repoData.value!.items[index].description,
+                //         onTap: () {
+                //           Navigator.push(
+                //             context,
+                //             MaterialPageRoute(
+                //                 builder: (context) => DetailPage(
+                //                     repoData: repoData.value!.items[index])),
+                //           );
+                //         },
+                //       ),
+                //       separatorBuilder: (context, index) => const Divider(
+                //         color: Color(0xffBBBBBB),
+                //       ),
+                //     ),
+                //   ),
           ],
         ),
       ),

@@ -9,7 +9,8 @@ import '../../main.dart';
 final inputRepoNameProvider = StateProvider.autoDispose<String>((ref) => "");
 //キャッチしたエラーメッセージを格納
 final errorMessageProvider = StateProvider.autoDispose<String>((ref) => "");
-//
+// //ロード状況を管理
+// final loadingStateProvider = StateProvider.autoDispose((ref) => false);
 
 final textEditingControllerProvider =
     Provider<TextEditingController>((ref) => TextEditingController());
@@ -18,6 +19,8 @@ final isClearButtonVisibleProvider = StateProvider<bool>((ref) => false);
 
 final apiFamilyProvider = FutureProvider.autoDispose
     .family<RepositoryDataModel?, String>((ref, repoName) async {
+
+
   //エラーメッセージに値が入るかをエラー表示のフラグにしているから検索ごとに初期化
   //android studioのバグなのか、refreshが使われていない判定になる
   // ignore: unused_result
@@ -25,6 +28,7 @@ final apiFamilyProvider = FutureProvider.autoDispose
 
   final dataRepository = ref.watch(dataRepositoryProvider);
   return await dataRepository.getData(repoName).catchError((e) {
+
     ref.read(errorMessageProvider.notifier).update((state) => e.toString());
     return null;
   });

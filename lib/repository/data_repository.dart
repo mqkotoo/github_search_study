@@ -6,8 +6,6 @@ import 'package:http/http.dart' as http;
 
 import '../domain/repository_data_model.dart';
 
-final errorMessageProvider = Provider.autoDispose<String>((ref) => "");
-
 class DataRepository {
   DataRepository({required this.client});
 
@@ -22,6 +20,7 @@ class DataRepository {
       switch (response.statusCode) {
         case 200:
           final jsonData = json.decode(response.body);
+
           return RepositoryDataModel.fromJson(jsonData);
         case 422:
           throw "Please Enter Text!";
