@@ -97,11 +97,10 @@ class SearchPage extends ConsumerWidget {
                       await connectivity.checkConnectivity();
                   //通信がなかったら何もその後の処理はせず、エラーを出す
                   if (connectivityResult == ConnectivityResult.none) {
-                    // ref
-                    //     .read(errorMessageProvider.notifier)
-                    //     .update((state) => "Network Error!!");
-                    // return;
-                    throw "Network Error!!";
+                    ref
+                        .read(errorMessageProvider.notifier)
+                        .update((state) => "Network Error!!");
+                    return;
                   }
 
                   ref
@@ -113,38 +112,33 @@ class SearchPage extends ConsumerWidget {
             const Divider(color: Colors.black12),
 
             // total count,メッセージ
-            (() {
-              if (repoData.value != null && repoData.value!.totalCount != 0) {
-                //resultをカンマ区切りで表示
-                String totalCount =
-                    NumberFormat('#,##0').format(repoData.value!.totalCount);
-                return Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Align(
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: Text("result: $totalCount"),
+            if (repoData.value != null && repoData.value!.totalCount != 0)
+              //resultをカンマ区切りで表示
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: Text(
+                    "result: ${NumberFormat('#,##0').format(repoData.value?.totalCount)}",
                   ),
-                );
-              }
-              if (repoData.value != null && repoData.value!.totalCount == 0) {
-                //この場合は「見つかりませんでした」みたいな
-                return Column(
-                  children: const [
-                    Padding(
-                      padding: EdgeInsets.only(right: 10),
-                      child: Align(
-                        alignment: AlignmentDirectional.centerEnd,
-                        child: Text("result: 0"),
-                      ),
+                ),
+              ),
+
+            if (repoData.value != null && repoData.value!.totalCount == 0)
+              //この場合は「見つかりませんでした」みたいな
+              Column(
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.only(right: 10),
+                    child: Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: Text("result: 0"),
                     ),
-                    SizedBox(height: 30),
-                    Text("not found search result!")
-                  ],
-                );
-              } else {
-                return const SizedBox.shrink();
-              }
-            })(),
+                  ),
+                  SizedBox(height: 30),
+                  Text("not found search result!")
+                ],
+              ),
 
             if (errorMessage.isNotEmpty)
               Column(
@@ -155,51 +149,51 @@ class SearchPage extends ConsumerWidget {
               ),
 
             Expanded(
-              flex: 8,
+                flex: 8,
                 child: repoData.when(
-                    data: (data) => ListView.separated(
-                      itemCount: (repoData.valueOrNull?.items ?? []).length,
-                      itemBuilder: (context, index) => _listItem(
-                        fullName: repoData.value!.items[index].fullName,
-                        description: repoData.value!.items[index].description,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DetailPage(
-                                    repoData: repoData.value!.items[index])),
-                          );
-                        },
-                      ),
-                      separatorBuilder: (context, index) => const Divider(
-                        color: Color(0xffBBBBBB),
-                      ),
+                  data: (data) => ListView.separated(
+                    itemCount: (repoData.valueOrNull?.items ?? []).length,
+                    itemBuilder: (context, index) => _listItem(
+                      fullName: repoData.value!.items[index].fullName,
+                      description: repoData.value!.items[index].description,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DetailPage(
+                                  repoData: repoData.value!.items[index])),
+                        );
+                      },
                     ),
-                    //上でハンドリングしているため、ここではつかわない
-                    error: (_,stack) => const SizedBox.shrink(),
-                    loading: () => const LoadingShimmer(),
+                    separatorBuilder: (context, index) => const Divider(
+                      color: Color(0xffBBBBBB),
+                    ),
+                  ),
+                  //上でハンドリングしているため、ここではつかわない
+                  error: (_, stack) => const SizedBox.shrink(),
+                  loading: () => const LoadingShimmer(),
                 ))
-                // : Expanded(
-                //     flex: 8,
-                //     child: ListView.separated(
-                //       itemCount: (repoData.valueOrNull?.items ?? []).length,
-                //       itemBuilder: (context, index) => _listItem(
-                //         fullName: repoData.value!.items[index].fullName,
-                //         description: repoData.value!.items[index].description,
-                //         onTap: () {
-                //           Navigator.push(
-                //             context,
-                //             MaterialPageRoute(
-                //                 builder: (context) => DetailPage(
-                //                     repoData: repoData.value!.items[index])),
-                //           );
-                //         },
-                //       ),
-                //       separatorBuilder: (context, index) => const Divider(
-                //         color: Color(0xffBBBBBB),
-                //       ),
-                //     ),
-                //   ),
+            // : Expanded(
+            //     flex: 8,
+            //     child: ListView.separated(
+            //       itemCount: (repoData.valueOrNull?.items ?? []).length,
+            //       itemBuilder: (context, index) => _listItem(
+            //         fullName: repoData.value!.items[index].fullName,
+            //         description: repoData.value!.items[index].description,
+            //         onTap: () {
+            //           Navigator.push(
+            //             context,
+            //             MaterialPageRoute(
+            //                 builder: (context) => DetailPage(
+            //                     repoData: repoData.value!.items[index])),
+            //           );
+            //         },
+            //       ),
+            //       separatorBuilder: (context, index) => const Divider(
+            //         color: Color(0xffBBBBBB),
+            //       ),
+            //     ),
+            //   ),
           ],
         ),
       ),
