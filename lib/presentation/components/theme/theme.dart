@@ -10,19 +10,19 @@ ThemeData lightTheme = ThemeData.light().copyWith(
     backgroundColor: Color(0xffFCFDF6),
     elevation: 0,
     titleTextStyle: TextStyle(
-      color: Colors.black,
+      color: Color(0xff000000),
       fontWeight: FontWeight.bold,
       fontSize: 20,
     ),
     iconTheme: IconThemeData(
-      color: Colors.black,
+      color: Color(0xff000000),
     ),
   ),
 
   //textField theme
   inputDecorationTheme: InputDecorationTheme(
-    prefixIconColor: Colors.grey,
-    suffixIconColor: Colors.grey,
+    prefixIconColor: const Color(0xff9e9e9e),
+    suffixIconColor: const Color(0xff9e9e9e),
     fillColor: const Color(0xffe1eedf),
     filled: true,
     enabledBorder: OutlineInputBorder(
@@ -34,15 +34,12 @@ ThemeData lightTheme = ThemeData.light().copyWith(
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
       borderSide: const BorderSide(
-        color: Colors.grey,
+        color: Color(0xff9e9e9e),
       ),
     ),
   ),
   // divider
-  dividerColor: Colors.black12,
-
-  //詳細テキスト用
-  hoverColor: Colors.grey.shade800,
+  dividerColor: const Color(0x1f000000),
 );
 
 //dark theme ----------------------------------
@@ -54,19 +51,19 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
     backgroundColor: Color(0xff1A1C19),
     elevation: 0,
     titleTextStyle: TextStyle(
-      color: Colors.white,
+      color: Color(0xffffffff),
       fontWeight: FontWeight.bold,
       fontSize: 20,
     ),
     iconTheme: IconThemeData(
-      color: Colors.white,
+      color: Color(0xffffffff),
     ),
   ),
 
   //textField theme
   inputDecorationTheme: InputDecorationTheme(
-    prefixIconColor: Colors.grey,
-    suffixIconColor: Colors.grey,
+    prefixIconColor: const Color(0xff9e9e9e),
+    suffixIconColor: const Color(0xff9e9e9e),
     fillColor: const Color(0xff454f45),
     filled: true,
     enabledBorder: OutlineInputBorder(
@@ -78,14 +75,11 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
       borderSide: const BorderSide(
-        color: Colors.grey,
+        color: Color(0xff9e9e9e),
       ),
     ),
   ),
 
   // divider
   dividerColor: const Color(0xff777777),
-
-  //詳細テキスト用
-  hoverColor: const Color(0xffBBBBBB),
 );
