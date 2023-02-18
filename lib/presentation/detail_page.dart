@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 
+import '../components/color/app_color.dart';
 import '../domain/repository_data_model.dart';
 
 class DetailPage extends StatelessWidget {
@@ -25,36 +26,39 @@ class DetailPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: ClipOval(
-                child: Image.network(
-                  repoData.owner.avatarUrl,
-                  width: 120,
-                  height: 120,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                repoData.fullName,
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 5),
-              child: Text(
-                repoData.description ?? "No Description",
-                style: TextStyle(color: Theme.of(context).hoverColor),
+            Container(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  ClipOval(
+                    child: Image.network(
+                      repoData.owner.avatarUrl,
+                      width: 120,
+                      height: 120,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Text(
+                      repoData.fullName,
+                      style:
+                      const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                  ),
+                  Text(
+                    repoData.description ?? "No Description",
+                    style: TextStyle(color: Theme.of(context).brightness == Brightness.light
+                        ? AppColor.lightDescriptionColor
+                        : AppColor.darkDescriptionColor,
+                    ),
+                  ),
+                ],
               ),
             ),
             const Divider(),
-
             //リポジトリのスター数など
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            Container(
+              padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
                   verDetailElement(

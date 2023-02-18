@@ -4,9 +4,10 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import 'package:github_search_study/presentation/components/widget/loading_shimmer.dart';
 import 'package:github_search_study/presentation/detail_page.dart';
 import 'package:github_search_study/repository/providers/connectivity.dart';
+import '../components/color/app_color.dart';
+import '../components/widget/loading_shimmer.dart';
 import 'controller/controllers.dart';
 
 class SearchPage extends ConsumerWidget {
@@ -185,8 +186,9 @@ class SearchPage extends ConsumerWidget {
           Text(
             description ?? "No Description",
             style: TextStyle(color: Theme.of(context).brightness == Brightness.light
-                ? Colors.grey.shade800
-                : const Color(0xffBBBBBB)),
+                ? AppColor.lightDescriptionColor
+                : AppColor.darkDescriptionColor,
+            ),
             overflow: TextOverflow.ellipsis,
             maxLines: 3,
           ),
