@@ -26,6 +26,8 @@ class SearchPage extends ConsumerWidget {
     final errorMessage = ref.watch(errorMessageProvider);
     //通信状況
     final connectivity = ref.watch(connectivityProvider);
+    //テーマのオンオフ
+    final isDarkMode = ref.watch(isOnDarkModeProvider);
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -36,12 +38,16 @@ class SearchPage extends ConsumerWidget {
             "GitHub Repo Search",
             key: Key("searchAppBar"),
           ),
-          // //APPBARの右側
-          // actions: [
-          //   Switch(
-          //       value: value,
-          //       onChanged: onChanged)
-          // ],
+          //APPBARの右側
+          actions: [
+            Switch(
+              value: isDarkMode,
+              onChanged: (value) => ref
+                  .read(isOnDarkModeProvider.notifier)
+                  .update((state) => value),
+              activeColor: const Color(0xff3f51b5),
+            )
+          ],
         ),
         body: Column(
           children: <Widget>[
@@ -131,31 +137,32 @@ class SearchPage extends ConsumerWidget {
               ),
 
             Expanded(
-                flex: 8,
-                child: repoData.when(
-                  data: (data) => Scrollbar(
-                    child: ListView.separated(
-                      itemCount: (repoData.valueOrNull?.items ?? []).length,
-                      itemBuilder: (context, index) => _listItem(
-                        context: context,
-                        fullName: repoData.value!.items[index].fullName,
-                        description: repoData.value!.items[index].description,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DetailPage(
-                                    repoData: repoData.value!.items[index])),
-                          );
-                        },
-                      ),
-                      separatorBuilder: (context, index) => const Divider(),
+              flex: 8,
+              child: repoData.when(
+                data: (data) => Scrollbar(
+                  child: ListView.separated(
+                    itemCount: (repoData.valueOrNull?.items ?? []).length,
+                    itemBuilder: (context, index) => _listItem(
+                      context: context,
+                      fullName: repoData.value!.items[index].fullName,
+                      description: repoData.value!.items[index].description,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DetailPage(
+                                  repoData: repoData.value!.items[index])),
+                        );
+                      },
                     ),
+                    separatorBuilder: (context, index) => const Divider(),
                   ),
-                  //上でハンドリングしているため、ここではつかわない
-                  error: (_, stack) => const SizedBox.shrink(),
-                  loading: () => const LoadingShimmer(),
-                ))
+                ),
+                //上でハンドリングしているため、ここではつかわない
+                error: (_, stack) => const SizedBox.shrink(),
+                loading: () => const LoadingShimmer(),
+              ),
+            ),
           ],
         ),
       ),
@@ -185,9 +192,10 @@ class SearchPage extends ConsumerWidget {
         children: <Widget>[
           Text(
             description ?? "No Description",
-            style: TextStyle(color: Theme.of(context).brightness == Brightness.light
-                ? AppColor.lightDescriptionColor
-                : AppColor.darkDescriptionColor,
+            style: TextStyle(
+              color: Theme.of(context).brightness == Brightness.light
+                  ? AppColor.lightDescriptionColor
+                  : AppColor.darkDescriptionColor,
             ),
             overflow: TextOverflow.ellipsis,
             maxLines: 3,
