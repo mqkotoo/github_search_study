@@ -15,7 +15,6 @@ class DataRepository {
       final apiUri = Uri.parse(
           'https://api.github.com/search/repositories?q=$repositoryName&per_page=40');
       http.Response response = await client.get(apiUri);
-
       switch (response.statusCode) {
         case 200:
           final jsonData = json.decode(response.body);

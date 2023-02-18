@@ -7,7 +7,6 @@ import 'package:intl/intl.dart';
 import 'package:github_search_study/presentation/components/widget/loading_shimmer.dart';
 import 'package:github_search_study/presentation/detail_page.dart';
 import 'package:github_search_study/repository/connectivity.dart';
-import 'components/theme/theme.dart';
 import 'controller/controllers.dart';
 
 class SearchPage extends ConsumerWidget {
