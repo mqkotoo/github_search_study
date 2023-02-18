@@ -7,7 +7,7 @@ import 'package:mockito/mockito.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 
 import 'package:github_search_study/main.dart';
-import 'package:github_search_study/repository/http_client.dart';
+import 'package:github_search_study/repository/providers/http_client.dart';
 import '../repository/repository_mock_data.dart';
 import '../repository/repository_mock_test.mocks.dart';
 
