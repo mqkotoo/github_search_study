@@ -21,9 +21,9 @@ class DataRepository {
 
           return RepositoryDataModel.fromJson(jsonData);
         case 422:
-          throw "Please Enter Text!";
+          throw "Please Enter Text!!";
         default:
-          throw "error occurred!!";
+          throw "Error Occurred!!";
       }
     } on SocketException catch (_) {
       throw "Network Error!!";

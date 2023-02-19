@@ -6,9 +6,10 @@ import 'package:github_search_study/presentation/search_page.dart';
 import 'package:github_search_study/repository/data_repository.dart';
 import 'package:github_search_study/repository/providers/http_client.dart';
 import 'package:github_search_study/repository/providers/shared_preferences.dart';
+import 'package:github_search_study/theme/theme.dart';
+import 'package:github_search_study/theme/theme_selector_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'components/theme/theme.dart';
 
 final dataRepositoryProvider = Provider.autoDispose<DataRepository>((ref) {
   return DataRepository(client: ref.watch(httpClientProvider));
@@ -19,7 +20,7 @@ void main() async {
   runApp(
     ProviderScope(
       overrides: [
-        // ここでインスタンス化し、Providerの値を上書きします
+        // sharedPreferencesインスタンス化
         sharedPreferencesProvider.overrideWithValue(
           await SharedPreferences.getInstance(),
         ),
@@ -29,13 +30,15 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ref.watch(themeSelectorProvider),
       home: const SearchPage(),
     );
   }

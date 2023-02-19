@@ -8,6 +8,7 @@ import 'package:github_search_study/presentation/detail_page.dart';
 import 'package:github_search_study/repository/providers/connectivity.dart';
 import '../components/color/app_color.dart';
 import '../components/widget/loading_shimmer.dart';
+import '../theme/theme_selector_provider.dart';
 import 'controller/controllers.dart';
 
 class SearchPage extends ConsumerWidget {
@@ -28,6 +29,8 @@ class SearchPage extends ConsumerWidget {
     final connectivity = ref.watch(connectivityProvider);
     //テーマのオンオフ
     final isDarkMode = ref.watch(isOnDarkModeProvider);
+    //theme設定
+    final themeSelector = ref.watch(themeSelectorProvider);
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -90,7 +93,6 @@ class SearchPage extends ConsumerWidget {
                         .update((state) => "Network Error!!");
                     return;
                   }
-
                   ref
                       .read(inputRepoNameProvider.notifier)
                       .update((state) => text);
@@ -98,7 +100,6 @@ class SearchPage extends ConsumerWidget {
               ),
             ),
             const Divider(color: Colors.black12),
-
             // total count,メッセージ
             if (repoData.value != null && repoData.value!.totalCount != 0)
               //resultをカンマ区切りで表示
