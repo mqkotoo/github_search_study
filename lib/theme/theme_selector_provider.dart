@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_search_study/repository/providers/shared_preferences.dart';
 
 // SharedPreferences保存用キー
-const _themeKey = 'selectedThemeKey';
+const _isDarkThemeKey = 'selectedThemeKey';
 
 final themeSelectorProvider = StateNotifierProvider<ThemeSelector, ThemeMode>(
   ThemeSelector.new,
@@ -11,16 +11,12 @@ final themeSelectorProvider = StateNotifierProvider<ThemeSelector, ThemeMode>(
 
 class ThemeSelector extends StateNotifier<ThemeMode> {
   ThemeSelector(this._ref) : super(ThemeMode.system) {
-    // 記憶しているテーマがあれば取得して反映する。
-    final themeIndex = _prefs.getInt(_themeKey);
-    if (themeIndex == null) {
+    // テーマが保存されていればテーマを反映、そうでなければ初期値のシステム依存
+    final isDarkTheme = _prefs.getBool(_isDarkThemeKey);
+    if (isDarkTheme == null) {
       return;
     }
-    final themeMode = ThemeMode.values.firstWhere(
-          (e) => e.index == themeIndex,
-      orElse: () => ThemeMode.system,
-    );
-    state = themeMode;
+    state = isDarkTheme ? ThemeMode.dark : ThemeMode.light;
   }
 
   final Ref _ref;
@@ -29,8 +25,8 @@ class ThemeSelector extends StateNotifier<ThemeMode> {
   late final _prefs = _ref.read(sharedPreferencesProvider);
 
   // テーマの変更と保存
-  Future<void> changeAndSave(ThemeMode theme) async {
-    await _prefs.setInt(_themeKey, theme.index);
-    state = theme;
+  Future<void> changeAndSave(bool isDarkTheme) async {
+    await _prefs.setBool(_isDarkThemeKey, isDarkTheme);
+    state = isDarkTheme ? ThemeMode.dark : ThemeMode.light;
   }
 }
