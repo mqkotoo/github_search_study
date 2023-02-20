@@ -15,7 +15,7 @@ final textEditingControllerProvider =
 
 final isClearButtonVisibleProvider = StateProvider.autoDispose<bool>((ref) => false);
 
-final isOnDarkModeProvider = StateProvider<bool>((ref) => false);
+// final isOnDarkModeProvider = StateProvider<bool>((ref) => false);
 
 final apiFamilyProvider = FutureProvider.autoDispose
     .family<RepositoryDataModel?, String>((ref, repoName) async {

@@ -27,10 +27,8 @@ class SearchPage extends ConsumerWidget {
     final errorMessage = ref.watch(errorMessageProvider);
     //通信状況
     final connectivity = ref.watch(connectivityProvider);
-    //テーマのオンオフ
-    final isDarkMode = ref.watch(isOnDarkModeProvider);
     //theme設定
-    final themeSelector = ref.watch(themeSelectorProvider);
+    final themeMode = ref.watch(themeModeProvider);
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -44,11 +42,13 @@ class SearchPage extends ConsumerWidget {
           //APPBARの右側
           actions: [
             Switch(
-              value: isDarkMode,
-              onChanged: (value) => ref
-                  .read(isOnDarkModeProvider.notifier)
-                  .update((state) => value),
+              //キャッシュされているモードがダークかで判定
+              value: themeMode == ThemeMode.dark,
               activeColor: const Color(0xff3f51b5),
+              onChanged: (value) {
+                final themeSelector = ref.read(themeModeProvider.notifier);
+                themeSelector.toggleThemeAndSave(value);
+              },
             )
           ],
         ),

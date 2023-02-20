@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_search_study/presentation/search_page.dart';
 import 'package:github_search_study/repository/data_repository.dart';
 import 'package:github_search_study/repository/providers/http_client.dart';
-import 'package:github_search_study/repository/providers/shared_preferences.dart';
+import 'package:github_search_study/theme/shared_preferences.dart';
 import 'package:github_search_study/theme/theme.dart';
 import 'package:github_search_study/theme/theme_selector_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,7 +38,7 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: ref.watch(themeSelectorProvider),
+      themeMode: ref.watch(themeModeProvider),
       home: const SearchPage(),
     );
   }
