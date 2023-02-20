@@ -68,7 +68,7 @@ class DetailPage extends StatelessWidget {
                   iconColor: Colors.white,
                 ),
                 verDetailElement(
-                  icon: Icons.star_border,
+                  icon: Icons.nightlife,
                   elementLabel: "Star",
                   element: starsCount,
                   iconBackgroundColor: Colors.yellowAccent,
