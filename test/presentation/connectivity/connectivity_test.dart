@@ -13,8 +13,8 @@ import 'package:github_search_study/main.dart';
 import 'package:github_search_study/repository/providers/connectivity.dart';
 import 'package:github_search_study/repository/providers/http_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../repository/repository_mock_data.dart';
-import '../repository/repository_mock_test.mocks.dart';
+import '../../repository/repository_mock_data.dart';
+import '../../repository/repository_mock_test.mocks.dart';
 import 'connectivity_test.mocks.dart';
 
 //通信テストできるように
