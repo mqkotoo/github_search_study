@@ -23,84 +23,82 @@ class DetailPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Repo Detail", key: Key("detailAppBar")),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  ClipOval(
-                    child: Image.network(
-                      repoData.owner.avatarUrl,
-                      width: 120,
-                      height: 120,
-                    ),
+      body: Column(
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                ClipOval(
+                  child: Image.network(
+                    repoData.owner.avatarUrl,
+                    width: 120,
+                    height: 120,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Text(
-                      repoData.fullName,
-                      style:
-                      const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                    ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    repoData.fullName,
+                    style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  Text(
-                    repoData.description ?? "No Description",
-                    style: TextStyle(color: Theme.of(context).brightness == Brightness.light
-                        ? AppColor.lightDescriptionColor
-                        : AppColor.darkDescriptionColor,
-                    ),
+                ),
+                Text(
+                  repoData.description ?? "No Description",
+                  style: TextStyle(color: Theme.of(context).brightness == Brightness.light
+                      ? AppColor.lightDescriptionColor
+                      : AppColor.darkDescriptionColor,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            const Divider(),
-            //リポジトリのスター数など
-            Container(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  verDetailElement(
-                    icon: Icons.language,
-                    elementLabel: "Language",
-                    element: repoData.language ?? "No Language",
-                    iconBackgroundColor: Colors.blueAccent,
-                    iconColor: Colors.white,
-                  ),
-                  verDetailElement(
-                    icon: Icons.star_border,
-                    elementLabel: "Star",
-                    element: starsCount,
-                    iconBackgroundColor: Colors.yellowAccent,
-                    iconColor: Colors.black87,
-                  ),
-                  verDetailElement(
-                    icon: Icons.remove_red_eye_outlined,
-                    elementLabel: "Watch",
-                    element: watchersCount,
-                    iconBackgroundColor: Colors.brown,
-                    iconColor: Colors.white,
-                  ),
-                  verDetailElement(
-                    icon: Icons.fork_right_sharp,
-                    elementLabel: "Fork",
-                    element: forksCount,
-                    iconBackgroundColor: Colors.purpleAccent,
-                    iconColor: Colors.white,
-                  ),
-                  verDetailElement(
-                    icon: Icons.info_outline,
-                    elementLabel: "Issue",
-                    element: issuesCount,
-                    iconBackgroundColor: Colors.greenAccent,
-                    iconColor: Colors.white,
-                  ),
-                ],
-              ),
+          ),
+          const Divider(),
+          //リポジトリのスター数など
+          Container(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                verDetailElement(
+                  icon: Icons.language,
+                  elementLabel: "Language",
+                  element: repoData.language ?? "No Language",
+                  iconBackgroundColor: Colors.blueAccent,
+                  iconColor: Colors.white,
+                ),
+                verDetailElement(
+                  icon: Icons.star_border,
+                  elementLabel: "Star",
+                  element: starsCount,
+                  iconBackgroundColor: Colors.yellowAccent,
+                  iconColor: Colors.black87,
+                ),
+                verDetailElement(
+                  icon: Icons.remove_red_eye_outlined,
+                  elementLabel: "Watch",
+                  element: watchersCount,
+                  iconBackgroundColor: Colors.brown,
+                  iconColor: Colors.white,
+                ),
+                verDetailElement(
+                  icon: Icons.fork_right_sharp,
+                  elementLabel: "Fork",
+                  element: forksCount,
+                  iconBackgroundColor: Colors.purpleAccent,
+                  iconColor: Colors.white,
+                ),
+                verDetailElement(
+                  icon: Icons.info_outline,
+                  elementLabel: "Issue",
+                  element: issuesCount,
+                  iconBackgroundColor: Colors.greenAccent,
+                  iconColor: Colors.white,
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -108,7 +106,7 @@ class DetailPage extends StatelessWidget {
   Widget verDetailElement(
       {iconBackgroundColor, icon, iconColor, elementLabel, element}) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.only(bottom: 15),
       child: Row(
         children: [
           CircleAvatar(

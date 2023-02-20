@@ -8,7 +8,7 @@ import 'package:github_search_study/presentation/detail_page.dart';
 import 'package:github_search_study/repository/providers/connectivity.dart';
 import '../components/color/app_color.dart';
 import '../components/widget/loading_shimmer.dart';
-import '../theme/theme_selector_provider.dart';
+import '../theme/theme_mode_provider.dart';
 import 'controller/controllers.dart';
 
 class SearchPage extends ConsumerWidget {

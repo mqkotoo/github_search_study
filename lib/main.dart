@@ -7,7 +7,7 @@ import 'package:github_search_study/repository/data_repository.dart';
 import 'package:github_search_study/repository/providers/http_client.dart';
 import 'package:github_search_study/theme/shared_preferences.dart';
 import 'package:github_search_study/theme/theme.dart';
-import 'package:github_search_study/theme/theme_selector_provider.dart';
+import 'package:github_search_study/theme/theme_mode_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
