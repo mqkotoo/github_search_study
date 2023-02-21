@@ -193,11 +193,6 @@ class SearchPage extends ConsumerWidget {
         children: <Widget>[
           Text(
             description ?? "No Description",
-            style: TextStyle(
-              color: Theme.of(context).brightness == Brightness.light
-                  ? AppColor.lightDescriptionColor
-                  : AppColor.darkDescriptionColor,
-            ),
             overflow: TextOverflow.ellipsis,
             maxLines: 3,
           ),

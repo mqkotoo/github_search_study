@@ -45,13 +45,7 @@ class DetailPage extends StatelessWidget {
                       const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
                   ),
-                  Text(
-                    repoData.description ?? "No Description",
-                    style: TextStyle(color: Theme.of(context).brightness == Brightness.light
-                        ? AppColor.lightDescriptionColor
-                        : AppColor.darkDescriptionColor,
-                    ),
-                  ),
+                  Text(repoData.description ?? "No Description"),
                 ],
               ),
             ),
