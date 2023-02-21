@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../components/color/app_color.dart';
-
 //light theme ----------------------------------
 ThemeData lightTheme = ThemeData.light().copyWith(
   scaffoldBackgroundColor: const Color(0xffFCFDF6),

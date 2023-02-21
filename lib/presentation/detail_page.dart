@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 
-import '../components/color/app_color.dart';
 import '../domain/repository_data_model.dart';
 
 class DetailPage extends StatelessWidget {
@@ -41,8 +40,8 @@ class DetailPage extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Text(
                       repoData.fullName,
-                      style:
-                      const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16),
                     ),
                   ),
                   Text(repoData.description ?? "No Description"),

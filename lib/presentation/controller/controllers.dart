@@ -13,7 +13,8 @@ final errorMessageProvider = StateProvider.autoDispose<String>((ref) => "");
 final textEditingControllerProvider =
     Provider<TextEditingController>((ref) => TextEditingController());
 
-final isClearButtonVisibleProvider = StateProvider.autoDispose<bool>((ref) => false);
+final isClearButtonVisibleProvider =
+    StateProvider.autoDispose<bool>((ref) => false);
 
 // final isOnDarkModeProvider = StateProvider<bool>((ref) => false);
 

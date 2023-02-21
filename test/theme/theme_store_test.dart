@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:github_search_study/theme/shared_preferences.dart';
 import 'package:github_search_study/theme/theme_mode_provider.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   group("themeに関するテスト", () {
@@ -42,13 +43,13 @@ void main() {
       const isDark = false;
       //テーマモードをライトモードに設定
       SharedPreferences.setMockInitialValues({isDarkThemeKey: isDark});
-      
+
       container = ProviderContainer(overrides: [
         sharedPreferencesProvider.overrideWithValue(
           await SharedPreferences.getInstance(),
         ),
       ]);
-      
+
       final themeMode = container.read(themeModeProvider);
       expect(themeMode, ThemeMode.light);
     });
@@ -66,6 +67,5 @@ void main() {
       final theme = prefs.getBool(isDarkThemeKey);
       expect(theme, true);
     });
-    
   });
 }

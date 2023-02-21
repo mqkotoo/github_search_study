@@ -14,7 +14,6 @@ import 'repository_mock_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<http.Client>()])
 void main() {
-
   test("getメソッドのテスト", () async {
     const data = RepositoryMockData.jsonData;
 

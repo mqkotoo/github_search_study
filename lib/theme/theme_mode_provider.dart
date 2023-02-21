@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:github_search_study/theme/shared_preferences.dart';
 
 // SharedPreferences保存用キー
