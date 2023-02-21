@@ -84,6 +84,11 @@ class SearchPage extends ConsumerWidget {
                 textInputAction: TextInputAction.search,
                 //search押したらデータ取得 データ渡す
                 onFieldSubmitted: (text) async {
+                  // エラーメッセージに値が入るかをエラー表示のフラグにしているから検索ごとに初期化
+                  // android studioのバグなのか、refreshが使われていない判定になる
+                  // ignore: unused_result
+                  ref.refresh(errorMessageProvider);
+
                   final connectivityResult =
                       await connectivity.checkConnectivity();
                   //通信がなかったら何もその後の処理はせず、エラーを出す
