@@ -49,6 +49,86 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `GitHub Search`
+  String get searchPageTitle {
+    return Intl.message(
+      'GitHub Search',
+      name: 'searchPageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `result`
+  String get result {
+    return Intl.message(
+      'result',
+      name: 'result',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Repo Detail`
+  String get detailPageTitle {
+    return Intl.message(
+      'Repo Detail',
+      name: 'detailPageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Star`
+  String get star {
+    return Intl.message(
+      'Star',
+      name: 'star',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Watch`
+  String get watch {
+    return Intl.message(
+      'Watch',
+      name: 'watch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fork`
+  String get fork {
+    return Intl.message(
+      'Fork',
+      name: 'fork',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Issue`
+  String get issue {
+    return Intl.message(
+      'Issue',
+      name: 'issue',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -57,6 +137,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'ja'),
     ];
   }
 

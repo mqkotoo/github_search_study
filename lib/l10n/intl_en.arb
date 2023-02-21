@@ -1,1 +1,10 @@
-{}
+{
+  "searchPageTitle": "GitHub Search",
+  "result": "result",
+  "detailPageTitle": "Repo Detail",
+  "language": "Language",
+  "star": "Star",
+  "watch": "Watch",
+  "fork": "Fork",
+  "issue": "Issue"
+}

@@ -10,7 +10,7 @@ import 'package:github_search_study/theme/shared_preferences.dart';
 import 'package:github_search_study/theme/theme.dart';
 import 'package:github_search_study/theme/theme_mode_provider.dart';
 
-import 'localization/generated/l10n.dart';
+import 'generated/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 final dataRepositoryProvider = Provider.autoDispose<DataRepository>((ref) {
