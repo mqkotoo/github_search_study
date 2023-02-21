@@ -13,13 +13,16 @@ dependencies:
   connectivity_plus: ^3.0.3
   flutter:
     sdk: flutter
-  flutter_riverpod: ^2.1.3
+  flutter_riverpod: ^2.2.0
   freezed_annotation: ^2.2.0
   http: ^0.13.5
-  intl: ^0.18.0
+  #flutter_localizationsとの互換性でintlのバージョンは下げた
+  intl: ^0.17.0
   json_annotation: ^4.8.0
   shimmer: ^2.0.0
   shared_preferences: ^2.0.17
+  flutter_localizations:
+    sdk: flutter
 
 
 dev_dependencies:
@@ -41,3 +44,5 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+flutter_intl:
+  enabled: true

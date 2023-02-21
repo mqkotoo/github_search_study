@@ -1,0 +1,14 @@
+{
+  "searchPageTitle": "GitHubサーチ",
+  "result": "結果",
+  "detailPageTitle": "リポジトリ詳細",
+  "language": "言語",
+  "star": "スター",
+  "watch": "ウォッチ",
+  "fork": "フォーク",
+  "issue": "イシュー",
+  "errorOccurred": "エラーが発生しました！！",
+  "networkError": "ネットワークエラーです！！",
+  "enterText": "テキストを入力してください！！",
+  "noResult": "結果は見つかりませんでした！！"
+}

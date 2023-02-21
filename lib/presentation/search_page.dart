@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:github_search_study/presentation/detail_page.dart';
 import 'package:github_search_study/repository/providers/connectivity.dart';
 import '../components/widget/loading_shimmer.dart';
+import '../generated/l10n.dart';
 import '../theme/theme_mode_provider.dart';
 import 'controller/controllers.dart';
 
@@ -34,9 +35,9 @@ class SearchPage extends ConsumerWidget {
       behavior: HitTestBehavior.opaque,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            "GitHub Repo Search",
-            key: Key("searchAppBar"),
+          title: Text(
+            S.of(context).searchPageTitle,
+            key: const Key("searchAppBar"),
           ),
           //APPBARの右側
           actions: [
@@ -89,7 +90,7 @@ class SearchPage extends ConsumerWidget {
                   if (connectivityResult == ConnectivityResult.none) {
                     ref
                         .read(errorMessageProvider.notifier)
-                        .update((state) => "Network Error!!");
+                        .update((state) => S.of(context).networkError);
                     return;
                   }
                   ref
@@ -101,40 +102,37 @@ class SearchPage extends ConsumerWidget {
             const Divider(color: Colors.black12),
             // total count,メッセージ
             if (repoData.value != null && repoData.value!.totalCount != 0)
-              //resultをカンマ区切りで表示
               Padding(
                 padding: const EdgeInsets.only(right: 10),
                 child: Align(
                   alignment: AlignmentDirectional.centerEnd,
                   child: Text(
-                    "result: ${NumberFormat('#,##0').format(repoData.value?.totalCount)}",
+                    "${S.of(context).result}: ${NumberFormat('#,##0').format(repoData.value?.totalCount)}",
                   ),
                 ),
               ),
 
-            if (repoData.value != null && repoData.value!.totalCount == 0)
-              //この場合は「見つかりませんでした」みたいな
+            //結果がなかった時(errorMessageProviderを介していないので下のエラーと同時に表示される可能性がある)
+            if (repoData.value != null &&
+                repoData.value!.totalCount == 0 &&
+                errorMessage == "")
               Column(
-                children: const [
+                children: [
                   Padding(
-                    padding: EdgeInsets.only(right: 10),
+                    padding: const EdgeInsets.only(right: 10),
                     child: Align(
                       alignment: AlignmentDirectional.centerEnd,
-                      child: Text("result: 0"),
+                      child: Text("${S.of(context).result}: 0"),
                     ),
                   ),
-                  SizedBox(height: 30),
-                  Text("not found search result!")
+                  const SizedBox(height: 30),
+                  Text(S.of(context).noResult)
                 ],
               ),
 
+            //APIたたいてエラーがあれば表示
             if (errorMessage.isNotEmpty)
-              Column(
-                children: [
-                  const SizedBox(height: 40),
-                  Text(errorMessage.toString()),
-                ],
-              ),
+              returnErrorMessage(errorMessage, context),
 
             Expanded(
               flex: 8,
@@ -167,6 +165,31 @@ class SearchPage extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  Widget returnErrorMessage(String error, BuildContext context) {
+    if (error == "Please Enter Text!!") {
+      return Column(
+        children: [
+          const SizedBox(height: 40),
+          Text(S.of(context).enterText),
+        ],
+      );
+    } else if (error == "Error Occurred!!") {
+      return Column(
+        children: [
+          const SizedBox(height: 40),
+          Text(S.of(context).errorOccurred),
+        ],
+      );
+    } else {
+      return Column(
+        children: [
+          const SizedBox(height: 40),
+          Text(S.of(context).networkError),
+        ],
+      );
+    }
   }
 
   Widget _listItem(
