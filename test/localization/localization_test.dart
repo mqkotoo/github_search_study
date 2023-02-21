@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:network_image_mock/network_image_mock.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:github_search_study/generated/l10n.dart';
 import 'package:github_search_study/presentation/search_page.dart';
 import 'package:github_search_study/theme/shared_preferences.dart';
-import 'package:network_image_mock/network_image_mock.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   Widget myTestWidget(Locale locale) {

@@ -21,9 +21,8 @@ class DetailPage extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text(
-            S.of(context).detailPageTitle,
-            key: const Key("detailAppBar")),
+        title:
+            Text(S.of(context).detailPageTitle, key: const Key("detailAppBar")),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -66,7 +65,7 @@ class DetailPage extends StatelessWidget {
                   ),
                   verDetailElement(
                     icon: Icons.star_outline,
-                    elementLabel:S.of(context).star,
+                    elementLabel: S.of(context).star,
                     element: starsCount,
                     iconBackgroundColor: Colors.yellowAccent,
                     iconColor: Colors.black87,

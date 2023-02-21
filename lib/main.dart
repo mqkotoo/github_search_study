@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,9 +10,7 @@ import 'package:github_search_study/repository/providers/http_client.dart';
 import 'package:github_search_study/theme/shared_preferences.dart';
 import 'package:github_search_study/theme/theme.dart';
 import 'package:github_search_study/theme/theme_mode_provider.dart';
-
 import 'generated/l10n.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 final dataRepositoryProvider = Provider.autoDispose<DataRepository>((ref) {
   return DataRepository(client: ref.watch(httpClientProvider));
