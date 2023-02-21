@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,6 +10,8 @@ import 'package:github_search_study/theme/shared_preferences.dart';
 import 'package:github_search_study/theme/theme.dart';
 import 'package:github_search_study/theme/theme_mode_provider.dart';
 
+
+import 'package:flutter/material.dart';
 final dataRepositoryProvider = Provider.autoDispose<DataRepository>((ref) {
   return DataRepository(client: ref.watch(httpClientProvider));
 });
