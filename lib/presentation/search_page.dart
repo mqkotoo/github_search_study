@@ -101,41 +101,38 @@ class SearchPage extends ConsumerWidget {
             ),
             const Divider(color: Colors.black12),
             // total count,メッセージ
-            if (repoData.value != null && repoData.value!.totalCount != 0)
-              //resultをカンマ区切りで表示
+        if(repoData.value != null && repoData.value!.totalCount != 0)
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: Align(
+                alignment: AlignmentDirectional.centerEnd,
+                child: Text(
+                  "${S.of(context).result}: ${NumberFormat('#,##0').format(repoData.value?.totalCount)}",
+                ),
+              ),
+            ),
+
+            //結果がなかった時(errorMessageProviderを介していないので下のエラーと同時に表示される可能性がある)
+        if(repoData.value != null
+            && repoData.value!.totalCount == 0
+            && errorMessage == "")
+          Column(
+            children: [
               Padding(
                 padding: const EdgeInsets.only(right: 10),
                 child: Align(
                   alignment: AlignmentDirectional.centerEnd,
-                  child: Text(
-                      "${S.of(context).result}: ${NumberFormat('#,##0').format(repoData.value?.totalCount)}",
-                  ),
+                  child: Text("${S.of(context).result}: 0"),
                 ),
               ),
+              const SizedBox(height: 30),
+              Text(S.of(context).noResult)
+            ],
+          ),
 
-            if (repoData.value != null && repoData.value!.totalCount == 0)
-              //この場合は「見つかりませんでした」みたいな
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Align(
-                      alignment: AlignmentDirectional.centerEnd,
-                      child: Text("${S.of(context).result}: 0"),
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                  Text(S.of(context).noResult)
-                ],
-              ),
-
+            //APIたたいてエラーがあれば表示
             if (errorMessage.isNotEmpty)
-              Column(
-                children: [
-                  const SizedBox(height: 40),
-                  Text(errorMessage.toString()),
-                ],
-              ),
+              returnErrorMessage(errorMessage,context),
 
             Expanded(
               flex: 8,
@@ -168,6 +165,31 @@ class SearchPage extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  Widget returnErrorMessage(String error,BuildContext context) {
+    if(error == "Please Enter Text!!") {
+      return Column(
+        children: [
+          const SizedBox(height: 40),
+          Text(S.of(context).enterText),
+        ],
+      );
+    }else if(error == "Error Occurred!!") {
+      return Column(
+        children: [
+          const SizedBox(height: 40),
+          Text(S.of(context).errorOccurred),
+        ],
+      );
+    }else{
+      return Column(
+        children: [
+          const SizedBox(height: 40),
+          Text(S.of(context).networkError),
+        ],
+      );
+    }
   }
 
   Widget _listItem(
