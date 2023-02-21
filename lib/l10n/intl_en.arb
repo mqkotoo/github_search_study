@@ -6,5 +6,9 @@
   "star": "Star",
   "watch": "Watch",
   "fork": "Fork",
-  "issue": "Issue"
+  "issue": "Issue",
+  "errorOccurred": "Error Occurred!!",
+  "networkError": "Network Error!!",
+  "enterText": "Please Enter Text!!",
+  "noResult": "Not Found Search Result!!"
 }

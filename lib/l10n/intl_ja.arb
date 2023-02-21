@@ -6,5 +6,9 @@
   "star": "スター",
   "watch": "ウォッチ",
   "fork": "フォーク",
-  "issue": "イシュー"
+  "issue": "イシュー",
+  "errorOccurred": "エラーが発生しました！！",
+  "networkError": "ネットワークエラーです！！",
+  "enterText": "テキストを入力してください！！",
+  "noResult": "結果は見つかりませんでした！！"
 }

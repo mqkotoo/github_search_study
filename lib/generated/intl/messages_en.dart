@@ -23,9 +23,16 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "detailPageTitle": MessageLookupByLibrary.simpleMessage("Repo Detail"),
+        "enterText":
+            MessageLookupByLibrary.simpleMessage("Please Enter Text!!"),
+        "errorOccurred":
+            MessageLookupByLibrary.simpleMessage("Error Occurred!!"),
         "fork": MessageLookupByLibrary.simpleMessage("Fork"),
         "issue": MessageLookupByLibrary.simpleMessage("Issue"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "networkError": MessageLookupByLibrary.simpleMessage("Network Error!!"),
+        "noResult":
+            MessageLookupByLibrary.simpleMessage("Not Found Search Result!!"),
         "result": MessageLookupByLibrary.simpleMessage("result"),
         "searchPageTitle":
             MessageLookupByLibrary.simpleMessage("GitHub Search"),

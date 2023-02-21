@@ -129,6 +129,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Error Occurred!!`
+  String get errorOccurred {
+    return Intl.message(
+      'Error Occurred!!',
+      name: 'errorOccurred',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network Error!!`
+  String get networkError {
+    return Intl.message(
+      'Network Error!!',
+      name: 'networkError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter Text!!`
+  String get enterText {
+    return Intl.message(
+      'Please Enter Text!!',
+      name: 'enterText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not Found Search Result!!`
+  String get noResult {
+    return Intl.message(
+      'Not Found Search Result!!',
+      name: 'noResult',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

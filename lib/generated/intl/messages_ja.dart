@@ -23,9 +23,13 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "detailPageTitle": MessageLookupByLibrary.simpleMessage("リポジトリ詳細"),
+        "enterText": MessageLookupByLibrary.simpleMessage("テキストを入力してください！！"),
+        "errorOccurred": MessageLookupByLibrary.simpleMessage("エラーが発生しました！！"),
         "fork": MessageLookupByLibrary.simpleMessage("フォーク"),
         "issue": MessageLookupByLibrary.simpleMessage("イシュー"),
         "language": MessageLookupByLibrary.simpleMessage("言語"),
+        "networkError": MessageLookupByLibrary.simpleMessage("ネットワークエラーです！！"),
+        "noResult": MessageLookupByLibrary.simpleMessage("結果は見つかりませんでした！！"),
         "result": MessageLookupByLibrary.simpleMessage("結果"),
         "searchPageTitle": MessageLookupByLibrary.simpleMessage("GitHubサーチ"),
         "star": MessageLookupByLibrary.simpleMessage("スター"),

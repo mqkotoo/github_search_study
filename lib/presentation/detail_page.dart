@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../domain/repository_data_model.dart';
+import '../generated/l10n.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({required this.repoData, Key? key}) : super(key: key);
@@ -20,7 +21,9 @@ class DetailPage extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text("Repo Detail", key: Key("detailAppBar")),
+        title: Text(
+            S.of(context).detailPageTitle,
+            key: const Key("detailAppBar")),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -56,35 +59,35 @@ class DetailPage extends StatelessWidget {
                 children: [
                   verDetailElement(
                     icon: Icons.language,
-                    elementLabel: "Language",
+                    elementLabel: S.of(context).language,
                     element: repoData.language ?? "No Language",
                     iconBackgroundColor: Colors.blueAccent,
                     iconColor: Colors.white,
                   ),
                   verDetailElement(
                     icon: Icons.star_outline,
-                    elementLabel: "Star",
+                    elementLabel:S.of(context).star,
                     element: starsCount,
                     iconBackgroundColor: Colors.yellowAccent,
                     iconColor: Colors.black87,
                   ),
                   verDetailElement(
                     icon: Icons.remove_red_eye_outlined,
-                    elementLabel: "Watch",
+                    elementLabel: S.of(context).watch,
                     element: watchersCount,
                     iconBackgroundColor: Colors.brown,
                     iconColor: Colors.white,
                   ),
                   verDetailElement(
                     icon: Icons.fork_right_sharp,
-                    elementLabel: "Fork",
+                    elementLabel: S.of(context).fork,
                     element: forksCount,
                     iconBackgroundColor: Colors.purpleAccent,
                     iconColor: Colors.white,
                   ),
                   verDetailElement(
                     icon: Icons.info_outline,
-                    elementLabel: "Issue",
+                    elementLabel: S.of(context).issue,
                     element: issuesCount,
                     iconBackgroundColor: Colors.greenAccent,
                     iconColor: Colors.white,
