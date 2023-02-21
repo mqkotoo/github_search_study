@@ -9,13 +9,14 @@ import '../../main.dart';
 final inputRepoNameProvider = StateProvider.autoDispose<String>((ref) => "");
 //キャッチしたエラーメッセージを格納
 final errorMessageProvider = StateProvider.autoDispose<String>((ref) => "");
-// //ロード状況を管理
-// final loadingStateProvider = StateProvider.autoDispose((ref) => false);
 
 final textEditingControllerProvider =
     Provider<TextEditingController>((ref) => TextEditingController());
 
-final isClearButtonVisibleProvider = StateProvider<bool>((ref) => false);
+final isClearButtonVisibleProvider =
+    StateProvider.autoDispose<bool>((ref) => false);
+
+// final isOnDarkModeProvider = StateProvider<bool>((ref) => false);
 
 final apiFamilyProvider = FutureProvider.autoDispose
     .family<RepositoryDataModel?, String>((ref, repoName) async {

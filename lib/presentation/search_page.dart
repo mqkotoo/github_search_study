@@ -4,9 +4,10 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import 'package:github_search_study/presentation/components/loading_shimmer.dart';
 import 'package:github_search_study/presentation/detail_page.dart';
-import 'package:github_search_study/repository/connectivity.dart';
+import 'package:github_search_study/repository/providers/connectivity.dart';
+import '../components/widget/loading_shimmer.dart';
+import '../theme/theme_mode_provider.dart';
 import 'controller/controllers.dart';
 
 class SearchPage extends ConsumerWidget {
@@ -25,27 +26,30 @@ class SearchPage extends ConsumerWidget {
     final errorMessage = ref.watch(errorMessageProvider);
     //通信状況
     final connectivity = ref.watch(connectivityProvider);
+    //theme設定
+    final themeMode = ref.watch(themeModeProvider);
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       behavior: HitTestBehavior.opaque,
       child: Scaffold(
-        backgroundColor: const Color(0xffFCFDF6),
         appBar: AppBar(
-          backgroundColor: const Color(0xffFCFDF6),
-          elevation: 0,
-          titleTextStyle: const TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-          iconTheme: const IconThemeData(
-            color: Colors.black,
-          ),
           title: const Text(
             "GitHub Repo Search",
             key: Key("searchAppBar"),
           ),
+          //APPBARの右側
+          actions: [
+            Switch(
+              //キャッシュされているモードがダークかで判定
+              value: themeMode == ThemeMode.dark,
+              activeColor: const Color(0xff64FFDA),
+              onChanged: (value) {
+                final themeSelector = ref.read(themeModeProvider.notifier);
+                themeSelector.toggleThemeAndSave(value);
+              },
+            )
+          ],
         ),
         body: Column(
           children: <Widget>[
@@ -61,7 +65,7 @@ class SearchPage extends ConsumerWidget {
                       .update((state) => text.isNotEmpty);
                 },
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                  prefixIcon: const Icon(Icons.search),
                   suffixIcon: isClearVisible
                       ? IconButton(
                           key: const Key("clearButton"),
@@ -74,20 +78,6 @@ class SearchPage extends ConsumerWidget {
                           },
                           color: Colors.grey)
                       : const SizedBox.shrink(),
-                  fillColor: const Color(0xffe1eedf),
-                  filled: true,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: const BorderSide(
-                      color: Colors.transparent,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: const BorderSide(
-                      color: Colors.grey,
-                    ),
-                  ),
                 ),
                 //入力キーボードのdone→searchに変更
                 textInputAction: TextInputAction.search,
@@ -102,7 +92,6 @@ class SearchPage extends ConsumerWidget {
                         .update((state) => "Network Error!!");
                     return;
                   }
-
                   ref
                       .read(inputRepoNameProvider.notifier)
                       .update((state) => text);
@@ -110,7 +99,6 @@ class SearchPage extends ConsumerWidget {
               ),
             ),
             const Divider(color: Colors.black12),
-
             // total count,メッセージ
             if (repoData.value != null && repoData.value!.totalCount != 0)
               //resultをカンマ区切りで表示
@@ -149,32 +137,32 @@ class SearchPage extends ConsumerWidget {
               ),
 
             Expanded(
-                flex: 8,
-                child: repoData.when(
-                  data: (data) => Scrollbar(
-                    child: ListView.separated(
-                      itemCount: (repoData.valueOrNull?.items ?? []).length,
-                      itemBuilder: (context, index) => _listItem(
-                        fullName: repoData.value!.items[index].fullName,
-                        description: repoData.value!.items[index].description,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DetailPage(
-                                    repoData: repoData.value!.items[index])),
-                          );
-                        },
-                      ),
-                      separatorBuilder: (context, index) => const Divider(
-                        color: Color(0xffBBBBBB),
-                      ),
+              flex: 8,
+              child: repoData.when(
+                data: (data) => Scrollbar(
+                  child: ListView.separated(
+                    itemCount: (repoData.valueOrNull?.items ?? []).length,
+                    itemBuilder: (context, index) => _listItem(
+                      context: context,
+                      fullName: repoData.value!.items[index].fullName,
+                      description: repoData.value!.items[index].description,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DetailPage(
+                                  repoData: repoData.value!.items[index])),
+                        );
+                      },
                     ),
+                    separatorBuilder: (context, index) => const Divider(),
                   ),
-                  //上でハンドリングしているため、ここではつかわない
-                  error: (_, stack) => const SizedBox.shrink(),
-                  loading: () => const LoadingShimmer(),
-                ))
+                ),
+                //上でハンドリングしているため、ここではつかわない
+                error: (_, stack) => const SizedBox.shrink(),
+                loading: () => const LoadingShimmer(),
+              ),
+            ),
           ],
         ),
       ),
@@ -184,6 +172,7 @@ class SearchPage extends ConsumerWidget {
   Widget _listItem(
       {required String fullName,
       String? description,
+      required BuildContext context,
       required void Function() onTap}) {
     return ListTile(
       onTap: onTap,

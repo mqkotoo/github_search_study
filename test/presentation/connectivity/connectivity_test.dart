@@ -7,12 +7,14 @@ import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:network_image_mock/network_image_mock.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:github_search_study/main.dart';
-import 'package:github_search_study/repository/connectivity.dart';
-import 'package:github_search_study/repository/http_client.dart';
-import '../repository/repository_mock_data.dart';
-import '../repository/repository_mock_test.mocks.dart';
+import 'package:github_search_study/repository/providers/connectivity.dart';
+import 'package:github_search_study/repository/providers/http_client.dart';
+import 'package:github_search_study/theme/shared_preferences.dart';
+import '../../repository/repository_mock_data.dart';
+import '../../repository/repository_mock_test.mocks.dart';
 import 'connectivity_test.mocks.dart';
 
 //通信テストできるように
@@ -30,10 +32,18 @@ void main() {
 
     mockNetworkImagesFor(() async {
       await tester.pumpWidget(
-        ProviderScope(overrides: [
-          httpClientProvider.overrideWithValue(mockClient),
-          connectivityProvider.overrideWithValue(connectivityMock),
-        ], child: const MyApp()),
+        ProviderScope(
+          overrides: [
+            httpClientProvider.overrideWithValue(mockClient),
+            connectivityProvider.overrideWithValue(connectivityMock),
+            // sharedPreferencesインスタンス化
+            //ここではsharedPreferencesのテストはしないのでモックにしていない
+            sharedPreferencesProvider.overrideWithValue(
+              await SharedPreferences.getInstance(),
+            ),
+          ],
+          child: const MyApp(),
+        ),
       );
 
       final formField = find.byKey(const ValueKey("inputForm"));

@@ -5,9 +5,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 import 'package:network_image_mock/network_image_mock.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:github_search_study/main.dart';
-import 'package:github_search_study/repository/http_client.dart';
+import 'package:github_search_study/repository/providers/http_client.dart';
+import 'package:github_search_study/theme/shared_preferences.dart';
 import '../repository/repository_mock_data.dart';
 import '../repository/repository_mock_test.mocks.dart';
 
@@ -19,9 +21,14 @@ void main() {
 
     mockNetworkImagesFor(() async {
       await tester.pumpWidget(
-        ProviderScope(
-            overrides: [httpClientProvider.overrideWithValue(mockClient)],
-            child: const MyApp()),
+        ProviderScope(overrides: [
+          httpClientProvider.overrideWithValue(mockClient),
+          // sharedPreferencesインスタンス化
+          //ここではsharedPreferencesのテストはしないのでモックにしていない
+          sharedPreferencesProvider.overrideWithValue(
+            await SharedPreferences.getInstance(),
+          ),
+        ], child: const MyApp()),
       );
 
       expect(find.byKey(const Key("searchAppBar")), findsOneWidget);
@@ -66,9 +73,14 @@ void main() {
 
     mockNetworkImagesFor(() async {
       await tester.pumpWidget(
-        ProviderScope(
-            overrides: [httpClientProvider.overrideWithValue(mockClient)],
-            child: const MyApp()),
+        ProviderScope(overrides: [
+          httpClientProvider.overrideWithValue(mockClient),
+          // sharedPreferencesインスタンス化
+          //ここではsharedPreferencesのテストはしないのでモックにしていない
+          sharedPreferencesProvider.overrideWithValue(
+            await SharedPreferences.getInstance(),
+          ),
+        ], child: const MyApp()),
       );
 
       final formField = find.byKey(const ValueKey("inputForm"));

@@ -19,53 +19,39 @@ class DetailPage extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: const Color(0xffFCFDF6),
       appBar: AppBar(
-        backgroundColor: const Color(0xffFCFDF6),
-        elevation: 0,
-        titleTextStyle: const TextStyle(
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
-          fontSize: 20,
-        ),
-        iconTheme: const IconThemeData(
-          color: Colors.black,
-        ),
         title: const Text("Repo Detail", key: Key("detailAppBar")),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: ClipOval(
-                child: Image.network(
-                  repoData.owner.avatarUrl,
-                  width: 120,
-                  height: 120,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                repoData.fullName,
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 5),
-              child: Text(
-                repoData.description ?? "No Description",
-                style: const TextStyle(color: Colors.black54, fontSize: 13),
+            Container(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  ClipOval(
+                    child: Image.network(
+                      repoData.owner.avatarUrl,
+                      width: 120,
+                      height: 120,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Text(
+                      repoData.fullName,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                  ),
+                  Text(repoData.description ?? "No Description"),
+                ],
               ),
             ),
             const Divider(),
-
             //リポジトリのスター数など
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            Container(
+              padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
                   verDetailElement(
@@ -76,7 +62,7 @@ class DetailPage extends StatelessWidget {
                     iconColor: Colors.white,
                   ),
                   verDetailElement(
-                    icon: Icons.star_border,
+                    icon: Icons.star_outline,
                     elementLabel: "Star",
                     element: starsCount,
                     iconBackgroundColor: Colors.yellowAccent,
@@ -115,7 +101,7 @@ class DetailPage extends StatelessWidget {
   Widget verDetailElement(
       {iconBackgroundColor, icon, iconColor, elementLabel, element}) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.only(bottom: 15),
       child: Row(
         children: [
           CircleAvatar(
