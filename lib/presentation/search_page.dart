@@ -44,7 +44,6 @@ class SearchPage extends ConsumerWidget {
             Switch(
               //キャッシュされているモードがダークかで判定
               value: themeMode == ThemeMode.dark,
-              // activeColor: const Color(0xff3f51b5),
               activeColor: const Color(0xff64FFDA),
               onChanged: (value) {
                 final themeSelector = ref.read(themeModeProvider.notifier);

@@ -84,4 +84,5 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
 
   // divider
   dividerColor: const Color(0xff777777),
+
 );
