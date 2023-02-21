@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -83,6 +84,9 @@ class SearchPage extends ConsumerWidget {
                 textInputAction: TextInputAction.search,
                 //search押したらデータ取得 データ渡す
                 onFieldSubmitted: (text) async {
+                  if (kDebugMode) {
+                    print("test");
+                  }
                   final connectivityResult =
                       await connectivity.checkConnectivity();
                   //通信がなかったら何もその後の処理はせず、エラーを出す
