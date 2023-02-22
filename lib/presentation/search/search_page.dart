@@ -4,12 +4,12 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import 'package:github_search_study/presentation/detail_page.dart';
+import 'package:github_search_study/presentation/detail/detail_page.dart';
 import 'package:github_search_study/repository/providers/connectivity.dart';
-import '../components/widget/loading_shimmer.dart';
-import '../generated/l10n.dart';
-import '../theme/theme_mode_provider.dart';
-import 'controller/controllers.dart';
+import 'widget/loading_shimmer.dart';
+import '../../generated/l10n.dart';
+import '../../theme/theme_mode_provider.dart';
+import '../controller/controllers.dart';
 
 class SearchPage extends ConsumerWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -34,6 +34,7 @@ class SearchPage extends ConsumerWidget {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       behavior: HitTestBehavior.opaque,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(
             S.of(context).searchPageTitle,
@@ -55,8 +56,8 @@ class SearchPage extends ConsumerWidget {
         body: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-              //search field
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              //search field 横画面だとIPHONEのノッチにかかるから対策
               child: TextFormField(
                 key: const Key("inputForm"),
                 controller: textController,
@@ -105,6 +106,7 @@ class SearchPage extends ConsumerWidget {
               ),
             ),
             const Divider(color: Colors.black12),
+
             // total count,メッセージ
             if (repoData.value != null && repoData.value!.totalCount != 0)
               Padding(
@@ -140,10 +142,11 @@ class SearchPage extends ConsumerWidget {
               returnErrorMessage(errorMessage, context),
 
             Expanded(
-              flex: 8,
+              // flex: 9,
               child: repoData.when(
                 data: (data) => Scrollbar(
                   child: ListView.separated(
+                    keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                     itemCount: (repoData.valueOrNull?.items ?? []).length,
                     itemBuilder: (context, index) => _listItem(
                       context: context,

@@ -7,7 +7,7 @@ import 'package:network_image_mock/network_image_mock.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:github_search_study/generated/l10n.dart';
-import 'package:github_search_study/presentation/search_page.dart';
+import 'package:github_search_study/presentation/search/search_page.dart';
 import 'package:github_search_study/theme/shared_preferences.dart';
 
 void main() {

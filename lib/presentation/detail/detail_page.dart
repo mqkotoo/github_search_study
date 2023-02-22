@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 
-import '../domain/repository_data_model.dart';
-import '../generated/l10n.dart';
+import '../../domain/repository_data_model.dart';
+import '../../generated/l10n.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({required this.repoData, Key? key}) : super(key: key);
