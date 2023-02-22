@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_search_study/presentation/search/widget/search_app_bar.dart';
 import 'package:intl/intl.dart';
 
 import 'package:github_search_study/presentation/detail/detail_page.dart';
 import 'package:github_search_study/repository/providers/connectivity.dart';
 import 'widget/loading_shimmer.dart';
 import '../../generated/l10n.dart';
-import '../../theme/theme_mode_provider.dart';
 import '../controller/controllers.dart';
 
 class SearchPage extends ConsumerWidget {
@@ -27,32 +27,13 @@ class SearchPage extends ConsumerWidget {
     final errorMessage = ref.watch(errorMessageProvider);
     //通信状況
     final connectivity = ref.watch(connectivityProvider);
-    //theme設定
-    final themeMode = ref.watch(themeModeProvider);
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       behavior: HitTestBehavior.opaque,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: Text(
-            S.of(context).searchPageTitle,
-            key: const Key("searchAppBar"),
-          ),
-          //APPBARの右側
-          actions: [
-            Switch(
-              //キャッシュされているモードがダークかで判定
-              value: themeMode == ThemeMode.dark,
-              activeColor: const Color(0xff64FFDA),
-              onChanged: (value) {
-                final themeSelector = ref.read(themeModeProvider.notifier);
-                themeSelector.toggleThemeAndSave(value);
-              },
-            )
-          ],
-        ),
+        appBar: const SearchAppBar(),
         body: Column(
           children: <Widget>[
             Padding(
