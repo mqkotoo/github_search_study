@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_search_study/presentation/search/widget/search_app_bar.dart';
+import 'package:github_search_study/presentation/search/widget/search_field.dart';
 import 'package:intl/intl.dart';
 
 import 'package:github_search_study/presentation/detail/detail_page.dart';
@@ -37,34 +38,23 @@ class SearchPage extends ConsumerWidget {
         body: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               //search field 横画面だとIPHONEのノッチにかかるから対策
-              child: TextFormField(
-                key: const Key("inputForm"),
-                controller: textController,
+              child: SearchField(
+                textController: textController,
+                //textが何かあったらクリアボタンを表示する
                 onChanged: (text) {
                   ref
                       .read(isClearButtonVisibleProvider.notifier)
                       .update((state) => text.isNotEmpty);
                 },
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.search),
-                  suffixIcon: isClearVisible
-                      ? IconButton(
-                          key: const Key("clearButton"),
-                          icon: const Icon(Icons.clear),
-                          onPressed: () {
-                            textController.clear();
-                            ref
-                                .watch(isClearButtonVisibleProvider.notifier)
-                                .update((state) => false);
-                          },
-                          color: Colors.grey)
-                      : const SizedBox.shrink(),
-                ),
-                //入力キーボードのdone→searchに変更
-                textInputAction: TextInputAction.search,
-                //search押したらデータ取得 データ渡す
+                isClearVisible: isClearVisible,
+                onPressClearButton: () {
+                  textController.clear();
+                  ref
+                      .watch(isClearButtonVisibleProvider.notifier)
+                      .update((state) => false);
+                },
                 onFieldSubmitted: (text) async {
                   // エラーメッセージに値が入るかをエラー表示のフラグにしているから検索ごとに初期化
                   // android studioのバグなのか、refreshが使われていない判定になる
@@ -72,7 +62,7 @@ class SearchPage extends ConsumerWidget {
                   ref.refresh(errorMessageProvider);
 
                   final connectivityResult =
-                      await connectivity.checkConnectivity();
+                  await connectivity.checkConnectivity();
                   //通信がなかったら何もその後の処理はせず、エラーを出す
                   if (connectivityResult == ConnectivityResult.none) {
                     ref
@@ -88,18 +78,6 @@ class SearchPage extends ConsumerWidget {
             ),
             const Divider(color: Colors.black12),
 
-            // total count,メッセージ
-            if (repoData.value != null && repoData.value!.totalCount != 0)
-              Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: Align(
-                  alignment: AlignmentDirectional.centerEnd,
-                  child: Text(
-                    "${S.of(context).result}: ${NumberFormat('#,##0').format(repoData.value?.totalCount)}",
-                  ),
-                ),
-              ),
-
             //結果がなかった時(errorMessageProviderを介していないので下のエラーと同時に表示される可能性がある)
             if (repoData.value != null &&
                 repoData.value!.totalCount == 0 &&
@@ -110,7 +88,8 @@ class SearchPage extends ConsumerWidget {
                     padding: const EdgeInsets.only(right: 10),
                     child: Align(
                       alignment: AlignmentDirectional.centerEnd,
-                      child: Text("${S.of(context).result}: 0"),
+                      child:
+                          SafeArea(child: Text("${S.of(context).result}: 0")),
                     ),
                   ),
                   const SizedBox(height: 30),
@@ -120,34 +99,44 @@ class SearchPage extends ConsumerWidget {
 
             //APIたたいてエラーがあれば表示
             if (errorMessage.isNotEmpty)
-              returnErrorMessage(errorMessage, context),
+              displayErrorMessage(errorMessage, context),
 
             Expanded(
-              // flex: 9,
-              child: repoData.when(
-                data: (data) => Scrollbar(
-                  child: ListView.separated(
-                    keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-                    itemCount: (repoData.valueOrNull?.items ?? []).length,
-                    itemBuilder: (context, index) => _listItem(
-                      context: context,
-                      fullName: repoData.value!.items[index].fullName,
-                      description: repoData.value!.items[index].description,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DetailPage(
-                                  repoData: repoData.value!.items[index])),
-                        );
-                      },
+              child: Stack(
+                alignment: AlignmentDirectional.topEnd,
+                children: [
+                  repoData.when(
+                    data: (data) => Scrollbar(
+                      child: ListView.separated(
+                        keyboardDismissBehavior:
+                        ScrollViewKeyboardDismissBehavior.onDrag,
+                        itemCount: (repoData.valueOrNull?.items ?? []).length,
+                        itemBuilder: (context, index) => _listItem(
+                          context: context,
+                          fullName: repoData.value!.items[index].fullName,
+                          description: repoData.value!.items[index].description,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DetailPage(
+                                      repoData: repoData.value!.items[index])),
+                            );
+                          },
+                        ),
+                        separatorBuilder: (context, index) => const Divider(),
+                      ),
                     ),
-                    separatorBuilder: (context, index) => const Divider(),
+                    //上でハンドリングしているため、ここではつかわない
+                    error: (_, stack) => const SizedBox.shrink(),
+                    loading: () => const LoadingShimmer(),
                   ),
-                ),
-                //上でハンドリングしているため、ここではつかわない
-                error: (_, stack) => const SizedBox.shrink(),
-                loading: () => const LoadingShimmer(),
+                  //検索結果がある場合は件数を右上に表示する（リストの表示範囲を狭めないために右上に重ねる）
+                  // total count,メッセージ
+                  if (repoData.value != null && repoData.value!.totalCount != 0)
+                    resultCount(context, repoData),
+                ],
+
               ),
             ),
           ],
@@ -156,7 +145,46 @@ class SearchPage extends ConsumerWidget {
     );
   }
 
-  Widget returnErrorMessage(String error, BuildContext context) {
+  Widget resultCount(context,repoData) {
+    final size = MediaQuery.of(context).size;
+    //横画面の場合ノッチに隠れないようにする
+    //safeareaにすると間延びして変な見た目になる
+    if (size.height < size.width) {
+      return Positioned(
+        top: 0,
+        child: Container(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          child: Padding(
+            padding: const EdgeInsets.only(right: 40),
+            child: Align(
+              alignment: AlignmentDirectional.centerEnd,
+              child: Text(
+                "${S.of(context).result}: ${NumberFormat('#,##0').format(repoData.value?.totalCount)}",
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+    return Positioned(
+      top: 0,
+      child: Container(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        child: Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: Align(
+            alignment: AlignmentDirectional.centerEnd,
+            child: Text(
+              "${S.of(context).result}: ${NumberFormat('#,##0').format(repoData.value?.totalCount)}",
+            ),
+          ),
+        ),
+      ),
+    );
+
+  }
+
+  Widget displayErrorMessage(String error, BuildContext context) {
     if (error == "Please Enter Text!!") {
       return Column(
         children: [
