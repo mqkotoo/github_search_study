@@ -16,9 +16,9 @@ class HoriRepoHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final widthSize = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 90),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: widthSize * 0.1),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           ClipOval(
             child: Image.network(

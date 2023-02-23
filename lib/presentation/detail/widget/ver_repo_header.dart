@@ -14,8 +14,9 @@ class VerRepoHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final widthSize = MediaQuery.of(context).size.width;
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.symmetric(vertical: 15,horizontal: widthSize * 0.05),
       child: Column(
         children: [
           ClipOval(
