@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,8 +13,6 @@ import 'package:github_search_study/theme/shared_preferences.dart';
 import 'package:github_search_study/theme/theme.dart';
 import 'package:github_search_study/theme/theme_mode_provider.dart';
 import 'generated/l10n.dart';
-
-import 'package:device_preview/device_preview.dart';
 
 final dataRepositoryProvider = Provider.autoDispose<DataRepository>((ref) {
   return DataRepository(client: ref.watch(httpClientProvider));
@@ -31,7 +30,7 @@ void main() async {
       ],
       child: DevicePreview(
         enabled: !kReleaseMode,
-          builder: (context) => const MyApp(),
+        builder: (context) => const MyApp(),
       ),
     ),
   );

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 
+import 'package:github_search_study/presentation/detail/widget/detail_element.dart';
 import 'package:github_search_study/presentation/detail/widget/hori_repo_header.dart';
-import 'package:github_search_study/presentation/detail/widget/ver_detail_element.dart';
 import 'package:github_search_study/presentation/detail/widget/ver_repo_header.dart';
 import '../../domain/repository_data_model.dart';
 import '../../generated/l10n.dart';
@@ -54,39 +54,40 @@ class DetailPage extends StatelessWidget {
           ),
           const Divider(),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: widthSize * 0.1,vertical: 15),
+            padding:
+                EdgeInsets.symmetric(horizontal: widthSize * 0.1, vertical: 15),
             child: Column(
               children: <Widget>[
                 //スター数などの詳細パーツ
-                VerDetailElement(
+                DetailElement(
                   icon: Icons.language,
                   elementLabel: S.of(context).language,
                   element: repoData.language ?? "No Language",
                   iconBackgroundColor: Colors.blueAccent,
                   iconColor: Colors.white,
                 ),
-                VerDetailElement(
+                DetailElement(
                   icon: Icons.star_outline,
                   elementLabel: S.of(context).star,
                   element: starsCount,
                   iconBackgroundColor: Colors.yellowAccent,
                   iconColor: Colors.black87,
                 ),
-                VerDetailElement(
+                DetailElement(
                   icon: Icons.remove_red_eye_outlined,
                   elementLabel: S.of(context).watch,
                   element: watchersCount,
                   iconBackgroundColor: Colors.brown,
                   iconColor: Colors.white,
                 ),
-                VerDetailElement(
+                DetailElement(
                   icon: Icons.fork_right_sharp,
                   elementLabel: S.of(context).fork,
                   element: forksCount,
                   iconBackgroundColor: Colors.purpleAccent,
                   iconColor: Colors.white,
                 ),
-                VerDetailElement(
+                DetailElement(
                   icon: Icons.info_outline,
                   elementLabel: S.of(context).issue,
                   element: issuesCount,
@@ -116,39 +117,40 @@ class DetailPage extends StatelessWidget {
           const Divider(),
           //リポジトリのスター数など
           Container(
-            padding: EdgeInsets.symmetric(vertical: 15,horizontal: widthSize * 0.05),
+            padding: EdgeInsets.symmetric(
+                vertical: 15, horizontal: widthSize * 0.05),
             child: Column(
               children: <Widget>[
                 //スター数などの詳細パーツ
-                VerDetailElement(
+                DetailElement(
                   icon: Icons.language,
                   elementLabel: S.of(context).language,
                   element: repoData.language ?? "No Language",
                   iconBackgroundColor: Colors.blueAccent,
                   iconColor: Colors.white,
                 ),
-                VerDetailElement(
+                DetailElement(
                   icon: Icons.star_outline,
                   elementLabel: S.of(context).star,
                   element: starsCount,
                   iconBackgroundColor: Colors.yellowAccent,
                   iconColor: Colors.black87,
                 ),
-                VerDetailElement(
+                DetailElement(
                   icon: Icons.remove_red_eye_outlined,
                   elementLabel: S.of(context).watch,
                   element: watchersCount,
                   iconBackgroundColor: Colors.brown,
                   iconColor: Colors.white,
                 ),
-                VerDetailElement(
+                DetailElement(
                   icon: Icons.fork_right_sharp,
                   elementLabel: S.of(context).fork,
                   element: forksCount,
                   iconBackgroundColor: Colors.purpleAccent,
                   iconColor: Colors.white,
                 ),
-                VerDetailElement(
+                DetailElement(
                   icon: Icons.info_outline,
                   elementLabel: S.of(context).issue,
                   element: issuesCount,

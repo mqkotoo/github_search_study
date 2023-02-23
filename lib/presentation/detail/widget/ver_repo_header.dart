@@ -16,7 +16,7 @@ class VerRepoHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final widthSize = MediaQuery.of(context).size.width;
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 15,horizontal: widthSize * 0.05),
+      padding: EdgeInsets.symmetric(vertical: 15, horizontal: widthSize * 0.05),
       child: Column(
         children: [
           ClipOval(
