@@ -19,19 +19,21 @@ class DetailPage extends StatelessWidget {
     final issuesCount = NumberFormat('#,##0').format(repoData.openIssuesCount);
 
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: Text(S.of(context).detailPageTitle,
-              key: const Key("detailAppBar")),
-        ),
-        body: LayoutBuilder(builder: (context, constraints) {
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title:
+            Text(S.of(context).detailPageTitle, key: const Key("detailAppBar")),
+      ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
           return constraints.maxWidth < constraints.maxHeight
               ? verBody(
                   context, starsCount, watchersCount, forksCount, issuesCount)
               : horiBody(
                   context, starsCount, watchersCount, forksCount, issuesCount);
-          // : horiBody(context);
-        }));
+        },
+      ),
+    );
   }
 
   Widget horiRepoHeader(context) {
@@ -88,11 +90,6 @@ class DetailPage extends StatelessWidget {
       ),
     );
   }
-
-  // Widget horiBody(context) {
-  //   // return Center(child: Text("horizon"),);
-  //   return horiRepoHeader(context);
-  // }
 
   Widget horiBody(context, starsCount, watchersCount, forksCount, issuesCount) {
     return SingleChildScrollView(
@@ -161,7 +158,6 @@ class DetailPage extends StatelessWidget {
   }
 
   //ユーザー画像、リポ名、詳細
-
   Widget verRepoHeader(context) {
     return Container(
       padding: const EdgeInsets.all(20),
