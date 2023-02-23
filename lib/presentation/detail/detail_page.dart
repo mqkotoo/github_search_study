@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:github_search_study/presentation/detail/widget/hori_detail_element.dart';
 import 'package:github_search_study/presentation/detail/widget/hori_repo_header.dart';
 import 'package:github_search_study/presentation/detail/widget/ver_detail_element.dart';
 import 'package:github_search_study/presentation/detail/widget/ver_repo_header.dart';
@@ -39,25 +40,6 @@ class DetailPage extends StatelessWidget {
     );
   }
 
-  Widget horiDetailElement(
-      {iconBackgroundColor, icon, iconColor, elementLabel, element, context}) {
-    return Container(
-      padding: const EdgeInsets.only(bottom: 15),
-      child: Row(
-        children: [
-          CircleAvatar(
-            backgroundColor: iconBackgroundColor,
-            child: Icon(icon, size: 20, color: iconColor),
-          ),
-          const SizedBox(width: 10),
-          Text(elementLabel, style: const TextStyle(fontSize: 16)),
-          const SizedBox(width: 20),
-          Text(element, style: const TextStyle(fontSize: 16))
-        ],
-      ),
-    );
-  }
-
   Widget horiBody(context, starsCount, watchersCount, forksCount, issuesCount) {
     return SingleChildScrollView(
       child: Column(
@@ -78,21 +60,21 @@ class DetailPage extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    horiDetailElement(
+                    HoriDetailElement(
                       icon: Icons.language,
                       elementLabel: S.of(context).language,
                       element: repoData.language ?? "No Language",
                       iconBackgroundColor: Colors.blueAccent,
                       iconColor: Colors.white,
                     ),
-                    horiDetailElement(
+                    HoriDetailElement(
                       icon: Icons.star_outline,
                       elementLabel: S.of(context).star,
                       element: starsCount,
                       iconBackgroundColor: Colors.yellowAccent,
                       iconColor: Colors.black87,
                     ),
-                    horiDetailElement(
+                    HoriDetailElement(
                       icon: Icons.remove_red_eye_outlined,
                       elementLabel: S.of(context).watch,
                       element: watchersCount,
@@ -104,14 +86,14 @@ class DetailPage extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    horiDetailElement(
+                    HoriDetailElement(
                       icon: Icons.fork_right_sharp,
                       elementLabel: S.of(context).fork,
                       element: forksCount,
                       iconBackgroundColor: Colors.purpleAccent,
                       iconColor: Colors.white,
                     ),
-                    horiDetailElement(
+                    HoriDetailElement(
                       icon: Icons.info_outline,
                       elementLabel: S.of(context).issue,
                       element: issuesCount,
