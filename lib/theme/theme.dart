@@ -83,3 +83,12 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
   // divider
   dividerColor: const Color(0xff777777),
 );
+
+TextStyle descriptionStyle(context) {
+  final platformBrightness = MediaQuery.platformBrightnessOf(context);
+  return TextStyle(
+    color: platformBrightness == Brightness.dark
+        ? const Color(0xffBBBBBB)
+        : const Color(0xff424242)
+  );
+}
