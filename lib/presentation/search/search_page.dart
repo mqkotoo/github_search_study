@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_search_study/presentation/search/widget/search_app_bar.dart';
-import 'package:github_search_study/presentation/search/widget/search_field.dart';
 import 'package:intl/intl.dart';
 
 import 'package:github_search_study/presentation/detail/detail_page.dart';
+import 'package:github_search_study/presentation/search/widget/search_app_bar.dart';
+import 'package:github_search_study/presentation/search/widget/search_field.dart';
 import 'package:github_search_study/repository/providers/connectivity.dart';
-import 'widget/loading_shimmer.dart';
 import '../../generated/l10n.dart';
 import '../controller/controllers.dart';
+import 'widget/loading_shimmer.dart';
 
 class SearchPage extends ConsumerWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -62,7 +62,7 @@ class SearchPage extends ConsumerWidget {
                   ref.refresh(errorMessageProvider);
 
                   final connectivityResult =
-                  await connectivity.checkConnectivity();
+                      await connectivity.checkConnectivity();
                   //通信がなかったら何もその後の処理はせず、エラーを出す
                   if (connectivityResult == ConnectivityResult.none) {
                     ref
@@ -109,7 +109,7 @@ class SearchPage extends ConsumerWidget {
                     data: (data) => Scrollbar(
                       child: ListView.separated(
                         keyboardDismissBehavior:
-                        ScrollViewKeyboardDismissBehavior.onDrag,
+                            ScrollViewKeyboardDismissBehavior.onDrag,
                         itemCount: (repoData.valueOrNull?.items ?? []).length,
                         itemBuilder: (context, index) => _listItem(
                           context: context,
@@ -136,7 +136,6 @@ class SearchPage extends ConsumerWidget {
                   if (repoData.value != null && repoData.value!.totalCount != 0)
                     resultCount(context, repoData),
                 ],
-
               ),
             ),
           ],
@@ -145,14 +144,16 @@ class SearchPage extends ConsumerWidget {
     );
   }
 
-  Widget resultCount(context,repoData) {
+  Widget resultCount(context, repoData) {
     //横画面の場合ノッチに隠れないようにする
     return Positioned(
       top: 0,
       child: Container(
         color: Theme.of(context).scaffoldBackgroundColor,
         child: SafeArea(
-          top: false,left: false,bottom: false,
+          top: false,
+          left: false,
+          bottom: false,
           child: Padding(
             padding: const EdgeInsets.only(right: 10),
             child: Align(
@@ -165,7 +166,6 @@ class SearchPage extends ConsumerWidget {
         ),
       ),
     );
-
   }
 
   Widget displayErrorMessage(String error, BuildContext context) {

@@ -19,30 +19,31 @@ class SearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //横画面の場合ノッチに隠れないようにする
-      return SafeArea(
-        top: false,bottom: false,
-        child: TextFormField(
-          key: const Key("inputForm"),
-          controller: textController,
-          onChanged: onChanged,
+    return SafeArea(
+      top: false,
+      bottom: false,
+      child: TextFormField(
+        key: const Key("inputForm"),
+        controller: textController,
+        onChanged: onChanged,
 
-          //decoration
-          decoration: InputDecoration(
-            prefixIcon: const Icon(Icons.search, color: Colors.grey),
-            suffixIcon: isClearVisible
-                ? IconButton(
-                    key: const Key("clearButton"),
-                    icon: const Icon(Icons.clear),
-                    onPressed: onPressClearButton,
-                    color: Colors.grey)
-                : const SizedBox.shrink(),
-          ),
-
-          //入力キーボードのdone→searchに変更
-          textInputAction: TextInputAction.search,
-          //search押したらデータ取得
-          onFieldSubmitted: onFieldSubmitted,
+        //decoration
+        decoration: InputDecoration(
+          prefixIcon: const Icon(Icons.search, color: Colors.grey),
+          suffixIcon: isClearVisible
+              ? IconButton(
+                  key: const Key("clearButton"),
+                  icon: const Icon(Icons.clear),
+                  onPressed: onPressClearButton,
+                  color: Colors.grey)
+              : const SizedBox.shrink(),
         ),
-      );
-    }
+
+        //入力キーボードのdone→searchに変更
+        textInputAction: TextInputAction.search,
+        //search押したらデータ取得
+        onFieldSubmitted: onFieldSubmitted,
+      ),
+    );
   }
+}

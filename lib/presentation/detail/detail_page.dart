@@ -30,44 +30,43 @@ class DetailPage extends StatelessWidget {
                   context, starsCount, watchersCount, forksCount, issuesCount)
               : horiBody(
                   context, starsCount, watchersCount, forksCount, issuesCount);
-              // : horiBody(context);
-        })
-        );
+          // : horiBody(context);
+        }));
   }
 
   Widget horiRepoHeader(context) {
     final widthSize = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 90),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 90),
       child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ClipOval(
-              child: Image.network(
-                repoData.owner.avatarUrl,
-                width: 90,
-                height: 90,
-              ),
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          ClipOval(
+            child: Image.network(
+              repoData.owner.avatarUrl,
+              width: 90,
+              height: 90,
             ),
-            SizedBox(
-              width: widthSize * 0.5,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                      repoData.fullName,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                      repoData.description ?? "No Description",
-                    style:Theme.of(context).textTheme.titleSmall,
-                  ),
-                ],
-              ),
+          ),
+          SizedBox(
+            width: widthSize * 0.5,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  repoData.fullName,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  repoData.description ?? "No Description",
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -103,7 +102,7 @@ class DetailPage extends StatelessWidget {
           horiRepoHeader(context),
           const Divider(),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,7 +183,7 @@ class DetailPage extends StatelessWidget {
           ),
           Text(
             repoData.description ?? "No Description",
-            style:Theme.of(context).textTheme.titleSmall,
+            style: Theme.of(context).textTheme.titleSmall,
           ),
         ],
       ),

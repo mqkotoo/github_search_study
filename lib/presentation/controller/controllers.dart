@@ -20,7 +20,6 @@ final isClearButtonVisibleProvider =
 
 final apiFamilyProvider = FutureProvider.autoDispose
     .family<RepositoryDataModel?, String>((ref, repoName) async {
-
   final dataRepository = ref.watch(dataRepositoryProvider);
   return await dataRepository.getData(repoName).catchError((e) {
     ref.read(errorMessageProvider.notifier).update((state) => e.toString());
