@@ -72,8 +72,6 @@ flutter_riverpod: ^2.2.0
 
 ＊Application層は今回ない
 
-・アーキテクチャについては理解が甘く、もっと勉強する必要があると思った
-
 <img width="280" alt="スクリーンショット 2023-02-24 1 42 19" src="https://user-images.githubusercontent.com/87256037/220972746-34a0401f-962f-4717-8513-519f879ed3db.png">
 
 ### フォルダ構成
