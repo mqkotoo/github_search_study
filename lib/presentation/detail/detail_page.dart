@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:github_search_study/presentation/detail/widget/ver_detail_element.dart';
+import 'package:github_search_study/presentation/detail/widget/ver_repo_header.dart';
 
 import 'package:intl/intl.dart';
 
@@ -157,98 +159,54 @@ class DetailPage extends StatelessWidget {
     );
   }
 
-  //ユーザー画像、リポ名、詳細
-  Widget verRepoHeader(context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        children: [
-          ClipOval(
-            child: Image.network(
-              repoData.owner.avatarUrl,
-              width: 120,
-              height: 120,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Text(
-              repoData.fullName,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-          ),
-          Text(
-            repoData.description ?? "No Description",
-            style: Theme.of(context).textTheme.titleSmall,
-          ),
-        ],
-      ),
-    );
-  }
 
-  //スター数などの詳細パーツ
-  Widget verDetailElement(
-      {iconBackgroundColor, icon, iconColor, elementLabel, element}) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15),
-      child: Row(
-        children: [
-          CircleAvatar(
-            backgroundColor: iconBackgroundColor,
-            child: Icon(icon, size: 20, color: iconColor),
-          ),
-          const SizedBox(width: 12),
-          Text(elementLabel, style: const TextStyle(fontSize: 16)),
-          const Spacer(),
-          Text(
-            element,
-            style: const TextStyle(fontSize: 16),
-          )
-        ],
-      ),
-    );
-  }
 
   Widget verBody(context, starsCount, watchersCount, forksCount, issuesCount) {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          verRepoHeader(context),
+          //ユーザー画像、リポ名、詳細
+          VerRepoHeader(
+              avatarUrl: repoData.owner.avatarUrl, 
+              fullName: repoData.fullName, 
+              description: repoData.description,
+          ),
           const Divider(),
           //リポジトリのスター数など
           Container(
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                verDetailElement(
+                //スター数などの詳細パーツ
+                VerDetailElement(
                   icon: Icons.language,
                   elementLabel: S.of(context).language,
                   element: repoData.language ?? "No Language",
                   iconBackgroundColor: Colors.blueAccent,
                   iconColor: Colors.white,
                 ),
-                verDetailElement(
+                VerDetailElement(
                   icon: Icons.star_outline,
                   elementLabel: S.of(context).star,
                   element: starsCount,
                   iconBackgroundColor: Colors.yellowAccent,
                   iconColor: Colors.black87,
                 ),
-                verDetailElement(
+                VerDetailElement(
                   icon: Icons.remove_red_eye_outlined,
                   elementLabel: S.of(context).watch,
                   element: watchersCount,
                   iconBackgroundColor: Colors.brown,
                   iconColor: Colors.white,
                 ),
-                verDetailElement(
+                VerDetailElement(
                   icon: Icons.fork_right_sharp,
                   elementLabel: S.of(context).fork,
                   element: forksCount,
                   iconBackgroundColor: Colors.purpleAccent,
                   iconColor: Colors.white,
                 ),
-                verDetailElement(
+                VerDetailElement(
                   icon: Icons.info_outline,
                   elementLabel: S.of(context).issue,
                   element: issuesCount,
