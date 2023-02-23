@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:github_search_study/presentation/detail/widget/hori_repo_header.dart';
 import 'package:github_search_study/presentation/detail/widget/ver_detail_element.dart';
 import 'package:github_search_study/presentation/detail/widget/ver_repo_header.dart';
 
@@ -38,42 +39,6 @@ class DetailPage extends StatelessWidget {
     );
   }
 
-  Widget horiRepoHeader(context) {
-    final widthSize = MediaQuery.of(context).size.width;
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 90),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          ClipOval(
-            child: Image.network(
-              repoData.owner.avatarUrl,
-              width: 90,
-              height: 90,
-            ),
-          ),
-          SizedBox(
-            width: widthSize * 0.5,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  repoData.fullName,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  repoData.description ?? "No Description",
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget horiDetailElement(
       {iconBackgroundColor, icon, iconColor, elementLabel, element, context}) {
     return Container(
@@ -98,7 +63,11 @@ class DetailPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          horiRepoHeader(context),
+          HoriRepoHeader(
+              avatarUrl: repoData.owner.avatarUrl,
+              fullName: repoData.fullName,
+              description: repoData.description,
+          ),
           const Divider(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
