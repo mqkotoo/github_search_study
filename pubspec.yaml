@@ -10,17 +10,40 @@ environment:
   sdk: '>=2.18.4 <3.0.0'
 
 dependencies:
+  connectivity_plus: ^3.0.3
   flutter:
     sdk: flutter
+  flutter_riverpod: ^2.2.0
+  freezed_annotation: ^2.2.0
+  http: ^0.13.5
+  #flutter_localizationsとの互換性でintlのバージョンは下げた
+  intl: ^0.17.0
+  json_annotation: ^4.8.0
+  shimmer: ^2.0.0
+  shared_preferences: ^2.0.17
+  flutter_localizations:
+    sdk: flutter
+  device_preview: ^1.1.0
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
- flutter_lints: ^2.0.0
+  flutter_lints: ^2.0.1
+  build_runner: ^2.3.3
+  freezed: ^2.3.2
+  json_serializable: ^6.6.1
+  mockito: ^5.3.2
+  import_sorter: ^4.6.0
+  network_image_mock: ^2.1.1
+  integration_test:
+    sdk: flutter
+
 
 
 flutter:
 
   uses-material-design: true
+flutter_intl:
+  enabled: true
