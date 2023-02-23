@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 
+import 'package:github_search_study/presentation/detail/widget/hori_detail_element.dart';
+import 'package:github_search_study/presentation/detail/widget/hori_repo_header.dart';
+import 'package:github_search_study/presentation/detail/widget/ver_detail_element.dart';
+import 'package:github_search_study/presentation/detail/widget/ver_repo_header.dart';
 import '../../domain/repository_data_model.dart';
 import '../../generated/l10n.dart';
 
@@ -36,67 +40,18 @@ class DetailPage extends StatelessWidget {
     );
   }
 
-  Widget horiRepoHeader(context) {
-    final widthSize = MediaQuery.of(context).size.width;
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 90),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          ClipOval(
-            child: Image.network(
-              repoData.owner.avatarUrl,
-              width: 90,
-              height: 90,
-            ),
-          ),
-          SizedBox(
-            width: widthSize * 0.5,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  repoData.fullName,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  repoData.description ?? "No Description",
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget horiDetailElement(
-      {iconBackgroundColor, icon, iconColor, elementLabel, element, context}) {
-    return Container(
-      padding: const EdgeInsets.only(bottom: 15),
-      child: Row(
-        children: [
-          CircleAvatar(
-            backgroundColor: iconBackgroundColor,
-            child: Icon(icon, size: 20, color: iconColor),
-          ),
-          const SizedBox(width: 10),
-          Text(elementLabel, style: const TextStyle(fontSize: 16)),
-          const SizedBox(width: 20),
-          Text(element, style: const TextStyle(fontSize: 16))
-        ],
-      ),
-    );
-  }
-
-  Widget horiBody(context, starsCount, watchersCount, forksCount, issuesCount) {
+  Widget horiBody(BuildContext context, String starsCount, String watchersCount,
+      String forksCount, String issuesCount) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          horiRepoHeader(context),
+        children: <Widget>[
+          //ユーザー画像、リポ名、詳細
+          HoriRepoHeader(
+            avatarUrl: repoData.owner.avatarUrl,
+            fullName: repoData.fullName,
+            description: repoData.description,
+          ),
           const Divider(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
@@ -106,22 +61,23 @@ class DetailPage extends StatelessWidget {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    horiDetailElement(
+                  children: <Widget>[
+                    //リポジトリのスター数など
+                    HoriDetailElement(
                       icon: Icons.language,
                       elementLabel: S.of(context).language,
                       element: repoData.language ?? "No Language",
                       iconBackgroundColor: Colors.blueAccent,
                       iconColor: Colors.white,
                     ),
-                    horiDetailElement(
+                    HoriDetailElement(
                       icon: Icons.star_outline,
                       elementLabel: S.of(context).star,
                       element: starsCount,
                       iconBackgroundColor: Colors.yellowAccent,
                       iconColor: Colors.black87,
                     ),
-                    horiDetailElement(
+                    HoriDetailElement(
                       icon: Icons.remove_red_eye_outlined,
                       elementLabel: S.of(context).watch,
                       element: watchersCount,
@@ -132,15 +88,15 @@ class DetailPage extends StatelessWidget {
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    horiDetailElement(
+                  children: <Widget>[
+                    HoriDetailElement(
                       icon: Icons.fork_right_sharp,
                       elementLabel: S.of(context).fork,
                       element: forksCount,
                       iconBackgroundColor: Colors.purpleAccent,
                       iconColor: Colors.white,
                     ),
-                    horiDetailElement(
+                    HoriDetailElement(
                       icon: Icons.info_outline,
                       elementLabel: S.of(context).issue,
                       element: issuesCount,
@@ -157,98 +113,53 @@ class DetailPage extends StatelessWidget {
     );
   }
 
-  //ユーザー画像、リポ名、詳細
-  Widget verRepoHeader(context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        children: [
-          ClipOval(
-            child: Image.network(
-              repoData.owner.avatarUrl,
-              width: 120,
-              height: 120,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Text(
-              repoData.fullName,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-          ),
-          Text(
-            repoData.description ?? "No Description",
-            style: Theme.of(context).textTheme.titleSmall,
-          ),
-        ],
-      ),
-    );
-  }
-
-  //スター数などの詳細パーツ
-  Widget verDetailElement(
-      {iconBackgroundColor, icon, iconColor, elementLabel, element}) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15),
-      child: Row(
-        children: [
-          CircleAvatar(
-            backgroundColor: iconBackgroundColor,
-            child: Icon(icon, size: 20, color: iconColor),
-          ),
-          const SizedBox(width: 12),
-          Text(elementLabel, style: const TextStyle(fontSize: 16)),
-          const Spacer(),
-          Text(
-            element,
-            style: const TextStyle(fontSize: 16),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget verBody(context, starsCount, watchersCount, forksCount, issuesCount) {
+  Widget verBody(BuildContext context, String starsCount, String watchersCount,
+      String forksCount, String issuesCount) {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          verRepoHeader(context),
+          //ユーザー画像、リポ名、詳細
+          VerRepoHeader(
+            avatarUrl: repoData.owner.avatarUrl,
+            fullName: repoData.fullName,
+            description: repoData.description,
+          ),
           const Divider(),
           //リポジトリのスター数など
           Container(
             padding: const EdgeInsets.all(20),
             child: Column(
-              children: [
-                verDetailElement(
+              children: <Widget>[
+                //スター数などの詳細パーツ
+                VerDetailElement(
                   icon: Icons.language,
                   elementLabel: S.of(context).language,
                   element: repoData.language ?? "No Language",
                   iconBackgroundColor: Colors.blueAccent,
                   iconColor: Colors.white,
                 ),
-                verDetailElement(
+                VerDetailElement(
                   icon: Icons.star_outline,
                   elementLabel: S.of(context).star,
                   element: starsCount,
                   iconBackgroundColor: Colors.yellowAccent,
                   iconColor: Colors.black87,
                 ),
-                verDetailElement(
+                VerDetailElement(
                   icon: Icons.remove_red_eye_outlined,
                   elementLabel: S.of(context).watch,
                   element: watchersCount,
                   iconBackgroundColor: Colors.brown,
                   iconColor: Colors.white,
                 ),
-                verDetailElement(
+                VerDetailElement(
                   icon: Icons.fork_right_sharp,
                   elementLabel: S.of(context).fork,
                   element: forksCount,
                   iconBackgroundColor: Colors.purpleAccent,
                   iconColor: Colors.white,
                 ),
-                verDetailElement(
+                VerDetailElement(
                   icon: Icons.info_outline,
                   elementLabel: S.of(context).issue,
                   element: issuesCount,
