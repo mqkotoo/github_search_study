@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 
 import '../../domain/repository_data_model.dart';
 import '../../generated/l10n.dart';
-import '../../theme/theme.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({required this.repoData, Key? key}) : super(key: key);
@@ -62,7 +61,7 @@ class DetailPage extends StatelessWidget {
                   const SizedBox(height: 10),
                   Text(
                       repoData.description ?? "No Description",
-                    style:descriptionStyle(context),
+                    style:Theme.of(context).textTheme.titleSmall,
                   ),
                 ],
               ),
@@ -104,7 +103,7 @@ class DetailPage extends StatelessWidget {
           horiRepoHeader(context),
           const Divider(),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 60,vertical: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,12 +179,12 @@ class DetailPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Text(
               repoData.fullName,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
           Text(
             repoData.description ?? "No Description",
-            style:descriptionStyle(context),
+            style:Theme.of(context).textTheme.titleSmall,
           ),
         ],
       ),

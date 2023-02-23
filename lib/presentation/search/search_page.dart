@@ -146,7 +146,6 @@ class SearchPage extends ConsumerWidget {
   }
 
   Widget resultCount(context,repoData) {
-    final size = MediaQuery.of(context).size;
     //横画面の場合ノッチに隠れないようにする
     return Positioned(
       top: 0,
