@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_search_study/presentation/search/widget/list_item.dart';
 import 'package:intl/intl.dart';
 
 import 'package:github_search_study/presentation/detail/detail_page.dart';
@@ -82,24 +83,11 @@ class SearchPage extends ConsumerWidget {
             if (repoData.value != null &&
                 repoData.value!.totalCount == 0 &&
                 errorMessage == "")
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Align(
-                      alignment: AlignmentDirectional.centerEnd,
-                      child:
-                          SafeArea(child: Text("${S.of(context).result}: 0")),
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                  Text(S.of(context).noResult)
-                ],
-              ),
+              _noResultMessage(context),
 
             //APIたたいてエラーがあれば表示
             if (errorMessage.isNotEmpty)
-              displayErrorMessage(errorMessage, context),
+              _displayErrorMessage(errorMessage, context),
 
             Expanded(
               child: Stack(
@@ -111,8 +99,7 @@ class SearchPage extends ConsumerWidget {
                         keyboardDismissBehavior:
                             ScrollViewKeyboardDismissBehavior.onDrag,
                         itemCount: (repoData.valueOrNull?.items ?? []).length,
-                        itemBuilder: (context, index) => _listItem(
-                          context: context,
+                        itemBuilder: (context, index) => ListItem(
                           fullName: repoData.value!.items[index].fullName,
                           description: repoData.value!.items[index].description,
                           onTap: () {
@@ -134,7 +121,7 @@ class SearchPage extends ConsumerWidget {
                   //検索結果がある場合は件数を右上に表示する（リストの表示範囲を狭めないために右上に重ねる）
                   // total count,メッセージ
                   if (repoData.value != null && repoData.value!.totalCount != 0)
-                    resultCount(context, repoData),
+                    _resultCount(context, repoData),
                 ],
               ),
             ),
@@ -144,7 +131,24 @@ class SearchPage extends ConsumerWidget {
     );
   }
 
-  Widget resultCount(context, repoData) {
+  Widget _noResultMessage(context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: Align(
+            alignment: AlignmentDirectional.centerEnd,
+            child:
+            SafeArea(child: Text("${S.of(context).result}: 0")),
+          ),
+        ),
+        const SizedBox(height: 30),
+        Text(S.of(context).noResult)
+      ],
+    );
+  }
+
+  Widget _resultCount(context, repoData) {
     //横画面の場合ノッチに隠れないようにする
     return Positioned(
       top: 0,
@@ -168,7 +172,7 @@ class SearchPage extends ConsumerWidget {
     );
   }
 
-  Widget displayErrorMessage(String error, BuildContext context) {
+  Widget _displayErrorMessage(String error, BuildContext context) {
     if (error == "Please Enter Text!!") {
       return Column(
         children: [
@@ -191,36 +195,5 @@ class SearchPage extends ConsumerWidget {
         ],
       );
     }
-  }
-
-  Widget _listItem(
-      {required String fullName,
-      String? description,
-      required BuildContext context,
-      required void Function() onTap}) {
-    return ListTile(
-      onTap: onTap,
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(fullName,
-              style:
-                  const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-          const SizedBox(
-            height: 5,
-          )
-        ],
-      ),
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            description ?? "No Description",
-            overflow: TextOverflow.ellipsis,
-            maxLines: 3,
-          ),
-        ],
-      ),
-    );
   }
 }
