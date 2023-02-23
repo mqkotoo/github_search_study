@@ -148,34 +148,19 @@ class SearchPage extends ConsumerWidget {
   Widget resultCount(context,repoData) {
     final size = MediaQuery.of(context).size;
     //横画面の場合ノッチに隠れないようにする
-    //safeareaにすると間延びして変な見た目になる
-    if (size.height < size.width) {
-      return Positioned(
-        top: 0,
-        child: Container(
-          color: Theme.of(context).scaffoldBackgroundColor,
+    return Positioned(
+      top: 0,
+      child: Container(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        child: SafeArea(
+          top: false,left: false,bottom: false,
           child: Padding(
-            padding: const EdgeInsets.only(right: 40),
+            padding: const EdgeInsets.only(right: 10),
             child: Align(
               alignment: AlignmentDirectional.centerEnd,
               child: Text(
                 "${S.of(context).result}: ${NumberFormat('#,##0').format(repoData.value?.totalCount)}",
               ),
-            ),
-          ),
-        ),
-      );
-    }
-    return Positioned(
-      top: 0,
-      child: Container(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        child: Padding(
-          padding: const EdgeInsets.only(right: 10),
-          child: Align(
-            alignment: AlignmentDirectional.centerEnd,
-            child: Text(
-              "${S.of(context).result}: ${NumberFormat('#,##0').format(repoData.value?.totalCount)}",
             ),
           ),
         ),

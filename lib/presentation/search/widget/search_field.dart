@@ -18,13 +18,9 @@ class SearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     //横画面の場合ノッチに隠れないようにする
-    //safeareaにすると間延びして変な見た目になる
-    if (size.height < size.width) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+      return SafeArea(
+        top: false,bottom: false,
         child: TextFormField(
           key: const Key("inputForm"),
           controller: textController,
@@ -49,28 +45,4 @@ class SearchField extends StatelessWidget {
         ),
       );
     }
-
-    return TextFormField(
-      key: const Key("inputForm"),
-      controller: textController,
-      onChanged: onChanged,
-
-      //decoration
-      decoration: InputDecoration(
-        prefixIcon: const Icon(Icons.search, color: Colors.grey),
-        suffixIcon: isClearVisible
-            ? IconButton(
-                key: const Key("clearButton"),
-                icon: const Icon(Icons.clear),
-                onPressed: onPressClearButton,
-                color: Colors.grey)
-            : const SizedBox.shrink(),
-      ),
-
-      //入力キーボードのdone→searchに変更
-      textInputAction: TextInputAction.search,
-      //search押したらデータ取得
-      onFieldSubmitted: onFieldSubmitted,
-    );
   }
-}
