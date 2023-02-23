@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+
+import 'package:intl/intl.dart';
+
 import 'package:github_search_study/presentation/detail/widget/hori_detail_element.dart';
 import 'package:github_search_study/presentation/detail/widget/hori_repo_header.dart';
 import 'package:github_search_study/presentation/detail/widget/ver_detail_element.dart';
 import 'package:github_search_study/presentation/detail/widget/ver_repo_header.dart';
-
-import 'package:intl/intl.dart';
-
 import '../../domain/repository_data_model.dart';
 import '../../generated/l10n.dart';
 
@@ -40,15 +40,17 @@ class DetailPage extends StatelessWidget {
     );
   }
 
-  Widget horiBody(context, starsCount, watchersCount, forksCount, issuesCount) {
+  Widget horiBody(BuildContext context, String starsCount, String watchersCount,
+      String forksCount, String issuesCount) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
+        children: <Widget>[
+          //ユーザー画像、リポ名、詳細
           HoriRepoHeader(
-              avatarUrl: repoData.owner.avatarUrl,
-              fullName: repoData.fullName,
-              description: repoData.description,
+            avatarUrl: repoData.owner.avatarUrl,
+            fullName: repoData.fullName,
+            description: repoData.description,
           ),
           const Divider(),
           Padding(
@@ -59,7 +61,8 @@ class DetailPage extends StatelessWidget {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: <Widget>[
+                    //リポジトリのスター数など
                     HoriDetailElement(
                       icon: Icons.language,
                       elementLabel: S.of(context).language,
@@ -85,7 +88,7 @@ class DetailPage extends StatelessWidget {
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: <Widget>[
                     HoriDetailElement(
                       icon: Icons.fork_right_sharp,
                       elementLabel: S.of(context).fork,
@@ -110,24 +113,23 @@ class DetailPage extends StatelessWidget {
     );
   }
 
-
-
-  Widget verBody(context, starsCount, watchersCount, forksCount, issuesCount) {
+  Widget verBody(BuildContext context, String starsCount, String watchersCount,
+      String forksCount, String issuesCount) {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
           //ユーザー画像、リポ名、詳細
           VerRepoHeader(
-              avatarUrl: repoData.owner.avatarUrl, 
-              fullName: repoData.fullName, 
-              description: repoData.description,
+            avatarUrl: repoData.owner.avatarUrl,
+            fullName: repoData.fullName,
+            description: repoData.description,
           ),
           const Divider(),
           //リポジトリのスター数など
           Container(
             padding: const EdgeInsets.all(20),
             child: Column(
-              children: [
+              children: <Widget>[
                 //スター数などの詳細パーツ
                 VerDetailElement(
                   icon: Icons.language,

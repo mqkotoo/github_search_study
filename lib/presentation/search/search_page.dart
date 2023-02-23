@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_search_study/presentation/search/widget/list_item.dart';
 import 'package:intl/intl.dart';
 
 import 'package:github_search_study/presentation/detail/detail_page.dart';
+import 'package:github_search_study/presentation/search/widget/list_item.dart';
 import 'package:github_search_study/presentation/search/widget/search_app_bar.dart';
 import 'package:github_search_study/presentation/search/widget/search_field.dart';
 import 'package:github_search_study/repository/providers/connectivity.dart';
+import '../../domain/repository_data_model.dart';
 import '../../generated/l10n.dart';
 import '../controller/controllers.dart';
 import 'widget/loading_shimmer.dart';
@@ -40,7 +41,7 @@ class SearchPage extends ConsumerWidget {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              //search field 横画面だとIPHONEのノッチにかかるから対策
+              //search field
               child: SearchField(
                 textController: textController,
                 //textが何かあったらクリアボタンを表示する
@@ -92,7 +93,7 @@ class SearchPage extends ConsumerWidget {
             Expanded(
               child: Stack(
                 alignment: AlignmentDirectional.topEnd,
-                children: [
+                children: <Widget>[
                   repoData.when(
                     data: (data) => Scrollbar(
                       child: ListView.separated(
@@ -131,15 +132,14 @@ class SearchPage extends ConsumerWidget {
     );
   }
 
-  Widget _noResultMessage(context) {
+  Widget _noResultMessage(BuildContext context) {
     return Column(
       children: [
         Padding(
           padding: const EdgeInsets.only(right: 10),
           child: Align(
             alignment: AlignmentDirectional.centerEnd,
-            child:
-            SafeArea(child: Text("${S.of(context).result}: 0")),
+            child: SafeArea(child: Text("${S.of(context).result}: 0")),
           ),
         ),
         const SizedBox(height: 30),
@@ -148,7 +148,8 @@ class SearchPage extends ConsumerWidget {
     );
   }
 
-  Widget _resultCount(context, repoData) {
+  Widget _resultCount(
+      BuildContext context, AsyncValue<RepositoryDataModel?> repoData) {
     //横画面の場合ノッチに隠れないようにする
     return Positioned(
       top: 0,

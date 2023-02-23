@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
 class VerDetailElement extends StatelessWidget {
-  const VerDetailElement(
-      {Key? key,
-        required this.iconBackgroundColor,
-        required this.icon,
-        required this.iconColor,
-        required this.elementLabel,
-        required this.element,
-        })
-      : super(key: key);
+  const VerDetailElement({
+    Key? key,
+    required this.iconBackgroundColor,
+    required this.icon,
+    required this.iconColor,
+    required this.elementLabel,
+    required this.element,
+  }) : super(key: key);
 
   final Color iconBackgroundColor;
   final IconData icon;

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class HoriRepoHeader extends StatelessWidget {
   const HoriRepoHeader(
       {Key? key,
-        required this.avatarUrl,
-        required this.fullName,
-        required this.description})
+      required this.avatarUrl,
+      required this.fullName,
+      required this.description})
       : super(key: key);
 
   final String avatarUrl;
