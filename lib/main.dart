@@ -29,7 +29,7 @@ void main() async {
         ),
       ],
       child: DevicePreview(
-        enabled: !kReleaseMode,
+        enabled: false,
         builder: (context) => const MyApp(),
       ),
     ),

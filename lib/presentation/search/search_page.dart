@@ -21,7 +21,7 @@ class SearchPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     //検索結果データ
     final repoData =
-        ref.watch(apiFamilyProvider(ref.watch(inputRepoNameProvider)));
+        ref.watch(searchResultProvider);
     //テキストのコントローラ
     final textController = ref.read(textEditingControllerProvider);
     //クリアボタンの表示、非表示切り替え
@@ -75,20 +75,24 @@ class SearchPage extends ConsumerWidget {
                   ref
                       .read(inputRepoNameProvider.notifier)
                       .update((state) => text);
+                  print(ref.read(inputRepoNameProvider));
                 },
               ),
             ),
-            const Divider(color: Colors.black12),
+            const Divider(),
 
-            //結果がなかった時(errorMessageProviderを介していないので下のエラーと同時に表示される可能性がある)
-            if (repoData.value != null &&
-                repoData.value!.totalCount == 0 &&
-                errorMessage == "")
-              _noResultMessage(context),
+            // 結果がなかった時(errorMessageProviderを介していないので下のエラーと同時に表示される可能性がある)
+            if (repoData.value != null
+                && (repoData.value!.totalCount == 0
+                    || repoData.value!.totalCount == -1)
+                && errorMessage == ""
+                && !repoData.isLoading)
+              _noResultMessage(context,repoData),
 
             //APIたたいてエラーがあれば表示
             if (errorMessage.isNotEmpty)
               _displayErrorMessage(errorMessage, context),
+
 
             Expanded(
               child: Stack(
@@ -116,12 +120,14 @@ class SearchPage extends ConsumerWidget {
                       ),
                     ),
                     //上でハンドリングしているため、ここではつかわない
-                    error: (_, stack) => const SizedBox.shrink(),
+                    error: (_, __) => const SizedBox.shrink(),
                     loading: () => const LoadingShimmer(),
                   ),
                   //検索結果がある場合は件数を右上に表示する（リストの表示範囲を狭めないために右上に重ねる）
                   // total count,メッセージ
-                  if (repoData.value != null && repoData.value!.totalCount != 0)
+                  if (repoData.value != null
+                      && repoData.value!.totalCount != 0
+                      && repoData.value!.totalCount != -1)
                     _resultCount(context, repoData),
                 ],
               ),
@@ -132,20 +138,36 @@ class SearchPage extends ConsumerWidget {
     );
   }
 
-  Widget _noResultMessage(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(right: 10),
-          child: Align(
-            alignment: AlignmentDirectional.centerEnd,
-            child: SafeArea(child: Text("${S.of(context).result}: 0")),
+  Widget _noResultMessage(
+      BuildContext context,
+      AsyncValue<RepositoryDataModel?> repoData) {
+    if(repoData.value!.totalCount == 0) {
+      return Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: Align(
+              alignment: AlignmentDirectional.centerEnd,
+              child: SafeArea(child: Text("${S.of(context).result}: 0")),
+            ),
           ),
-        ),
-        const SizedBox(height: 30),
-        Text(S.of(context).noResult)
-      ],
-    );
+          const SizedBox(height: 30),
+          Text(S.of(context).noResult)
+        ],
+      );
+      //ユーザーの入力がない場合は結果-1を返しているのでその場合の処理
+    }else if(repoData.value!.totalCount == -1){
+      return Column(
+        children: [
+          const SizedBox(height: 30),
+          Text(S.of(context).enterText),
+        ],
+      );
+    }
+    else{
+      return const SizedBox.shrink();
+    }
+
   }
 
   Widget _resultCount(
@@ -174,27 +196,24 @@ class SearchPage extends ConsumerWidget {
   }
 
   Widget _displayErrorMessage(String error, BuildContext context) {
-    if (error == "Please Enter Text!!") {
+     if (error == "Error Occurred!!") {
       return Column(
         children: [
-          const SizedBox(height: 40),
-          Text(S.of(context).enterText),
-        ],
-      );
-    } else if (error == "Error Occurred!!") {
-      return Column(
-        children: [
-          const SizedBox(height: 40),
+          const SizedBox(height: 30),
           Text(S.of(context).errorOccurred),
         ],
       );
-    } else {
-      return Column(
-        children: [
-          const SizedBox(height: 40),
-          Text(S.of(context).networkError),
-        ],
-      );
-    }
+      //network error
+    }else if(error == S.of(context).networkError) {
+       return Column(
+         children: [
+           const SizedBox(height: 30),
+           Text(S.of(context).networkError),
+         ],
+       );
+     }
+     else{
+       return const SizedBox.shrink();
+     }
   }
 }

@@ -14,6 +14,10 @@ class RepositoryDataModel with _$RepositoryDataModel {
 
   factory RepositoryDataModel.fromJson(Map<String, dynamic> json) =>
       _$RepositoryDataModelFromJson(json);
+
+  ///入力がない場合はtotalCountを-1で返す
+  static const empty = RepositoryDataModel(totalCount: -1, items: []);
+
 }
 
 @freezed
