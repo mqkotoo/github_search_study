@@ -98,30 +98,29 @@ class SearchPage extends ConsumerWidget {
               child: Stack(
                 alignment: AlignmentDirectional.topEnd,
                 children: <Widget>[
-                  repoData.when(
+                  repoData.maybeWhen(
                     data: (data) => Scrollbar(
                       child: ListView.separated(
                         keyboardDismissBehavior:
                             ScrollViewKeyboardDismissBehavior.onDrag,
-                        itemCount: (repoData.valueOrNull?.items ?? []).length,
+                        itemCount: (data?.items ?? []).length,
                         itemBuilder: (context, index) => ListItem(
-                          fullName: repoData.value!.items[index].fullName,
-                          description: repoData.value!.items[index].description,
+                          fullName: data!.items[index].fullName,
+                          description: data.items[index].description,
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => DetailPage(
-                                      repoData: repoData.value!.items[index])),
+                                      repoData: data.items[index])),
                             );
                           },
                         ),
                         separatorBuilder: (context, index) => const Divider(),
                       ),
                     ),
-                    //上でハンドリングしているため、ここではつかわない
-                    error: (_, __) => const SizedBox.shrink(),
-                    loading: () => const LoadingShimmer(),
+                    //ロード処理
+                    orElse: () => const LoadingShimmer(),
                   ),
                   //検索結果がある場合は件数を右上に表示する（リストの表示範囲を狭めないために右上に重ねる）
                   // total count,メッセージ
