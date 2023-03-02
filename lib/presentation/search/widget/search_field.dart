@@ -1,23 +1,29 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SearchField extends StatelessWidget {
-  const SearchField(
-      {Key? key,
-      required this.onFieldSubmitted,
-      required this.isClearVisible,
-      required this.onPressClearButton,
-      required this.onChanged,
-      required this.textController})
-      : super(key: key);
+import '../../../generated/l10n.dart';
+import '../../../repository/providers/connectivity.dart';
+import '../../controller/controllers.dart';
 
-  final void Function(String) onFieldSubmitted;
-  final bool isClearVisible;
-  final void Function() onPressClearButton;
-  final void Function(String) onChanged;
-  final TextEditingController textController;
+final isClearButtonVisibleProvider =
+    StateProvider.autoDispose<bool>((ref) => false);
+
+final textEditingControllerProvider =
+    Provider<TextEditingController>((ref) => TextEditingController());
+
+class SearchField extends ConsumerWidget {
+  const SearchField({Key? key}) : super(key: key);
+
+  // //テキストのコントローラ
+  // final textController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    //通信状況
+    final connectivity = ref.watch(connectivityProvider);
+    final textController = ref.watch(textEditingControllerProvider);
+
     //横画面の場合ノッチに隠れないようにする
     return SafeArea(
       top: false,
@@ -25,16 +31,25 @@ class SearchField extends StatelessWidget {
       child: TextFormField(
         key: const Key("inputForm"),
         controller: textController,
-        onChanged: onChanged,
+        onChanged: (text) {
+          ref
+              .read(isClearButtonVisibleProvider.notifier)
+              .update((state) => text.isNotEmpty);
+        },
 
         //decoration
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.search, color: Colors.grey),
-          suffixIcon: isClearVisible
+          suffixIcon: ref.watch(isClearButtonVisibleProvider)
               ? IconButton(
                   key: const Key("clearButton"),
                   icon: const Icon(Icons.clear),
-                  onPressed: onPressClearButton,
+                  onPressed: () {
+                    textController.clear();
+                    ref
+                        .watch(isClearButtonVisibleProvider.notifier)
+                        .update((state) => false);
+                  },
                   color: Colors.grey)
               : const SizedBox.shrink(),
         ),
@@ -42,7 +57,22 @@ class SearchField extends StatelessWidget {
         //入力キーボードのdone→searchに変更
         textInputAction: TextInputAction.search,
         //search押したらデータ取得
-        onFieldSubmitted: onFieldSubmitted,
+        onFieldSubmitted: (text) async {
+          // エラーメッセージに値が入るかをエラー表示のフラグにしているから検索ごとに初期化
+          // android studioのバグなのか、refreshが使われていない判定になる
+          // ignore: unused_result
+          ref.refresh(errorMessageProvider);
+
+          final connectivityResult = await connectivity.checkConnectivity();
+          //通信がなかったら何もその後の処理はせず、エラーを出す
+          if (connectivityResult == ConnectivityResult.none) {
+            ref
+                .read(errorMessageProvider.notifier)
+                .update((state) => S.of(context).networkError);
+            return;
+          }
+          ref.read(inputRepoNameProvider.notifier).update((state) => text);
+        },
       ),
     );
   }

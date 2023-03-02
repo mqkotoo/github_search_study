@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
@@ -8,7 +7,6 @@ import 'package:github_search_study/presentation/detail/detail_page.dart';
 import 'package:github_search_study/presentation/search/widget/list_item.dart';
 import 'package:github_search_study/presentation/search/widget/search_app_bar.dart';
 import 'package:github_search_study/presentation/search/widget/search_field.dart';
-import 'package:github_search_study/repository/providers/connectivity.dart';
 import '../../domain/repository_data_model.dart';
 import '../../generated/l10n.dart';
 import '../controller/controllers.dart';
@@ -22,14 +20,9 @@ class SearchPage extends ConsumerWidget {
     //検索結果データ
     final repoData =
         ref.watch(searchResultProvider);
-    //テキストのコントローラ
-    final textController = ref.read(textEditingControllerProvider);
-    //クリアボタンの表示、非表示切り替え
-    bool isClearVisible = ref.watch(isClearButtonVisibleProvider);
+
     //エラーメッセージ
     final errorMessage = ref.watch(errorMessageProvider);
-    //通信状況
-    final connectivity = ref.watch(connectivityProvider);
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -39,44 +32,10 @@ class SearchPage extends ConsumerWidget {
         appBar: const SearchAppBar(),
         body: Column(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               //search field
-              child: SearchField(
-                textController: textController,
-                //textが何かあったらクリアボタンを表示する
-                onChanged: (text) {
-                  ref
-                      .read(isClearButtonVisibleProvider.notifier)
-                      .update((state) => text.isNotEmpty);
-                },
-                isClearVisible: isClearVisible,
-                onPressClearButton: () {
-                  textController.clear();
-                  ref
-                      .watch(isClearButtonVisibleProvider.notifier)
-                      .update((state) => false);
-                },
-                onFieldSubmitted: (text) async {
-                  // エラーメッセージに値が入るかをエラー表示のフラグにしているから検索ごとに初期化
-                  // android studioのバグなのか、refreshが使われていない判定になる
-                  // ignore: unused_result
-                  ref.refresh(errorMessageProvider);
-
-                  final connectivityResult =
-                      await connectivity.checkConnectivity();
-                  //通信がなかったら何もその後の処理はせず、エラーを出す
-                  if (connectivityResult == ConnectivityResult.none) {
-                    ref
-                        .read(errorMessageProvider.notifier)
-                        .update((state) => S.of(context).networkError);
-                    return;
-                  }
-                  ref
-                      .read(inputRepoNameProvider.notifier)
-                      .update((state) => text);
-                },
-              ),
+              child: SearchField(),
             ),
             const Divider(),
 

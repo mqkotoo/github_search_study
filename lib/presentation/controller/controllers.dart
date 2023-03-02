@@ -10,11 +10,10 @@ final inputRepoNameProvider = StateProvider.autoDispose<String>((ref) => "");
 //キャッチしたエラーメッセージを格納
 final errorMessageProvider = StateProvider<String>((ref) => "");
 
-final textEditingControllerProvider =
-    Provider<TextEditingController>((ref) => TextEditingController());
+// final textEditingControllerProvider =
+//     Provider<TextEditingController>((ref) => TextEditingController());
 
-final isClearButtonVisibleProvider =
-    StateProvider.autoDispose<bool>((ref) => false);
+
 
 
 final searchResultProvider = FutureProvider.autoDispose<RepositoryDataModel?>((ref) async {
