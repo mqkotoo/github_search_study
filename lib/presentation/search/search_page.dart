@@ -75,7 +75,6 @@ class SearchPage extends ConsumerWidget {
                   ref
                       .read(inputRepoNameProvider.notifier)
                       .update((state) => text);
-                  print(ref.read(inputRepoNameProvider));
                 },
               ),
             ),
