@@ -43,7 +43,7 @@ class SearchPage extends ConsumerWidget {
             if (repoData.value != null
                 && (repoData.value!.totalCount == 0
                     || repoData.value!.totalCount == -1)
-                && errorMessage == ""
+                && errorMessage.isEmpty
                 && !repoData.isLoading)
               _noResultMessage(context,repoData),
 
