@@ -44,7 +44,7 @@ ThemeData lightTheme = ThemeData.light().copyWith(
     isDense: true,
   ),
   // divider
-  dividerColor: const Color(0x1f000000),
+  dividerColor: const Color(0x47000000),
 );
 
 //dark theme ----------------------------------
