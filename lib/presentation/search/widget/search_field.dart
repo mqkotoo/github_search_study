@@ -45,11 +45,11 @@ class SearchFieldState extends ConsumerState<SearchField> {
 
         //decoration
         decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.search, color: Colors.grey),
+          prefixIcon: const Icon(Icons.search, color: Colors.grey,size: 27,),
           suffixIcon: ref.watch(isClearButtonVisibleProvider)
               ? IconButton(
               key: const Key("clearButton"),
-              icon: const Icon(Icons.clear),
+              icon: const Icon(Icons.clear,size: 27),
               onPressed: () {
                 textController.clear();
                 ref
