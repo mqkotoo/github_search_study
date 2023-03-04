@@ -25,6 +25,8 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
             key: const Key("searchAppBar"),
           ),
           FlutterSwitch(
+            height: 30,
+            width: 60,
             value: themeMode == ThemeMode.dark,
             onToggle: (value) {
               final themeSelector = ref.read(themeModeProvider.notifier);
