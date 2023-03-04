@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:github_search_study/domain/repository_data_model.dart';
@@ -9,12 +7,6 @@ import '../../main.dart';
 final inputRepoNameProvider = StateProvider.autoDispose<String>((ref) => "");
 //キャッチしたエラーメッセージを格納
 final errorMessageProvider = StateProvider<String>((ref) => "");
-
-// final textEditingControllerProvider =
-//     Provider<TextEditingController>((ref) => TextEditingController());
-
-
-
 
 final searchResultProvider = FutureProvider.autoDispose<RepositoryDataModel?>((ref) async {
 

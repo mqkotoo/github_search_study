@@ -19,7 +19,7 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
     return AppBar(
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
+        children: <Widget>[
           Text(
             S.of(context).searchPageTitle,
             key: const Key("searchAppBar"),
@@ -36,16 +36,14 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
             inactiveToggleColor: const Color(0xFFFFAB40),
             activeSwitchBorder: Border.all(
               color: const Color(0x42000000),
-              width: 1.5,
+              width: 1,
             ),
             inactiveSwitchBorder: Border.all(
               color: const Color(0x42000000),
-              width: 1.5,
+              width: 1,
             ),
-
             activeColor: const Color(0xFF365377),
             inactiveColor: const Color(0xFFFFE892),
-
             activeIcon: const Icon(
               Icons.nightlight_round,
               color: Colors.orangeAccent,

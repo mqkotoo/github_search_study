@@ -9,22 +9,28 @@ import '../../controller/controllers.dart';
 final isClearButtonVisibleProvider =
     StateProvider.autoDispose<bool>((ref) => false);
 
-final textEditingControllerProvider =
-    Provider<TextEditingController>((ref) => TextEditingController());
-
-class SearchField extends ConsumerWidget {
+class SearchField extends ConsumerStatefulWidget {
   const SearchField({Key? key}) : super(key: key);
 
-  // //テキストのコントローラ
-  // final textController = TextEditingController();
+  @override
+  SearchFieldState createState() => SearchFieldState();
+}
+
+final textController = TextEditingController();
+
+class SearchFieldState extends ConsumerState<SearchField> {
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void dispose() {
+    textController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     //通信状況
     final connectivity = ref.watch(connectivityProvider);
-    final textController = ref.watch(textEditingControllerProvider);
 
-    //横画面の場合ノッチに隠れないようにする
     return SafeArea(
       top: false,
       bottom: false,
@@ -42,15 +48,15 @@ class SearchField extends ConsumerWidget {
           prefixIcon: const Icon(Icons.search, color: Colors.grey),
           suffixIcon: ref.watch(isClearButtonVisibleProvider)
               ? IconButton(
-                  key: const Key("clearButton"),
-                  icon: const Icon(Icons.clear),
-                  onPressed: () {
-                    textController.clear();
-                    ref
-                        .watch(isClearButtonVisibleProvider.notifier)
-                        .update((state) => false);
-                  },
-                  color: Colors.grey)
+              key: const Key("clearButton"),
+              icon: const Icon(Icons.clear),
+              onPressed: () {
+                textController.clear();
+                ref
+                    .watch(isClearButtonVisibleProvider.notifier)
+                    .update((state) => false);
+              },
+              color: Colors.grey)
               : const SizedBox.shrink(),
         ),
 
@@ -74,6 +80,6 @@ class SearchField extends ConsumerWidget {
           ref.read(inputRepoNameProvider.notifier).update((state) => text);
         },
       ),
-    );
+    ); // ここにウィジェットツリーを構築するコードを記述してください。
   }
 }

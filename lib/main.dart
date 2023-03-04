@@ -80,7 +80,6 @@ class MyApp extends ConsumerWidget {
         GlobalCupertinoLocalizations.delegate
       ],
       supportedLocales: S.delegate.supportedLocales,
-
       home: const SearchPage(),
     );
   }
