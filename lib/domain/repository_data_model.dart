@@ -17,7 +17,6 @@ class RepositoryDataModel with _$RepositoryDataModel {
 
   ///入力がない場合はtotalCountを-1で返す
   static const empty = RepositoryDataModel(totalCount: -1, items: []);
-
 }
 
 @freezed
