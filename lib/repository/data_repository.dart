@@ -9,10 +9,10 @@ class DataRepository {
 
   final http.Client client;
 
-  Future<RepositoryDataModel?> getData(String repositoryName) async {
+  Future<RepositoryDataModel?> getData(String repositoryName,String sort) async {
 
       final apiUri = Uri.parse(
-          'https://api.github.com/search/repositories?q=$repositoryName&per_page=50');
+          'https://api.github.com/search/repositories?q=$repositoryName&per_page=50&sort=$sort');
       http.Response response = await client.get(apiUri);
 
       if(response.statusCode == 200) {

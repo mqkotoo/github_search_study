@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:github_search_study/presentation/search/widget/result_list_view.dart';
 
 import 'package:github_search_study/presentation/search/widget/search_app_bar.dart';
-import 'package:github_search_study/presentation/search/widget/search_field.dart';
+import 'package:github_search_study/presentation/search/widget/search_bar.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class SearchPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               //search field
-              child: SearchField(),
+              child: SearchBar(),
             ),
             Divider(),
             //検索結果一覧のリスト

@@ -9,17 +9,16 @@ import '../../controller/controllers.dart';
 final isClearButtonVisibleProvider =
     StateProvider.autoDispose<bool>((ref) => false);
 
-class SearchField extends ConsumerStatefulWidget {
-  const SearchField({Key? key}) : super(key: key);
+class SearchBar extends ConsumerStatefulWidget {
+  const SearchBar({Key? key}) : super(key: key);
 
   @override
-  SearchFieldState createState() => SearchFieldState();
+  SearchBarState createState() => SearchBarState();
 }
 
 final textController = TextEditingController();
 
-class SearchFieldState extends ConsumerState<SearchField> {
-
+class SearchBarState extends ConsumerState<SearchBar> {
   @override
   void dispose() {
     textController.dispose();
@@ -51,18 +50,19 @@ class SearchFieldState extends ConsumerState<SearchField> {
 
               //decoration
               decoration: InputDecoration(
-                prefixIcon: const Icon(Icons.search, color: Colors.grey,size: 27),
+                prefixIcon:
+                    const Icon(Icons.search, color: Colors.grey, size: 27),
                 suffixIcon: ref.watch(isClearButtonVisibleProvider)
                     ? IconButton(
-                    key: const Key("clearButton"),
-                    icon: const Icon(Icons.clear,size: 27),
-                    onPressed: () {
-                      textController.clear();
-                      ref
-                          .watch(isClearButtonVisibleProvider.notifier)
-                          .update((state) => false);
-                    },
-                    color: Colors.grey)
+                        key: const Key("clearButton"),
+                        icon: const Icon(Icons.clear, size: 27),
+                        onPressed: () {
+                          textController.clear();
+                          ref
+                              .watch(isClearButtonVisibleProvider.notifier)
+                              .update((state) => false);
+                        },
+                        color: Colors.grey)
                     : const SizedBox.shrink(),
               ),
 
@@ -75,7 +75,8 @@ class SearchFieldState extends ConsumerState<SearchField> {
                 // ignore: unused_result
                 ref.refresh(errorMessageProvider);
 
-                final connectivityResult = await connectivity.checkConnectivity();
+                final connectivityResult =
+                    await connectivity.checkConnectivity();
                 //通信がなかったら何もその後の処理はせず、エラーを出す
                 if (connectivityResult == ConnectivityResult.none) {
                   ref
@@ -83,7 +84,9 @@ class SearchFieldState extends ConsumerState<SearchField> {
                       .update((state) => S.of(context).networkError);
                   return;
                 }
-                ref.read(inputRepoNameProvider.notifier).update((state) => text);
+                ref
+                    .read(inputRepoNameProvider.notifier)
+                    .update((state) => text);
               },
             ),
           ),
@@ -91,43 +94,52 @@ class SearchFieldState extends ConsumerState<SearchField> {
           PopupMenuButton(
             icon: const Icon(Icons.sort),
             iconSize: 32,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5)),
-            onSelected: (value) => setState(() => _selectedView = value),
-              itemBuilder: (_) => <CheckedPopupMenuItem>[
-                CheckedPopupMenuItem(
-                  checked: _selectedView == 'ベストマッチ',
-                  value: 'ベストマッチ',
-                  child: elementText('ベストマッチ'),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            onSelected: (value) {
+              setState(() => _selectedView = value);
+              //ソートを更新
+              ref.read(sortStringProvider.notifier).update((state) => value);
+            },
+            itemBuilder: (_) => <CheckedPopupMenuItem>[
+              CheckedPopupMenuItem(
+                checked: _selectedView == 'ベストマッチ',
+                value: 'ベストマッチ',
+                child: elementText('ベストマッチ'),
+              ),
+              CheckedPopupMenuItem(
+                checked: _selectedView == 'updated',
+                value: 'updated',
+                child: elementText('あたらいい順'),
+              ),
+              CheckedPopupMenuItem(
+                checked: _selectedView == 'stars',
+                value: 'stars',
+                child: elementText('スター数'),
+              ),
+              CheckedPopupMenuItem(
+                checked: _selectedView == 'forks',
+                value: 'forks',
+                child: elementText('フォーク数'),
+              ),
+              CheckedPopupMenuItem(
+                checked: _selectedView == 'help-wanted-issues',
+                value: 'help-wanted-issues',
+                child: elementText(
+                  '助けてイシュー数',
                 ),
-                CheckedPopupMenuItem(
-                  checked: _selectedView == 'スター',
-                  value: 'スター',
-                  child: elementText('スター数'),
-                ),
-                CheckedPopupMenuItem(
-                  checked: _selectedView == 'フォーク',
-                  value: 'フォーク',
-                  child: elementText('フォーク数'),
-                ),
-                CheckedPopupMenuItem(
-                  checked: _selectedView == 'イシュー',
-                  value: 'イシュー',
-                  child: elementText('イシュー数',),
-                ),
-              ],
+              ),
+            ],
           )
         ],
       ),
     );
   }
+
   Text elementText(String text) {
     return Text(
-        text,
-        style: const TextStyle(
-            fontSize: 14,
-          fontWeight: FontWeight.bold
-        ),
+      text,
+      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
     );
   }
 }

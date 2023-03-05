@@ -7,10 +7,13 @@ import '../../main.dart';
 final inputRepoNameProvider = StateProvider.autoDispose<String>((ref) => "");
 //キャッチしたエラーメッセージを格納
 final errorMessageProvider = StateProvider<String>((ref) => "");
+//sortの文字列を格納
+final sortStringProvider = StateProvider<String>((ref) => "bestmatch");
 
 final searchResultProvider = FutureProvider.autoDispose<RepositoryDataModel?>((ref) async {
 
       final inputText = ref.watch(inputRepoNameProvider);
+      final sortString = ref.watch(sortStringProvider);
 
       //ユーザーの入力がない場合はtotal countを-1で返してview側で処理する
       if(inputText.isEmpty){
@@ -18,7 +21,7 @@ final searchResultProvider = FutureProvider.autoDispose<RepositoryDataModel?>((r
       }
 
   final dataRepository = ref.watch(dataRepositoryProvider);
-  return await dataRepository.getData(inputText).catchError((e) {
+  return await dataRepository.getData(inputText,sortString).catchError((e) {
     ref.read(errorMessageProvider.notifier)
         .update((state) => e.toString());
     return null;
