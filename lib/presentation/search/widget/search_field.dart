@@ -26,6 +26,9 @@ class SearchFieldState extends ConsumerState<SearchField> {
     super.dispose();
   }
 
+  //ソート要素の初期値
+  String _selectedView = 'ベストマッチ';
+
   @override
   Widget build(BuildContext context) {
     //通信状況
@@ -84,12 +87,47 @@ class SearchFieldState extends ConsumerState<SearchField> {
               },
             ),
           ),
-          IconButton(
-              onPressed: (){},
-              icon: const Icon(Icons.sort,size: 35),
+          //ソートのボタン
+          PopupMenuButton(
+            icon: const Icon(Icons.sort),
+            iconSize: 32,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5)),
+            onSelected: (value) => setState(() => _selectedView = value),
+              itemBuilder: (_) => <CheckedPopupMenuItem>[
+                CheckedPopupMenuItem(
+                  checked: _selectedView == 'ベストマッチ',
+                  value: 'ベストマッチ',
+                  child: elementText('ベストマッチ'),
+                ),
+                CheckedPopupMenuItem(
+                  checked: _selectedView == 'スター',
+                  value: 'スター',
+                  child: elementText('スター数'),
+                ),
+                CheckedPopupMenuItem(
+                  checked: _selectedView == 'フォーク',
+                  value: 'フォーク',
+                  child: elementText('フォーク数'),
+                ),
+                CheckedPopupMenuItem(
+                  checked: _selectedView == 'イシュー',
+                  value: 'イシュー',
+                  child: elementText('イシュー数',),
+                ),
+              ],
           )
         ],
       ),
-    ); // ここにウィジェットツリーを構築するコードを記述してください。
+    );
+  }
+  Text elementText(String text) {
+    return Text(
+        text,
+        style: const TextStyle(
+            fontSize: 14,
+          fontWeight: FontWeight.bold
+        ),
+    );
   }
 }
