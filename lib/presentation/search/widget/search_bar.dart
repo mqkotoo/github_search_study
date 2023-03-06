@@ -25,9 +25,6 @@ class SearchBarState extends ConsumerState<SearchBar> {
     super.dispose();
   }
 
-  //ソート要素の初期値
-  String _selectedView = 'ベストマッチ';
-
   @override
   Widget build(BuildContext context) {
     //通信状況
@@ -90,56 +87,43 @@ class SearchBarState extends ConsumerState<SearchBar> {
               },
             ),
           ),
-          //ソートのボタン
-          PopupMenuButton(
-            icon: const Icon(Icons.sort),
-            iconSize: 32,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-            onSelected: (value) {
-              setState(() => _selectedView = value);
-              //ソートを更新
-              ref.read(sortStringProvider.notifier).update((state) => value);
-            },
-            itemBuilder: (_) => <CheckedPopupMenuItem>[
-              CheckedPopupMenuItem(
-                checked: _selectedView == 'ベストマッチ',
-                value: 'ベストマッチ',
-                child: elementText('ベストマッチ'),
-              ),
-              CheckedPopupMenuItem(
-                checked: _selectedView == 'updated',
-                value: 'updated',
-                child: elementText('あたらいい順'),
-              ),
-              CheckedPopupMenuItem(
-                checked: _selectedView == 'stars',
-                value: 'stars',
-                child: elementText('スター数'),
-              ),
-              CheckedPopupMenuItem(
-                checked: _selectedView == 'forks',
-                value: 'forks',
-                child: elementText('フォーク数'),
-              ),
-              CheckedPopupMenuItem(
-                checked: _selectedView == 'help-wanted-issues',
-                value: 'help-wanted-issues',
-                child: elementText(
-                  '助けてイシュー数',
-                ),
-              ),
+          MenuAnchor(
+            alignmentOffset: const Offset(-120, 0),
+            menuChildren: <RadioMenuButton<String>>[
+              radioMenuButton(value: 'bestmatch', text: S.of(context).bestMatch),
+              radioMenuButton(value: 'updated', text: S.of(context).updated),
+              radioMenuButton(value: 'stars', text: S.of(context).stars),
+              radioMenuButton(value: 'forks', text: S.of(context).forks),
+              radioMenuButton(value: 'help-wanted-issues', text: S.of(context).helpWantedIssue),
             ],
-          )
+            builder: (BuildContext context, MenuController controller,
+                Widget? child) {
+              return IconButton(
+                onPressed: () {
+                  if (controller.isOpen) {
+                    controller.close();
+                  } else {
+                    controller.open();
+                  }
+                },
+                icon: const Icon(Icons.sort),
+              );
+            },
+          ),
         ],
       ),
     );
   }
 
-  Text elementText(String text) {
-    return Text(
-      text,
-      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+  //RadioButton
+  RadioMenuButton<String> radioMenuButton({
+    required String value, required String text}) {
+    return RadioMenuButton(
+      value: value,
+      groupValue: ref.watch(sortStringProvider),
+      onChanged: (value) =>
+          ref.read(sortStringProvider.notifier).update((state) => value!),
+      child: Text(text),
     );
   }
 }

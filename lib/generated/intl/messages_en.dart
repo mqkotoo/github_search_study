@@ -22,12 +22,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "bestMatch": MessageLookupByLibrary.simpleMessage("Best Match"),
         "detailPageTitle": MessageLookupByLibrary.simpleMessage("Repo Detail"),
         "enterText":
             MessageLookupByLibrary.simpleMessage("Please Enter Text!!"),
         "errorOccurred":
             MessageLookupByLibrary.simpleMessage("Error Occurred!!"),
         "fork": MessageLookupByLibrary.simpleMessage("Fork"),
+        "forks": MessageLookupByLibrary.simpleMessage("Forks"),
+        "helpWantedIssue":
+            MessageLookupByLibrary.simpleMessage("Help Wanted Issues"),
         "issue": MessageLookupByLibrary.simpleMessage("Issue"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "networkError": MessageLookupByLibrary.simpleMessage("Network Error!!"),
@@ -37,6 +41,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchPageTitle":
             MessageLookupByLibrary.simpleMessage("GitHub Search"),
         "star": MessageLookupByLibrary.simpleMessage("Star"),
+        "stars": MessageLookupByLibrary.simpleMessage("Stars"),
+        "updated": MessageLookupByLibrary.simpleMessage("Updated"),
         "watch": MessageLookupByLibrary.simpleMessage("Watch")
       };
 }
