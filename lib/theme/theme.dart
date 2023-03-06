@@ -88,6 +88,11 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
         color: Color(0xff9e9e9e),
       ),
     ),
+    contentPadding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 16
+    ),
+    isDense: true,
   ),
 
   // divider
