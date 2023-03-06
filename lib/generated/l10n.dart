@@ -219,6 +219,16 @@ class S {
       args: [],
     );
   }
+
+  /// `View On GitHub`
+  String get viewOnGitHub {
+    return Intl.message(
+      'View On GitHub',
+      name: 'viewOnGitHub',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

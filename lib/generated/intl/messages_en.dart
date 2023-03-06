@@ -43,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "star": MessageLookupByLibrary.simpleMessage("Star"),
         "stars": MessageLookupByLibrary.simpleMessage("Stars"),
         "updated": MessageLookupByLibrary.simpleMessage("Updated"),
+        "viewOnGitHub": MessageLookupByLibrary.simpleMessage("View On GitHub"),
         "watch": MessageLookupByLibrary.simpleMessage("Watch")
       };
 }

@@ -16,5 +16,7 @@
   "updated": "Updated",
   "stars": "Stars",
   "forks": "Forks",
-  "helpWantedIssue": "Help Wanted Issues"
+  "helpWantedIssue": "Help Wanted Issues",
+
+  "viewOnGitHub": "View On GitHub"
 }
