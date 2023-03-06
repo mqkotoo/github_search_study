@@ -16,7 +16,7 @@ class RepositoryDataModel with _$RepositoryDataModel {
       _$RepositoryDataModelFromJson(json);
 
   ///入力がない場合はtotalCountを-1で返す
-  static const empty = RepositoryDataModel(totalCount: -1, items: []);
+  static const empty = RepositoryDataModel(totalCount: -1,items: []);
 }
 
 @freezed
@@ -30,6 +30,7 @@ class RepositoryDataItems with _$RepositoryDataItems {
     required int watchersCount,
     required int forksCount,
     required int openIssuesCount,
+    required String htmlUrl,
     required RepositoryDataOwner owner,
   }) = _RepositoryDataItems;
 

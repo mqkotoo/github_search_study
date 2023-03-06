@@ -94,6 +94,17 @@ class DetailPage extends StatelessWidget {
                   iconBackgroundColor: Colors.green,
                   iconColor: Colors.white,
                 ),
+
+
+                //githubに飛ばす
+                Text(
+                  "GitHub上で見る",
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    decorationColor: Colors.blueAccent,
+                    decorationThickness: 5,
+                  ),
+                )
               ],
             ),
           ),
@@ -157,6 +168,17 @@ class DetailPage extends StatelessWidget {
                   iconBackgroundColor: Colors.green,
                   iconColor: Colors.white,
                 ),
+
+                //githubに飛ばす
+                Text(
+                  "GitHub上で見る",
+                  style: TextStyle(
+                    color: Colors.blueAccent,
+                    decoration: TextDecoration.underline,
+                    decorationColor: Colors.blueAccent,
+                    decorationThickness: 2,
+                  ),
+                )
               ],
             ),
           ),

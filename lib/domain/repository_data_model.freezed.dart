@@ -204,6 +204,7 @@ mixin _$RepositoryDataItems {
   int get watchersCount => throw _privateConstructorUsedError;
   int get forksCount => throw _privateConstructorUsedError;
   int get openIssuesCount => throw _privateConstructorUsedError;
+  String get htmlUrl => throw _privateConstructorUsedError;
   RepositoryDataOwner get owner => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -227,6 +228,7 @@ abstract class $RepositoryDataItemsCopyWith<$Res> {
       int watchersCount,
       int forksCount,
       int openIssuesCount,
+      String htmlUrl,
       RepositoryDataOwner owner});
 
   $RepositoryDataOwnerCopyWith<$Res> get owner;
@@ -253,6 +255,7 @@ class _$RepositoryDataItemsCopyWithImpl<$Res, $Val extends RepositoryDataItems>
     Object? watchersCount = null,
     Object? forksCount = null,
     Object? openIssuesCount = null,
+    Object? htmlUrl = null,
     Object? owner = null,
   }) {
     return _then(_value.copyWith(
@@ -288,6 +291,10 @@ class _$RepositoryDataItemsCopyWithImpl<$Res, $Val extends RepositoryDataItems>
           ? _value.openIssuesCount
           : openIssuesCount // ignore: cast_nullable_to_non_nullable
               as int,
+      htmlUrl: null == htmlUrl
+          ? _value.htmlUrl
+          : htmlUrl // ignore: cast_nullable_to_non_nullable
+              as String,
       owner: null == owner
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
@@ -321,6 +328,7 @@ abstract class _$$_RepositoryDataItemsCopyWith<$Res>
       int watchersCount,
       int forksCount,
       int openIssuesCount,
+      String htmlUrl,
       RepositoryDataOwner owner});
 
   @override
@@ -346,6 +354,7 @@ class __$$_RepositoryDataItemsCopyWithImpl<$Res>
     Object? watchersCount = null,
     Object? forksCount = null,
     Object? openIssuesCount = null,
+    Object? htmlUrl = null,
     Object? owner = null,
   }) {
     return _then(_$_RepositoryDataItems(
@@ -381,6 +390,10 @@ class __$$_RepositoryDataItemsCopyWithImpl<$Res>
           ? _value.openIssuesCount
           : openIssuesCount // ignore: cast_nullable_to_non_nullable
               as int,
+      htmlUrl: null == htmlUrl
+          ? _value.htmlUrl
+          : htmlUrl // ignore: cast_nullable_to_non_nullable
+              as String,
       owner: null == owner
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
@@ -403,6 +416,7 @@ class _$_RepositoryDataItems
       required this.watchersCount,
       required this.forksCount,
       required this.openIssuesCount,
+      required this.htmlUrl,
       required this.owner});
 
   factory _$_RepositoryDataItems.fromJson(Map<String, dynamic> json) =>
@@ -425,11 +439,13 @@ class _$_RepositoryDataItems
   @override
   final int openIssuesCount;
   @override
+  final String htmlUrl;
+  @override
   final RepositoryDataOwner owner;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RepositoryDataItems(fullName: $fullName, description: $description, avatarUrl: $avatarUrl, language: $language, stargazersCount: $stargazersCount, watchersCount: $watchersCount, forksCount: $forksCount, openIssuesCount: $openIssuesCount, owner: $owner)';
+    return 'RepositoryDataItems(fullName: $fullName, description: $description, avatarUrl: $avatarUrl, language: $language, stargazersCount: $stargazersCount, watchersCount: $watchersCount, forksCount: $forksCount, openIssuesCount: $openIssuesCount, htmlUrl: $htmlUrl, owner: $owner)';
   }
 
   @override
@@ -445,6 +461,7 @@ class _$_RepositoryDataItems
       ..add(DiagnosticsProperty('watchersCount', watchersCount))
       ..add(DiagnosticsProperty('forksCount', forksCount))
       ..add(DiagnosticsProperty('openIssuesCount', openIssuesCount))
+      ..add(DiagnosticsProperty('htmlUrl', htmlUrl))
       ..add(DiagnosticsProperty('owner', owner));
   }
 
@@ -469,6 +486,7 @@ class _$_RepositoryDataItems
                 other.forksCount == forksCount) &&
             (identical(other.openIssuesCount, openIssuesCount) ||
                 other.openIssuesCount == openIssuesCount) &&
+            (identical(other.htmlUrl, htmlUrl) || other.htmlUrl == htmlUrl) &&
             (identical(other.owner, owner) || other.owner == owner));
   }
 
@@ -484,6 +502,7 @@ class _$_RepositoryDataItems
       watchersCount,
       forksCount,
       openIssuesCount,
+      htmlUrl,
       owner);
 
   @JsonKey(ignore: true)
@@ -511,6 +530,7 @@ abstract class _RepositoryDataItems implements RepositoryDataItems {
       required final int watchersCount,
       required final int forksCount,
       required final int openIssuesCount,
+      required final String htmlUrl,
       required final RepositoryDataOwner owner}) = _$_RepositoryDataItems;
 
   factory _RepositoryDataItems.fromJson(Map<String, dynamic> json) =
@@ -532,6 +552,8 @@ abstract class _RepositoryDataItems implements RepositoryDataItems {
   int get forksCount;
   @override
   int get openIssuesCount;
+  @override
+  String get htmlUrl;
   @override
   RepositoryDataOwner get owner;
   @override
