@@ -51,21 +51,22 @@ class MyApp extends ConsumerWidget {
         final MediaQueryData data = MediaQuery.of(context);
         //textScaleの上限を指定
         double textScaleLimit() {
-          if(data.size.width <= 320) {
+          if (data.size.width <= 320) {
             return 1.3;
-          }else if(data.size.width <= 375){
+          } else if (data.size.width <= 375) {
             return 1.4;
-          }else{
+          } else {
             return 1.5;
           }
         }
+
         return MediaQuery(
           //min()どちらか小さい方を適用するようにして上限を設ける
           data: data.copyWith(
             textScaleFactor: min(textScaleLimit(), data.textScaleFactor),
           ),
           //device_preview setting
-          child: DevicePreview.appBuilder(context,child),
+          child: DevicePreview.appBuilder(context, child),
         );
       },
       //theme setting

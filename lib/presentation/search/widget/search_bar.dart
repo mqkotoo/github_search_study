@@ -1,5 +1,6 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../generated/l10n.dart';
@@ -90,11 +91,14 @@ class SearchBarState extends ConsumerState<SearchBar> {
           MenuAnchor(
             alignmentOffset: const Offset(-120, 0),
             menuChildren: <RadioMenuButton<String>>[
-              radioMenuButton(value: 'bestmatch', text: S.of(context).bestMatch),
+              radioMenuButton(
+                  value: 'bestmatch', text: S.of(context).bestMatch),
               radioMenuButton(value: 'updated', text: S.of(context).updated),
               radioMenuButton(value: 'stars', text: S.of(context).stars),
               radioMenuButton(value: 'forks', text: S.of(context).forks),
-              radioMenuButton(value: 'help-wanted-issues', text: S.of(context).helpWantedIssue),
+              radioMenuButton(
+                  value: 'help-wanted-issues',
+                  text: S.of(context).helpWantedIssue),
             ],
             builder: (BuildContext context, MenuController controller,
                 Widget? child) {
@@ -106,7 +110,7 @@ class SearchBarState extends ConsumerState<SearchBar> {
                     controller.open();
                   }
                 },
-                icon: const Icon(Icons.sort,size: 32),
+                icon: const Icon(Icons.sort, size: 32),
               );
             },
           ),
@@ -116,8 +120,8 @@ class SearchBarState extends ConsumerState<SearchBar> {
   }
 
   //RadioButton
-  RadioMenuButton<String> radioMenuButton({
-    required String value, required String text}) {
+  RadioMenuButton<String> radioMenuButton(
+      {required String value, required String text}) {
     return RadioMenuButton(
       value: value,
       groupValue: ref.watch(sortStringProvider),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:github_search_study/presentation/detail/widget/detail_element.dart';
 import 'package:github_search_study/presentation/detail/widget/hori_repo_header.dart';
 import 'package:github_search_study/presentation/detail/widget/ver_repo_header.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../domain/repository_data_model.dart';
 import '../../generated/l10n.dart';
 
@@ -199,6 +199,7 @@ class DetailPage extends StatelessWidget {
       ),
     );
   }
+
   //GitHubのリンク先に飛ばす
   Future _openGitHubUrl(Uri url) async {
     if (await canLaunchUrl(url)) {

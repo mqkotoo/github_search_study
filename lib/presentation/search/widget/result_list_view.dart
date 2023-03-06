@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
@@ -24,12 +25,12 @@ class ResultListview extends ConsumerWidget {
       child: Column(
         children: <Widget>[
           // 結果がなかった時(errorMessageProviderを介していないので下のエラーと同時に表示される可能性がある)
-          if (repoData.value != null
-              && (repoData.value!.totalCount == 0
-                  || repoData.value!.totalCount == -1)
-              && errorMessage.isEmpty
-              && !repoData.isLoading)
-            _noResultMessage(context,repoData),
+          if (repoData.value != null &&
+              (repoData.value!.totalCount == 0 ||
+                  repoData.value!.totalCount == -1) &&
+              errorMessage.isEmpty &&
+              !repoData.isLoading)
+            _noResultMessage(context, repoData),
 
           //APIたたいてエラーがあれば表示
           if (errorMessage.isNotEmpty)
@@ -43,7 +44,7 @@ class ResultListview extends ConsumerWidget {
                   data: (data) => Scrollbar(
                     child: ListView.separated(
                       keyboardDismissBehavior:
-                      ScrollViewKeyboardDismissBehavior.onDrag,
+                          ScrollViewKeyboardDismissBehavior.onDrag,
                       itemCount: (data?.items ?? []).length,
                       itemBuilder: (context, index) => ListItem(
                         fullName: data!.items[index].fullName,
@@ -52,8 +53,8 @@ class ResultListview extends ConsumerWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => DetailPage(
-                                    repoData: data.items[index])),
+                                builder: (context) =>
+                                    DetailPage(repoData: data.items[index])),
                           );
                         },
                       ),
@@ -65,9 +66,9 @@ class ResultListview extends ConsumerWidget {
                 ),
                 //検索結果がある場合は件数を右上に表示する（リストの表示範囲を狭めないために右上に重ねる）
                 // total count,メッセージ
-                if (repoData.value != null
-                    && repoData.value!.totalCount != 0
-                    && repoData.value!.totalCount != -1)
+                if (repoData.value != null &&
+                    repoData.value!.totalCount != 0 &&
+                    repoData.value!.totalCount != -1)
                   _resultCount(context, repoData),
               ],
             ),
@@ -78,9 +79,8 @@ class ResultListview extends ConsumerWidget {
   }
 
   Widget _noResultMessage(
-      BuildContext context,
-      AsyncValue<RepositoryDataModel?> repoData) {
-    if(repoData.value!.totalCount == 0) {
+      BuildContext context, AsyncValue<RepositoryDataModel?> repoData) {
+    if (repoData.value!.totalCount == 0) {
       return Column(
         children: [
           Padding(
@@ -95,15 +95,14 @@ class ResultListview extends ConsumerWidget {
         ],
       );
       //ユーザーの入力がない場合は結果-1を返しているのでその場合の処理
-    }else if(repoData.value!.totalCount == -1){
+    } else if (repoData.value!.totalCount == -1) {
       return Column(
         children: [
           const SizedBox(height: 30),
           Text(S.of(context).enterText),
         ],
       );
-    }
-    else{
+    } else {
       return const SizedBox.shrink();
     }
   }
@@ -142,17 +141,15 @@ class ResultListview extends ConsumerWidget {
         ],
       );
       //network error
-    }else if(error == S.of(context).networkError) {
+    } else if (error == S.of(context).networkError) {
       return Column(
         children: [
           const SizedBox(height: 30),
           Text(S.of(context).networkError),
         ],
       );
-    }
-    else{
+    } else {
       return const SizedBox.shrink();
     }
   }
-
 }

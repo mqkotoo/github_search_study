@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:github_search_study/presentation/search/widget/result_list_view.dart';
-
 import 'package:github_search_study/presentation/search/widget/search_app_bar.dart';
 import 'package:github_search_study/presentation/search/widget/search_bar.dart';
 

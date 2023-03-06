@@ -9,18 +9,17 @@ class DataRepository {
 
   final http.Client client;
 
-  Future<RepositoryDataModel?> getData(String repositoryName,String sort) async {
+  Future<RepositoryDataModel?> getData(
+      String repositoryName, String sort) async {
+    final apiUri = Uri.parse(
+        'https://api.github.com/search/repositories?q=$repositoryName&per_page=50&sort=$sort');
+    http.Response response = await client.get(apiUri);
 
-      final apiUri = Uri.parse(
-          'https://api.github.com/search/repositories?q=$repositoryName&per_page=50&sort=$sort');
-      http.Response response = await client.get(apiUri);
-
-      if(response.statusCode == 200) {
-        final jsonData = json.decode(response.body);
-        return RepositoryDataModel.fromJson(jsonData);
-      }else {
-        throw "Error Occurred!!";
-      }
-
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      return RepositoryDataModel.fromJson(jsonData);
+    } else {
+      throw "Error Occurred!!";
+    }
   }
 }
