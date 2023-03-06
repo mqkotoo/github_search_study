@@ -45,6 +45,11 @@ ThemeData lightTheme = ThemeData.light().copyWith(
   ),
   // divider
   dividerColor: const Color(0x47000000),
+
+  //RADIOボタンのアクティブ時の色
+  radioTheme: RadioThemeData(
+    fillColor: MaterialStateColor.resolveWith((states) => const Color(0xFFFF9800)),
+  )
 );
 
 //dark theme ----------------------------------
@@ -87,4 +92,9 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
 
   // divider
   dividerColor: const Color(0xff777777),
+
+    //RADIOボタンのアクティブ時の色
+    radioTheme: RadioThemeData(
+      fillColor: MaterialStateColor.resolveWith((states) => const Color(0xFF536DFE)),
+    )
 );

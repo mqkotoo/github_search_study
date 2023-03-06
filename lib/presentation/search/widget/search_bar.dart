@@ -106,7 +106,7 @@ class SearchBarState extends ConsumerState<SearchBar> {
                     controller.open();
                   }
                 },
-                icon: const Icon(Icons.sort),
+                icon: const Icon(Icons.sort,size: 32),
               );
             },
           ),
