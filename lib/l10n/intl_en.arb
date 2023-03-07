@@ -10,5 +10,13 @@
   "errorOccurred": "Error Occurred!!",
   "networkError": "Network Error!!",
   "enterText": "Please Enter Text!!",
-  "noResult": "Not Found Search Result!!"
+  "noResult": "Not Found Search Result!!",
+
+  "bestMatch": "Best Match",
+  "updated": "Updated",
+  "stars": "Stars",
+  "forks": "Forks",
+  "helpWantedIssue": "Help Wanted Issues",
+
+  "viewOnGitHub": "View On GitHub"
 }

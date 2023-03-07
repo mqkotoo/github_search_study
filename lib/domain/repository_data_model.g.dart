@@ -49,6 +49,7 @@ _$_RepositoryDataItems _$$_RepositoryDataItemsFromJson(
           forksCount: $checkedConvert('forks_count', (v) => v as int),
           openIssuesCount:
               $checkedConvert('open_issues_count', (v) => v as int),
+          htmlUrl: $checkedConvert('html_url', (v) => v as String),
           owner: $checkedConvert('owner',
               (v) => RepositoryDataOwner.fromJson(v as Map<String, dynamic>)),
         );
@@ -60,7 +61,8 @@ _$_RepositoryDataItems _$$_RepositoryDataItemsFromJson(
         'stargazersCount': 'stargazers_count',
         'watchersCount': 'watchers_count',
         'forksCount': 'forks_count',
-        'openIssuesCount': 'open_issues_count'
+        'openIssuesCount': 'open_issues_count',
+        'htmlUrl': 'html_url'
       },
     );
 
@@ -75,6 +77,7 @@ Map<String, dynamic> _$$_RepositoryDataItemsToJson(
       'watchers_count': instance.watchersCount,
       'forks_count': instance.forksCount,
       'open_issues_count': instance.openIssuesCount,
+      'html_url': instance.htmlUrl,
       'owner': instance.owner,
     };
 

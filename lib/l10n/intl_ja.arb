@@ -10,5 +10,13 @@
   "errorOccurred": "エラーが発生しました！！",
   "networkError": "ネットワークエラーです！！",
   "enterText": "テキストを入力してください！！",
-  "noResult": "結果は見つかりませんでした！！"
+  "noResult": "結果は見つかりませんでした！！",
+
+  "bestMatch": "ベストマッチ",
+  "updated": "新しい順",
+  "stars": "スター順",
+  "forks": "フォーク順",
+  "helpWantedIssue": "助けてイシュー順",
+
+  "viewOnGitHub": "GitHub上で見る"
 }

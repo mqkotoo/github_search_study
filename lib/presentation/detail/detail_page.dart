@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:github_search_study/presentation/detail/widget/detail_element.dart';
 import 'package:github_search_study/presentation/detail/widget/hori_repo_header.dart';
@@ -91,9 +92,25 @@ class DetailPage extends StatelessWidget {
                   icon: Icons.info_outline,
                   elementLabel: S.of(context).issue,
                   element: issuesCount,
-                  iconBackgroundColor: Colors.greenAccent,
+                  iconBackgroundColor: Colors.green,
                   iconColor: Colors.white,
                 ),
+                const SizedBox(height: 30),
+                //githubに飛ばす
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: GestureDetector(
+                    onTap: () => _openGitHubUrl(Uri.parse(repoData.htmlUrl)),
+                    child: Text(
+                      S.of(context).viewOnGitHub,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blueAccent,
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
@@ -154,14 +171,44 @@ class DetailPage extends StatelessWidget {
                   icon: Icons.info_outline,
                   elementLabel: S.of(context).issue,
                   element: issuesCount,
-                  iconBackgroundColor: Colors.greenAccent,
+                  iconBackgroundColor: Colors.green,
                   iconColor: Colors.white,
                 ),
+                const SizedBox(height: 30),
+                //githubに飛ばす
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: GestureDetector(
+                    onTap: () => _openGitHubUrl(Uri.parse(repoData.htmlUrl)),
+                    child: Text(
+                      S.of(context).viewOnGitHub,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blueAccent,
+                        decoration: TextDecoration.underline,
+                        decorationColor: Colors.blueAccent,
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  //GitHubのリンク先に飛ばす
+  Future _openGitHubUrl(Uri url) async {
+    if (await canLaunchUrl(url)) {
+      await launchUrl(
+        url,
+        mode: LaunchMode.inAppWebView,
+      );
+    } else {
+      throw 'このURLにはアクセスできません';
+    }
   }
 }
