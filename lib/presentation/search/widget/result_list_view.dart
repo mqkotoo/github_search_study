@@ -87,7 +87,7 @@ class ResultListview extends ConsumerWidget {
             padding: const EdgeInsets.only(right: 10),
             child: Align(
               alignment: AlignmentDirectional.centerEnd,
-              child: SafeArea(child: Text("${S.of(context).result}: 0")),
+              child: SafeArea(child: Text('${S.of(context).result}: 0')),
             ),
           ),
           const SizedBox(height: 30),
@@ -133,7 +133,7 @@ class ResultListview extends ConsumerWidget {
   }
 
   Widget _displayErrorMessage(String error, BuildContext context) {
-    if (error == "Error Occurred!!") {
+    if (error == 'Error Occurred!!') {
       return Column(
         children: [
           const SizedBox(height: 30),

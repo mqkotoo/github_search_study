@@ -19,7 +19,7 @@ class DataRepository {
       final jsonData = json.decode(response.body);
       return RepositoryDataModel.fromJson(jsonData);
     } else {
-      throw "Error Occurred!!";
+      throw 'Error Occurred!!';
     }
   }
 }

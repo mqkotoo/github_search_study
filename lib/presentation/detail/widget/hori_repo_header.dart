@@ -38,7 +38,7 @@ class HoriRepoHeader extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  description ?? "No Description",
+                  description ?? 'No Description',
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
               ],

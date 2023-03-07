@@ -30,7 +30,7 @@ class ListItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            description ?? "No Description",
+            description ?? 'No Description',
             overflow: TextOverflow.ellipsis,
             maxLines: 3,
           ),

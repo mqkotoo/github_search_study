@@ -53,7 +53,7 @@ void main() {
     });
   });
 
-  testWidgets("多言語対応のテスト 日本語", (WidgetTester tester) async {
+  testWidgets('多言語対応のテスト 日本語', (WidgetTester tester) async {
     mockNetworkImagesFor(() async {
       //日本語でアプリ起動
       await tester.pumpWidget(ProviderScope(

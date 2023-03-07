@@ -26,7 +26,7 @@ class DetailPage extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title:
-            Text(S.of(context).detailPageTitle, key: const Key("detailAppBar")),
+            Text(S.of(context).detailPageTitle, key: const Key('detailAppBar')),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -63,7 +63,7 @@ class DetailPage extends StatelessWidget {
                 DetailElement(
                   icon: Icons.language,
                   elementLabel: S.of(context).language,
-                  element: repoData.language ?? "No Language",
+                  element: repoData.language ?? 'No Language',
                   iconBackgroundColor: Colors.blueAccent,
                   iconColor: Colors.white,
                 ),
@@ -143,7 +143,7 @@ class DetailPage extends StatelessWidget {
                 DetailElement(
                   icon: Icons.language,
                   elementLabel: S.of(context).language,
-                  element: repoData.language ?? "No Language",
+                  element: repoData.language ?? 'No Language',
                   iconBackgroundColor: Colors.blueAccent,
                   iconColor: Colors.white,
                 ),
