@@ -110,7 +110,8 @@ class DetailPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
+                ),
+                const SizedBox(height: 30),
               ],
             ),
           ),
@@ -191,7 +192,8 @@ class DetailPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
+                ),
+                const SizedBox(height: 30),
               ],
             ),
           ),
