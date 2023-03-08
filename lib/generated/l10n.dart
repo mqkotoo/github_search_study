@@ -1,6 +1,9 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
+
 import 'package:flutter/material.dart';
+
 import 'package:intl/intl.dart';
+
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -230,10 +233,10 @@ class S {
     );
   }
 
-  /// `Search GitHub Repository`
+  /// `Search Repository`
   String get formHintText {
     return Intl.message(
-      'Search GitHub Repository',
+      'Search Repository',
       name: 'formHintText',
       desc: '',
       args: [],

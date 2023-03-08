@@ -30,7 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fork": MessageLookupByLibrary.simpleMessage("Fork"),
         "forks": MessageLookupByLibrary.simpleMessage("Forks"),
         "formHintText":
-            MessageLookupByLibrary.simpleMessage("Search GitHub Repository"),
+            MessageLookupByLibrary.simpleMessage("Search Repository"),
         "helpWantedIssue":
             MessageLookupByLibrary.simpleMessage("Help Wanted Issues"),
         "issue": MessageLookupByLibrary.simpleMessage("Issue"),
