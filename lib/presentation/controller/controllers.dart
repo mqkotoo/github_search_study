@@ -11,8 +11,7 @@ final errorMessageProvider = StateProvider<String>((ref) => '');
 final sortStringProvider = StateProvider<String>((ref) => 'bestmatch');
 
 final searchResultProvider =
-    FutureProvider.autoDispose<RepositoryDataModel?>((ref) async {
-  final inputText = ref.watch(inputRepoNameProvider);
+    FutureProvider.autoDispose.family<RepositoryDataModel?,String>((ref,inputText) async {
   final sortString = ref.watch(sortStringProvider);
 
   //ユーザーの入力がない場合はtotal countを-1で返してview側で処理する

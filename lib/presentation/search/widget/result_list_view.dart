@@ -16,7 +16,7 @@ class ResultListview extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //検索結果データ
-    final repoData = ref.watch(searchResultProvider);
+    final repoData = ref.watch(searchResultProvider(ref.watch(inputRepoNameProvider)));
 
     //エラーメッセージ
     final errorMessage = ref.watch(errorMessageProvider);

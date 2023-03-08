@@ -90,7 +90,7 @@ class SearchBarState extends ConsumerState<SearchBar> {
           ),
           MenuAnchor(
             alignmentOffset: const Offset(-120, 0),
-            menuChildren: <RadioMenuButton<String>>[
+            menuChildren: [
               radioMenuButton(
                   value: 'bestmatch', text: S.of(context).bestMatch),
               radioMenuButton(value: 'updated', text: S.of(context).updated),
