@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "エラーが発生しました。\n\n時間をおいて再度お試しください。"),
         "fork": MessageLookupByLibrary.simpleMessage("フォーク"),
         "forks": MessageLookupByLibrary.simpleMessage("フォーク順"),
+        "formHintText": MessageLookupByLibrary.simpleMessage("リポジトリを検索"),
         "helpWantedIssue": MessageLookupByLibrary.simpleMessage("助けてイシュー順"),
         "issue": MessageLookupByLibrary.simpleMessage("イシュー"),
         "language": MessageLookupByLibrary.simpleMessage("言語"),

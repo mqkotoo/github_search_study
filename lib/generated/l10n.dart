@@ -229,6 +229,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Search GitHub Repository`
+  String get formHintText {
+    return Intl.message(
+      'Search GitHub Repository',
+      name: 'formHintText',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

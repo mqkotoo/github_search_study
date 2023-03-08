@@ -29,6 +29,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Error Occurred.\n\nPlease retry later."),
         "fork": MessageLookupByLibrary.simpleMessage("Fork"),
         "forks": MessageLookupByLibrary.simpleMessage("Forks"),
+        "formHintText":
+            MessageLookupByLibrary.simpleMessage("Search GitHub Repository"),
         "helpWantedIssue":
             MessageLookupByLibrary.simpleMessage("Help Wanted Issues"),
         "issue": MessageLookupByLibrary.simpleMessage("Issue"),

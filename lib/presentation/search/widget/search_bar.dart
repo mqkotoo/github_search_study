@@ -48,6 +48,7 @@ class SearchBarState extends ConsumerState<SearchBar> {
 
               //decoration
               decoration: InputDecoration(
+                hintText: S.of(context).formHintText,
                 prefixIcon:
                     const Icon(Icons.search, color: Colors.grey, size: 27),
                 suffixIcon: ref.watch(isClearButtonVisibleProvider)

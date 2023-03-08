@@ -18,5 +18,7 @@
   "forks": "Forks",
   "helpWantedIssue": "Help Wanted Issues",
 
-  "viewOnGitHub": "View On GitHub"
+  "viewOnGitHub": "View On GitHub",
+
+  "formHintText": "Search GitHub Repository"
 }
