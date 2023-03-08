@@ -1,9 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-
 import 'package:flutter/material.dart';
-
 import 'package:intl/intl.dart';
-
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -133,40 +130,40 @@ class S {
     );
   }
 
-  /// `Error Occurred!!`
+  /// `Error Occurred.\n\nPlease retry later.`
   String get errorOccurred {
     return Intl.message(
-      'Error Occurred!!',
+      'Error Occurred.\n\nPlease retry later.',
       name: 'errorOccurred',
       desc: '',
       args: [],
     );
   }
 
-  /// `Network Error!!`
+  /// `Network Error.\n\nPlease check the connection and try again.`
   String get networkError {
     return Intl.message(
-      'Network Error!!',
+      'Network Error.\n\nPlease check the connection and try again.',
       name: 'networkError',
       desc: '',
       args: [],
     );
   }
 
-  /// `Please Enter Text!!`
+  /// `Please Enter Text.`
   String get enterText {
     return Intl.message(
-      'Please Enter Text!!',
+      'Please Enter Text.',
       name: 'enterText',
       desc: '',
       args: [],
     );
   }
 
-  /// `Not Found Search Result!!`
+  /// `Not Found Search Result.\n\nPlease change your search words.`
   String get noResult {
     return Intl.message(
-      'Not Found Search Result!!',
+      'Not Found Search Result.\n\nPlease change your search words.',
       name: 'noResult',
       desc: '',
       args: [],
