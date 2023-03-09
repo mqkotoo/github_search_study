@@ -138,20 +138,7 @@ class ResultListview extends ConsumerWidget {
   }
 
   Widget _displayErrorMessage(String error, BuildContext context) {
-    if (error == 'Error Occurred!!') {
-      return Column(
-        children: <Widget>[
-          const SizedBox(height: 30),
-          errorComponent(
-            context: context,
-            errorIcon: Icons.error_outline,
-            errorTitle: S.of(context).errorOccurred,
-            errorDetail: S.of(context).errorOccurredDetail,
-          ),
-        ],
-      );
-      //network error
-    } else if (error == S.of(context).networkError) {
+    if (error == S.of(context).networkError) {
       return Column(
         children: <Widget>[
           const SizedBox(height: 30),
@@ -164,7 +151,18 @@ class ResultListview extends ConsumerWidget {
         ],
       );
     } else {
-      return const SizedBox.shrink();
+      //ネットワーク以外のエラーはまとめて表示
+      return Column(
+        children: <Widget>[
+          const SizedBox(height: 30),
+          errorComponent(
+            context: context,
+            errorIcon: Icons.error_outline,
+            errorTitle: S.of(context).errorOccurred,
+            errorDetail: S.of(context).errorOccurredDetail,
+          ),
+        ],
+      );
     }
   }
 
