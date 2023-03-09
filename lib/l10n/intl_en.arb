@@ -7,10 +7,14 @@
   "watch": "Watch",
   "fork": "Fork",
   "issue": "Issue",
-  "errorOccurred": "Error Occurred.\n\nPlease retry later.",
-  "networkError": "Network Error.\n\nPlease check the connection and try again.",
+
+  "errorOccurred": "Error Occurred.",
+  "errorOccurredDetail": "Please retry later.",
+  "networkError": "Network Error.",
+  "networkErrorDetail": "Please check the connection and try again.",
   "enterText": "Please Enter Text.",
-  "noResult": "Not Found Search Result.\n\nPlease change your search words.",
+  "noResult": "Not Found Search Result.",
+  "noResultDetail": "Please change your search words.",
 
   "bestMatch": "Best Match",
   "updated": "Updated",

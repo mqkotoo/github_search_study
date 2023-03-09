@@ -1,9 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-
 import 'package:flutter/material.dart';
-
 import 'package:intl/intl.dart';
-
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -133,21 +130,41 @@ class S {
     );
   }
 
-  /// `Error Occurred.\n\nPlease retry later.`
+  /// `Error Occurred.`
   String get errorOccurred {
     return Intl.message(
-      'Error Occurred.\n\nPlease retry later.',
+      'Error Occurred.',
       name: 'errorOccurred',
       desc: '',
       args: [],
     );
   }
 
-  /// `Network Error.\n\nPlease check the connection and try again.`
+  /// `Please retry later.`
+  String get errorOccurredDetail {
+    return Intl.message(
+      'Please retry later.',
+      name: 'errorOccurredDetail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network Error.`
   String get networkError {
     return Intl.message(
-      'Network Error.\n\nPlease check the connection and try again.',
+      'Network Error.',
       name: 'networkError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please check the connection and try again.`
+  String get networkErrorDetail {
+    return Intl.message(
+      'Please check the connection and try again.',
+      name: 'networkErrorDetail',
       desc: '',
       args: [],
     );
@@ -163,11 +180,21 @@ class S {
     );
   }
 
-  /// `Not Found Search Result.\n\nPlease change your search words.`
+  /// `Not Found Search Result.`
   String get noResult {
     return Intl.message(
-      'Not Found Search Result.\n\nPlease change your search words.',
+      'Not Found Search Result.',
       name: 'noResult',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please change your search words.`
+  String get noResultDetail {
+    return Intl.message(
+      'Please change your search words.',
+      name: 'noResultDetail',
       desc: '',
       args: [],
     );

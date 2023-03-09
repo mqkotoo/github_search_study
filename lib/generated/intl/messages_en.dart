@@ -25,8 +25,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "bestMatch": MessageLookupByLibrary.simpleMessage("Best Match"),
         "detailPageTitle": MessageLookupByLibrary.simpleMessage("Repo Detail"),
         "enterText": MessageLookupByLibrary.simpleMessage("Please Enter Text."),
-        "errorOccurred": MessageLookupByLibrary.simpleMessage(
-            "Error Occurred.\n\nPlease retry later."),
+        "errorOccurred":
+            MessageLookupByLibrary.simpleMessage("Error Occurred."),
+        "errorOccurredDetail":
+            MessageLookupByLibrary.simpleMessage("Please retry later."),
         "fork": MessageLookupByLibrary.simpleMessage("Fork"),
         "forks": MessageLookupByLibrary.simpleMessage("Forks"),
         "formHintText":
@@ -35,10 +37,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Help Wanted Issues"),
         "issue": MessageLookupByLibrary.simpleMessage("Issue"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
-        "networkError": MessageLookupByLibrary.simpleMessage(
-            "Network Error.\n\nPlease check the connection and try again."),
-        "noResult": MessageLookupByLibrary.simpleMessage(
-            "Not Found Search Result.\n\nPlease change your search words."),
+        "networkError": MessageLookupByLibrary.simpleMessage("Network Error."),
+        "networkErrorDetail": MessageLookupByLibrary.simpleMessage(
+            "Please check the connection and try again."),
+        "noResult":
+            MessageLookupByLibrary.simpleMessage("Not Found Search Result."),
+        "noResultDetail": MessageLookupByLibrary.simpleMessage(
+            "Please change your search words."),
         "result": MessageLookupByLibrary.simpleMessage("result"),
         "searchPageTitle":
             MessageLookupByLibrary.simpleMessage("GitHub Search"),

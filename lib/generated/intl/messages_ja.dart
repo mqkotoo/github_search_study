@@ -25,18 +25,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "bestMatch": MessageLookupByLibrary.simpleMessage("ベストマッチ"),
         "detailPageTitle": MessageLookupByLibrary.simpleMessage("リポジトリ詳細"),
         "enterText": MessageLookupByLibrary.simpleMessage("テキストを入力してください。"),
-        "errorOccurred": MessageLookupByLibrary.simpleMessage(
-            "エラーが発生しました。\n\n時間をおいて再度お試しください。"),
+        "errorOccurred": MessageLookupByLibrary.simpleMessage("エラーが発生しました。"),
+        "errorOccurredDetail":
+            MessageLookupByLibrary.simpleMessage("時間をおいて再度お試しください。"),
         "fork": MessageLookupByLibrary.simpleMessage("フォーク"),
         "forks": MessageLookupByLibrary.simpleMessage("フォーク順"),
         "formHintText": MessageLookupByLibrary.simpleMessage("リポジトリを検索"),
         "helpWantedIssue": MessageLookupByLibrary.simpleMessage("助けてイシュー順"),
         "issue": MessageLookupByLibrary.simpleMessage("イシュー"),
         "language": MessageLookupByLibrary.simpleMessage("言語"),
-        "networkError": MessageLookupByLibrary.simpleMessage(
-            "ネットワークエラーです。\n\n接続を確認して再度お試しください。"),
-        "noResult": MessageLookupByLibrary.simpleMessage(
-            "結果は見つかりませんでした。\n\n検索ワードを変更してください。"),
+        "networkError": MessageLookupByLibrary.simpleMessage("ネットワークエラーです。"),
+        "networkErrorDetail":
+            MessageLookupByLibrary.simpleMessage("接続を確認して再度お試しください。"),
+        "noResult": MessageLookupByLibrary.simpleMessage("結果は見つかりませんでした。"),
+        "noResultDetail":
+            MessageLookupByLibrary.simpleMessage("検索ワードを変更してください。"),
         "result": MessageLookupByLibrary.simpleMessage("結果"),
         "searchPageTitle": MessageLookupByLibrary.simpleMessage("GitHubサーチ"),
         "star": MessageLookupByLibrary.simpleMessage("スター"),

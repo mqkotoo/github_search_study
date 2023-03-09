@@ -7,10 +7,14 @@
   "watch": "ウォッチ",
   "fork": "フォーク",
   "issue": "イシュー",
-  "errorOccurred": "エラーが発生しました。\n\n時間をおいて再度お試しください。",
-  "networkError": "ネットワークエラーです。\n\n接続を確認して再度お試しください。",
+
+  "errorOccurred": "エラーが発生しました。",
+  "errorOccurredDetail": "時間をおいて再度お試しください。",
+  "networkError": "ネットワークエラーです。",
+  "networkErrorDetail": "接続を確認して再度お試しください。",
   "enterText": "テキストを入力してください。",
-  "noResult": "結果は見つかりませんでした。\n\n検索ワードを変更してください。",
+  "noResult": "結果は見つかりませんでした。",
+  "noResultDetail": "検索ワードを変更してください。",
 
   "bestMatch": "ベストマッチ",
   "updated": "新しい順",
