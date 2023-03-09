@@ -14,7 +14,7 @@ import 'repository_mock_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<http.Client>()])
 void main() {
-  test("getメソッドのテスト", () async {
+  test('getメソッドのテスト', () async {
     const data = RepositoryMockData.jsonData;
 
     final mockClient = MockClient();
@@ -27,7 +27,7 @@ void main() {
     //上でオーバーライドされたmockのHTTPクライアントのインスタンスをみれてる
     final result = await container
         .read(dataRepositoryProvider)
-        .getData("flutter", "bestmatch");
+        .getData('flutter', 'bestmatch');
 
     expect(result,
         RepositoryDataModel.fromJson(jsonDecode(data) as Map<String, dynamic>));

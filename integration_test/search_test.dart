@@ -26,23 +26,23 @@ void main() {
             child: const MyApp()),
       );
 
-      expect(find.byKey(const Key("searchAppBar")), findsOneWidget);
+      expect(find.byKey(const Key('searchAppBar')), findsOneWidget);
 
-      final formField = find.byKey(const ValueKey("inputForm"));
+      final formField = find.byKey(const ValueKey('inputForm'));
 
       //textfieldに文字が入力できるか
-      await tester.enterText(formField, "こんにちは");
+      await tester.enterText(formField, 'こんにちは');
       expect(find.text('こんにちは'), findsOneWidget);
 
       await tester.pumpAndSettle();
 
       //文字を消す
-      final clearButton = find.byKey(const ValueKey("clearButton"));
+      final clearButton = find.byKey(const ValueKey('clearButton'));
       await tester.tap(clearButton);
       expect(find.text('こんにちは'), findsNothing);
 
       //flutterと入力して1番上のをタップする
-      await tester.enterText(formField, "flutter");
+      await tester.enterText(formField, 'flutter');
       //検索ボタンを押す
       await tester.tap(formField);
       await tester.testTextInput.receiveAction(TextInputAction.search);
@@ -50,13 +50,13 @@ void main() {
       await tester.pumpAndSettle();
 
       //リストが描画される
-      final tapTarget = find.textContaining("flutter/flutter");
-      expect(find.textContaining("result"), findsOneWidget);
+      final tapTarget = find.textContaining('flutter/flutter');
+      expect(find.textContaining('result'), findsOneWidget);
       //リストをタップ
       await tester.tap(tapTarget);
       await tester.pumpAndSettle();
-      expect(find.byKey(const Key("detailAppBar")), findsOneWidget);
-      expect(find.text("Fork"), findsOneWidget);
+      expect(find.byKey(const Key('detailAppBar')), findsOneWidget);
+      expect(find.text('Fork'), findsOneWidget);
     });
   });
 }

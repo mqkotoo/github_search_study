@@ -38,7 +38,7 @@ class SearchBarState extends ConsumerState<SearchBar> {
         children: [
           Expanded(
             child: TextFormField(
-              key: const Key("inputForm"),
+              key: const Key('inputForm'),
               controller: textController,
               onChanged: (text) {
                 ref
@@ -48,11 +48,12 @@ class SearchBarState extends ConsumerState<SearchBar> {
 
               //decoration
               decoration: InputDecoration(
+                hintText: S.of(context).formHintText,
                 prefixIcon:
                     const Icon(Icons.search, color: Colors.grey, size: 27),
                 suffixIcon: ref.watch(isClearButtonVisibleProvider)
                     ? IconButton(
-                        key: const Key("clearButton"),
+                        key: const Key('clearButton'),
                         icon: const Icon(Icons.clear, size: 27),
                         onPressed: () {
                           textController.clear();
@@ -90,7 +91,7 @@ class SearchBarState extends ConsumerState<SearchBar> {
           ),
           MenuAnchor(
             alignmentOffset: const Offset(-120, 0),
-            menuChildren: <RadioMenuButton<String>>[
+            menuChildren: [
               radioMenuButton(
                   value: 'bestmatch', text: S.of(context).bestMatch),
               radioMenuButton(value: 'updated', text: S.of(context).updated),

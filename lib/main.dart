@@ -69,10 +69,12 @@ class MyApp extends ConsumerWidget {
           child: DevicePreview.appBuilder(context, child),
         );
       },
+
       //theme setting
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ref.watch(themeModeProvider),
+
       //localization setting
       localizationsDelegates: const [
         S.delegate,
@@ -81,6 +83,7 @@ class MyApp extends ConsumerWidget {
         GlobalCupertinoLocalizations.delegate
       ],
       supportedLocales: S.delegate.supportedLocales,
+      //アプリのホーム
       home: const SearchPage(),
     );
   }

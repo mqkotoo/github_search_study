@@ -16,8 +16,8 @@ class ResultListview extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //検索結果データ
-    final repoData = ref.watch(searchResultProvider);
-
+    final repoData =
+        ref.watch(searchResultProvider(ref.watch(inputRepoNameProvider)));
     //エラーメッセージ
     final errorMessage = ref.watch(errorMessageProvider);
 
@@ -82,22 +82,27 @@ class ResultListview extends ConsumerWidget {
       BuildContext context, AsyncValue<RepositoryDataModel?> repoData) {
     if (repoData.value!.totalCount == 0) {
       return Column(
-        children: [
+        children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: Align(
               alignment: AlignmentDirectional.centerEnd,
-              child: SafeArea(child: Text("${S.of(context).result}: 0")),
+              child: SafeArea(child: Text('${S.of(context).result}: 0')),
             ),
           ),
           const SizedBox(height: 30),
-          Text(S.of(context).noResult)
+          errorComponent(
+            context: context,
+            errorIcon: Icons.search_off,
+            errorTitle: S.of(context).noResult,
+            errorDetail: S.of(context).noResultDetail,
+          ),
         ],
       );
       //ユーザーの入力がない場合は結果-1を返しているのでその場合の処理
     } else if (repoData.value!.totalCount == -1) {
       return Column(
-        children: [
+        children: <Widget>[
           const SizedBox(height: 30),
           Text(S.of(context).enterText),
         ],
@@ -133,23 +138,54 @@ class ResultListview extends ConsumerWidget {
   }
 
   Widget _displayErrorMessage(String error, BuildContext context) {
-    if (error == "Error Occurred!!") {
+    if (error == S.of(context).networkError) {
       return Column(
-        children: [
+        children: <Widget>[
           const SizedBox(height: 30),
-          Text(S.of(context).errorOccurred),
-        ],
-      );
-      //network error
-    } else if (error == S.of(context).networkError) {
-      return Column(
-        children: [
-          const SizedBox(height: 30),
-          Text(S.of(context).networkError),
+          errorComponent(
+            context: context,
+            errorIcon: Icons.wifi_off,
+            errorTitle: S.of(context).networkError,
+            errorDetail: S.of(context).networkErrorDetail,
+          ),
         ],
       );
     } else {
-      return const SizedBox.shrink();
+      //ネットワーク以外のエラーはまとめて表示
+      return Column(
+        children: <Widget>[
+          const SizedBox(height: 30),
+          errorComponent(
+            context: context,
+            errorIcon: Icons.error_outline,
+            errorTitle: S.of(context).errorOccurred,
+            errorDetail: S.of(context).errorOccurredDetail,
+          ),
+        ],
+      );
     }
+  }
+
+  //表示するエラーのかたまり
+  Widget errorComponent(
+      {required BuildContext context,
+      required IconData errorIcon,
+      required String errorTitle,
+      required String errorDetail}) {
+    return Column(
+      children: <Widget>[
+        Icon(errorIcon, size: 80),
+        const SizedBox(height: 15),
+        Text(
+          errorTitle,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(errorDetail),
+      ],
+    );
   }
 }

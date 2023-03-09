@@ -22,7 +22,7 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
           children: <Widget>[
             Text(
               S.of(context).searchPageTitle,
-              key: const Key("searchAppBar"),
+              key: const Key('searchAppBar'),
             ),
             FlutterSwitch(
               height: 30,

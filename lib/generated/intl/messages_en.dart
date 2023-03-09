@@ -24,19 +24,26 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "bestMatch": MessageLookupByLibrary.simpleMessage("Best Match"),
         "detailPageTitle": MessageLookupByLibrary.simpleMessage("Repo Detail"),
-        "enterText":
-            MessageLookupByLibrary.simpleMessage("Please Enter Text!!"),
+        "enterText": MessageLookupByLibrary.simpleMessage("Please Enter Text."),
         "errorOccurred":
-            MessageLookupByLibrary.simpleMessage("Error Occurred!!"),
+            MessageLookupByLibrary.simpleMessage("Error Occurred."),
+        "errorOccurredDetail":
+            MessageLookupByLibrary.simpleMessage("Please retry later."),
         "fork": MessageLookupByLibrary.simpleMessage("Fork"),
         "forks": MessageLookupByLibrary.simpleMessage("Forks"),
+        "formHintText":
+            MessageLookupByLibrary.simpleMessage("Search Repository"),
         "helpWantedIssue":
             MessageLookupByLibrary.simpleMessage("Help Wanted Issues"),
         "issue": MessageLookupByLibrary.simpleMessage("Issue"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
-        "networkError": MessageLookupByLibrary.simpleMessage("Network Error!!"),
+        "networkError": MessageLookupByLibrary.simpleMessage("Network Error."),
+        "networkErrorDetail": MessageLookupByLibrary.simpleMessage(
+            "Please check the connection and try again."),
         "noResult":
-            MessageLookupByLibrary.simpleMessage("Not Found Search Result!!"),
+            MessageLookupByLibrary.simpleMessage("Not Found Search Result."),
+        "noResultDetail": MessageLookupByLibrary.simpleMessage(
+            "Please change your search words."),
         "result": MessageLookupByLibrary.simpleMessage("result"),
         "searchPageTitle":
             MessageLookupByLibrary.simpleMessage("GitHub Search"),

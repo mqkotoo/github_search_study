@@ -133,41 +133,71 @@ class S {
     );
   }
 
-  /// `Error Occurred!!`
+  /// `Error Occurred.`
   String get errorOccurred {
     return Intl.message(
-      'Error Occurred!!',
+      'Error Occurred.',
       name: 'errorOccurred',
       desc: '',
       args: [],
     );
   }
 
-  /// `Network Error!!`
+  /// `Please retry later.`
+  String get errorOccurredDetail {
+    return Intl.message(
+      'Please retry later.',
+      name: 'errorOccurredDetail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network Error.`
   String get networkError {
     return Intl.message(
-      'Network Error!!',
+      'Network Error.',
       name: 'networkError',
       desc: '',
       args: [],
     );
   }
 
-  /// `Please Enter Text!!`
+  /// `Please check the connection and try again.`
+  String get networkErrorDetail {
+    return Intl.message(
+      'Please check the connection and try again.',
+      name: 'networkErrorDetail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter Text.`
   String get enterText {
     return Intl.message(
-      'Please Enter Text!!',
+      'Please Enter Text.',
       name: 'enterText',
       desc: '',
       args: [],
     );
   }
 
-  /// `Not Found Search Result!!`
+  /// `Not Found Search Result.`
   String get noResult {
     return Intl.message(
-      'Not Found Search Result!!',
+      'Not Found Search Result.',
       name: 'noResult',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please change your search words.`
+  String get noResultDetail {
+    return Intl.message(
+      'Please change your search words.',
+      name: 'noResultDetail',
       desc: '',
       args: [],
     );
@@ -228,6 +258,16 @@ class S {
     return Intl.message(
       'View On GitHub',
       name: 'viewOnGitHub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search Repository`
+  String get formHintText {
+    return Intl.message(
+      'Search Repository',
+      name: 'formHintText',
       desc: '',
       args: [],
     );
