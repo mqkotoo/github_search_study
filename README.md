@@ -7,11 +7,8 @@
 |![Simulator Screen Shot - iPhone 14 - 2023-02-23 at 23 58 03](https://user-images.githubusercontent.com/87256037/220946287-44346372-29ce-478c-9738-a2bafab130b2.png)|![Simulator Screen Shot - iPhone 14 - 2023-02-23 at 23 58 10](https://user-images.githubusercontent.com/87256037/220946361-e5299391-1736-4a60-8ecb-35d728722212.png)|![Simulator Screen Shot - iPhone 14 - 2023-03-09 at 21 48 35](https://user-images.githubusercontent.com/87256037/224027591-ef8a692c-96de-48cf-8d3f-1b118f3bdd9d.png)
 
 |結果なし|エラー|
+|---|---|
 |![simulator_screenshot_FD8471DD-D371-4F9A-97B8-6E259816B8C8](https://user-images.githubusercontent.com/87256037/224028254-d2c0eb34-9f5f-437b-9263-47490ed633bf.png)|![simulator_screenshot_F6E9F8A1-0D63-4F4D-BAD0-6F2BC2902C2E](https://user-images.githubusercontent.com/87256037/224029474-89b43eeb-81d0-434e-9493-d07ee8e93a47.png)|
-
-https://user-images.githubusercontent.com/87256037/224031195-69027c68-11b3-4eef-80ec-1eb789dea3af.mov
-
-
 
 
 デモ（縦）
