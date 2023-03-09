@@ -97,22 +97,7 @@ class DetailPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 //githubに飛ばす
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    onTap: () => _openGitHubUrl(Uri.parse(repoData.htmlUrl)),
-                    child: Text(
-                      S.of(context).viewOnGitHub,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blueAccent,
-                        decoration: TextDecoration.underline,
-                        decorationColor: Colors.blueAccent,
-                      ),
-                    ),
-                  ),
-                ),
+                githubLinkText(context),
                 const SizedBox(height: 30),
               ],
             ),
