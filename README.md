@@ -44,7 +44,7 @@ https://user-images.githubusercontent.com/87256037/220952628-5ea7a678-2291-4649-
 flutter_riverpod: ^2.2.0
 
 取得するデータを扱うプロバイダーは今回FutureProviderを使用しました。
-FutureProviderを使うことで、扱う値が変わった時だけ読み込まれるため、不要なリクエストなどでパフォーマンスを損なう可能性が低くする意図で使った。
+FutureProviderを使うことで、取得したデータのキャッシュ、loadingなどの操作が簡単、値が変化する時だけ再描画されるなどのメリットがあると考えました。
 
 ## 使用技術、パッケージ
 * GitHub ActionsによるCI
