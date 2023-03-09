@@ -43,6 +43,9 @@ https://user-images.githubusercontent.com/87256037/220952628-5ea7a678-2291-4649-
 
 flutter_riverpod: ^2.2.0
 
+取得するデータを扱うプロバイダーは今回FutureProviderを使用しました。
+FutureProviderを使うことで、扱う値が変わった時だけ読み込まれるため、不要なリクエストなどでパフォーマンスを損なう可能性が低くする意図で使った。
+
 ## 使用技術、パッケージ
 * GitHub ActionsによるCI
 * connectivity_plus -通信状況確認
@@ -82,7 +85,7 @@ flutter_riverpod: ^2.2.0
 │   ├── main.dart                    # アプリのエントリーポイント
 │   ├── domain                       # ドメイン、データのモデル定義
 │   ├── constant                     # 今回はアプリ内で使う色を定義
-│   ├── repository                   # apiとのやりとり、メソッドの定義
+│   ├── repository                   # httpでの外部とのやりとり、メソッドの定義
 │   ├── l10n                         # 多言語対応
 │   ├── theme                        # テーマの提供、永続化
 │   └── presentation                 # 見た目
