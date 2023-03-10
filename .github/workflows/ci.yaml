@@ -4,7 +4,8 @@ on:
     branch:
       - main
       - develop
-    push:
+  push:
+    branch:
       - main
       - develop
 

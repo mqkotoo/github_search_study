@@ -88,5 +88,3 @@ class MyApp extends ConsumerWidget {
     );
   }
 }
-
-//てすと
