@@ -18,9 +18,13 @@ jobs:
       - name: Start Simulator
         timeout-minutes: 10
         run: |
-          UDID=$(xcrun simctl list devices | grep -E "${{ matrix.device }}" | grep -o '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')
-          echo $UDID
-          xcrun simctl boot "${UDID:?No Simulator with this name found}"
+            DEVICE_NAME="${{ matrix.device }}"
+            UDID=$(xcrun simctl list devices | grep "$DEVICE_NAME" -m 1 -A 1 | grep -o '[0-9A-F]\{8\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{12\}')
+            echo "Starting simulator ${DEVICE_NAME} with UDID ${UDID}"
+            xcrun simctl boot "${UDID}"
+#          UDID=$(xcrun simctl list devices | grep -E "${{ matrix.device }}" | grep -o '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}')
+#          echo $UDID
+#          xcrun simctl boot "${UDID:?No Simulator with this name found}"
       - uses: actions/checkout@v3
       - name: Setup Flutter SDK
         uses: subosito/flutter-action@v2
