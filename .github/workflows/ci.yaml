@@ -22,13 +22,8 @@ jobs:
         with:
           channel: "stable"
       - run: flutter pub get
-      name: check import sort
       - run: flutter pub run import_sorter:main --no-comments --exit-if-changed
-      name: check code format
       - run: flutter format --set-exit-if-changed .
-      name: analyze lint
       - run: flutter analyze
-      name: test
       - run: flutter test
-      name: integration test
       - run: flutter test integration_test/search_test.dart
