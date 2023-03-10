@@ -1,64 +1,31 @@
-#name: Flutter Integration Test
-#
-#on: [pull_request,workflow_dispatch]
-#
-#jobs:
-#  ios:
-#    strategy:
-#      matrix:
-#        device:
-#          - "iPhone 14"
-#          - "iPad Pro (12.9-inch) (6th generation)"
-#      fail-fast: true
-#    runs-on: macos-latest
-#    steps:
-#      - name: "List all simulators"
-#        run: "xcrun xctrace list devices"
-#      - name: "Start Simulator"
-#        timeout-minutes: 10
-#        run: |
-#          UDID=$(xcrun xctrace list devices | grep "^${{ matrix.device }}" | awk '{gsub(/[()]/,""); print $NF}')
-#          echo $UDID
-#          xcrun simctl boot "${UDID:?No Simulator with this name found}"
-#      - uses: actions/checkout@v3
-#      - name: Setup Flutter SDK
-#        uses: subosito/flutter-action@v2
-#        with:
-#          channel: stable
-#      - name: Install Flutter dependencies
-#        run: flutter pub get
-#      - name: Run integration tests
-#        run: flutter test integration_test
-
 name: Flutter Integration Test
 
 on: [pull_request,workflow_dispatch]
 
 jobs:
   ios:
-    runs-on: macos-latest
     strategy:
       matrix:
         device:
           - "iPhone 14"
           - "iPad Pro (12.9-inch) (6th generation)"
+      fail-fast: true
+    runs-on: macos-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
+      - name: "List all simulators"
+        run: "xcrun xctrace list devices"
+      - name: "Start Simulator"
+        timeout-minutes: 10
+        run: |
+          UDID=$(xcrun xctrace list devices | grep "^${{ matrix.device }}" | awk '{gsub(/[|]/,""); print $NF}')
+          echo $UDID
+          xcrun simctl boot "${UDID:?No Simulator with this name found}"
+      - uses: actions/checkout@v3
       - name: Setup Flutter SDK
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-
-      - name: Install dependencies
+      - name: Install Flutter dependencies
         run: flutter pub get
-
-      - name: Start Simulator
-        run: |
-          UDID=$(xcrun simctl list | grep "${{ matrix.device }}" -A 2 | tail -n 1 | awk '{print $NF}')
-          echo $UDID
-          xcrun simctl boot "${UDID}"
-
       - name: Run integration tests
         run: flutter test integration_test
