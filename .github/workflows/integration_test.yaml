@@ -13,11 +13,11 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: "List all simulators"
-        run: "xcrun xctrace list devices"
+        run: xcrun xctrace list devices
       - name: "Start Simulator"
         timeout-minutes: 10
         run: |
-          UDID=$(xcrun xctrace list devices | grep "^${{ matrix.device }}" | awk '{gsub(/[|]/,""); print $NF}')
+          UDID=$(xcrun xctrace list devices | grep "^${{ matrix.device }}" | awk '{gsub(/[()]/,""); print $NF}')
           echo $UDID
           xcrun simctl boot "${UDID:?No Simulator with this name found}"
       - uses: actions/checkout@v3
