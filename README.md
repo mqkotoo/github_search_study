@@ -3,8 +3,11 @@
 |結果一覧(light)|結果一覧(dark)|
 |---|---|
 |![Simulator Screen Shot - iPhone 14 - 2023-03-09 at 21 48 35](https://user-images.githubusercontent.com/87256037/224027665-3aa0748b-ef2c-461a-9a27-848a7aa989d6.png)|![simulator_screenshot_771FE4D0-83FB-4B26-A420-24F16A254BE7](https://user-images.githubusercontent.com/87256037/224027872-80e1e211-5a88-4393-8fe5-a10c7d26e064.png)|
+
 |詳細(light)|詳細(dark)|
-|![Simulator Screen Shot - iPhone 14 - 2023-02-23 at 23 58 03](https://user-images.githubusercontent.com/87256037/220946287-44346372-29ce-478c-9738-a2bafab130b2.png)|![Simulator Screen Shot - iPhone 14 - 2023-02-23 at 23 58 10](https://user-images.githubusercontent.com/87256037/220946361-e5299391-1736-4a60-8ecb-35d728722212.png)|![Simulator Screen Shot - iPhone 14 - 2023-03-09 at 21 48 35](https://user-images.githubusercontent.com/87256037/224027591-ef8a692c-96de-48cf-8d3f-1b118f3bdd9d.png)
+|---|---|
+|![Simulator Screen Shot - iPhone 14 - 2023-03-10 at 14 06 10](https://user-images.githubusercontent.com/87256037/224228477-434e0166-713e-448f-a7e5-232a08fe10b9.png)|![Simulator Screen Shot - iPhone 14 - 2023-03-10 at 14 06 15](https://user-images.githubusercontent.com/87256037/224228528-1358044a-7f92-48ea-a99f-bf32fd6387c1.png)
+
 
 |結果なし|エラー|
 |---|---|
