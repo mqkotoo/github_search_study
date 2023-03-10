@@ -104,7 +104,11 @@ class ResultListview extends ConsumerWidget {
       return Column(
         children: <Widget>[
           const SizedBox(height: 30),
-          Text(S.of(context).enterText),
+          errorComponent(
+            context: context,
+            errorIcon: Icons.edit_outlined,
+            errorTitle: S.of(context).enterText,
+          ),
         ],
       );
     } else {
@@ -171,7 +175,7 @@ class ResultListview extends ConsumerWidget {
       {required BuildContext context,
       required IconData errorIcon,
       required String errorTitle,
-      required String errorDetail}) {
+      String? errorDetail}) {
     return Column(
       children: <Widget>[
         Icon(errorIcon, size: 80),
@@ -184,7 +188,7 @@ class ResultListview extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: 8),
-        Text(errorDetail),
+        if (errorDetail != null) Text(errorDetail),
       ],
     );
   }
