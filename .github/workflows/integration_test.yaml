@@ -12,9 +12,9 @@ jobs:
       fail-fast: true
     runs-on: macos-latest
     steps:
-      - name: "List all simulators"
+      - name: List all simulators
         run: xcrun xctrace list devices
-      - name: "Start Simulator"
+      - name: Start Simulator
         timeout-minutes: 10
         run: |
           UDID=$(xcrun xctrace list devices | grep "^${{ matrix.device }}" | awk '{gsub(/[()]/,""); print $NF}')
