@@ -7,8 +7,7 @@ jobs:
     strategy:
       matrix:
         device:
-          - "iPhone 14 Pro Max"
-          - "iPhone 8"
+          - "iPhone 14"
           - "iPad Pro (12.9-inch) (6th generation)"
       fail-fast: true
     runs-on: macos-latest
