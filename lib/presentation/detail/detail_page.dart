@@ -195,7 +195,7 @@ class DetailPage extends StatelessWidget {
   }
 
   //GitHubのリンク先に飛ばす
-  Future _openGitHubUrl(Uri url) async {
+  Future<void> _openGitHubUrl(Uri url) async {
     if (await canLaunchUrl(url)) {
       await launchUrl(
         url,

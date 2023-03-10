@@ -25,7 +25,7 @@ void main() {
     final mockClient = MockClient();
     when(mockClient.get(any)).thenAnswer((_) async => http.Response(data, 200));
 
-// 通信状態をオフラインに設定します。
+    // 通信状態をオフラインに設定します。
     final connectivityMock = MockConnectivity();
     when(connectivityMock.onConnectivityChanged)
         .thenAnswer((_) => Stream.value(ConnectivityResult.none));
@@ -48,9 +48,9 @@ void main() {
 
       final formField = find.byKey(const ValueKey('inputForm'));
 
-//"flutter"と入力して1番上のをタップする
+      //"flutter"と入力して検索する
       await tester.enterText(formField, 'flutter');
-//検索ボタンを押す
+      //検索ボタンを押す
       await tester.tap(formField);
       await tester.testTextInput.receiveAction(TextInputAction.search);
 
@@ -58,7 +58,7 @@ void main() {
 
       expect(find.textContaining('flutter/flutter'), findsOneWidget);
 
-//想定エラー文
+      //想定エラー文
       final target = find.text('Network Error!!');
       expect(target, findsNothing);
     });

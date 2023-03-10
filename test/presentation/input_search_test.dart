@@ -46,9 +46,8 @@ void main() {
       await tester.tap(clearButton);
       expect(find.text('こんにちは'), findsNothing);
 
-      //flutterと入力して1番上のをタップする
+      //flutterと入力して検索する
       await tester.enterText(formField, 'flutter');
-      //検索ボタンを押す
       await tester.tap(formField);
       await tester.testTextInput.receiveAction(TextInputAction.search);
 
@@ -68,8 +67,8 @@ void main() {
   testWidgets('空文字を入力してエラーが返るか', (WidgetTester tester) async {
     const data = RepositoryMockData.jsonData;
     final mockClient = MockClient();
-    //空文字を送信すると422が返ってくる
-    when(mockClient.get(any)).thenAnswer((_) async => http.Response(data, 422));
+    //空文字を送信するとリクエストはせず、エラーメッセージを表示する
+    when(mockClient.get(any)).thenAnswer((_) async => http.Response(data, 200));
 
     mockNetworkImagesFor(() async {
       await tester.pumpWidget(
@@ -85,9 +84,8 @@ void main() {
 
       final formField = find.byKey(const ValueKey('inputForm'));
 
-      //""と入力して1番上のをタップする
+      //""と入力して検索する
       await tester.enterText(formField, '');
-      //検索ボタンを押す
       await tester.tap(formField);
       await tester.testTextInput.receiveAction(TextInputAction.search);
 

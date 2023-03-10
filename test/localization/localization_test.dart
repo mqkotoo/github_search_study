@@ -13,10 +13,6 @@ import 'package:github_search_study/theme/shared_preferences.dart';
 void main() {
   Widget myTestWidget(Locale locale) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
       //多言語対応
       localizationsDelegates: const [
         S.delegate,
