@@ -8,7 +8,7 @@ import 'package:github_search_study/theme/shared_preferences.dart';
 import 'package:github_search_study/theme/theme_mode_provider.dart';
 
 void main() {
-  group("themeに関するテスト", () {
+  group('themeに関するテスト', () {
     late ProviderContainer container;
     // SharedPreferences保存用キー
     const isDarkThemeKey = 'selectedThemeKey';
@@ -28,7 +28,7 @@ void main() {
           container.dispose();
         });
 
-    test("初期状態でテーマモードが端末のシステム依存であること", () async {
+    test('初期状態でテーマモードが端末のシステム依存であること', () async {
       SharedPreferences.setMockInitialValues({});
       container = ProviderContainer(overrides: [
         sharedPreferencesProvider.overrideWithValue(
@@ -39,7 +39,7 @@ void main() {
       expect(themeMode, ThemeMode.system);
     });
 
-    test("テーマが記憶されていたら、そのテーマモードになっていること", () async {
+    test('テーマが記憶されていたら、そのテーマモードになっていること', () async {
       const isDark = false;
       //テーマモードをライトモードに設定
       SharedPreferences.setMockInitialValues({isDarkThemeKey: isDark});
@@ -54,7 +54,7 @@ void main() {
       expect(themeMode, ThemeMode.light);
     });
 
-    test("darkテーマに切り替え、テーマモードの保存ができていること", () async {
+    test('darkテーマに切り替え、テーマモードの保存ができていること', () async {
       final themeNotifier = container.read(themeModeProvider.notifier);
       //toggle theme method →isDarkにtrueを入れてダークモードに変更
       await themeNotifier.toggleThemeAndSave(true);

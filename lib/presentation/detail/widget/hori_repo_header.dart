@@ -18,7 +18,7 @@ class HoriRepoHeader extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: widthSize * 0.1),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ClipOval(
             child: Image.network(
@@ -38,7 +38,7 @@ class HoriRepoHeader extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  description ?? "No Description",
+                  description ?? 'No Description',
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
               ],

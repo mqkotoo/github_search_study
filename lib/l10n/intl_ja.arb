@@ -7,8 +7,22 @@
   "watch": "ウォッチ",
   "fork": "フォーク",
   "issue": "イシュー",
-  "errorOccurred": "エラーが発生しました！！",
-  "networkError": "ネットワークエラーです！！",
-  "enterText": "テキストを入力してください！！",
-  "noResult": "結果は見つかりませんでした！！"
+
+  "errorOccurred": "エラーが発生しました。",
+  "errorOccurredDetail": "時間をおいて再度お試しください。",
+  "networkError": "ネットワークエラーです。",
+  "networkErrorDetail": "接続を確認して再度お試しください。",
+  "enterText": "テキストを入力してください。",
+  "noResult": "結果は見つかりませんでした。",
+  "noResultDetail": "検索ワードを変更してください。",
+
+  "bestMatch": "ベストマッチ",
+  "updated": "新しい順",
+  "stars": "スター順",
+  "forks": "フォーク順",
+  "helpWantedIssue": "助けてイシュー順",
+
+  "viewOnGitHub": "GitHub上で見る",
+
+  "formHintText": "リポジトリを検索"
 }

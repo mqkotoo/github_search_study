@@ -13,10 +13,6 @@ import 'package:github_search_study/theme/shared_preferences.dart';
 void main() {
   Widget myTestWidget(Locale locale) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
       //多言語対応
       localizationsDelegates: const [
         S.delegate,
@@ -53,7 +49,7 @@ void main() {
     });
   });
 
-  testWidgets("多言語対応のテスト 日本語", (WidgetTester tester) async {
+  testWidgets('多言語対応のテスト 日本語', (WidgetTester tester) async {
     mockNetworkImagesFor(() async {
       //日本語でアプリ起動
       await tester.pumpWidget(ProviderScope(
