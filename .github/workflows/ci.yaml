@@ -4,9 +4,6 @@ on:
     branch:
       - main
       - develop
-    push:
-      - main
-      - develop
 
 jobs:
   widget_test:
