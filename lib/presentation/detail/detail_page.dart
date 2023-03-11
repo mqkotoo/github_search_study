@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:github_search_study/presentation/detail/widget/detail_element.dart';
 import 'package:github_search_study/presentation/detail/widget/hori_repo_header.dart';
@@ -25,7 +26,7 @@ class DetailPage extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title:
-            Text(S.of(context).detailPageTitle, key: const Key("detailAppBar")),
+            Text(S.of(context).detailPageTitle, key: const Key('detailAppBar')),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -62,7 +63,7 @@ class DetailPage extends StatelessWidget {
                 DetailElement(
                   icon: Icons.language,
                   elementLabel: S.of(context).language,
-                  element: repoData.language ?? "No Language",
+                  element: repoData.language ?? 'No Language',
                   iconBackgroundColor: Colors.blueAccent,
                   iconColor: Colors.white,
                 ),
@@ -91,9 +92,13 @@ class DetailPage extends StatelessWidget {
                   icon: Icons.info_outline,
                   elementLabel: S.of(context).issue,
                   element: issuesCount,
-                  iconBackgroundColor: Colors.greenAccent,
+                  iconBackgroundColor: Colors.green,
                   iconColor: Colors.white,
                 ),
+                const SizedBox(height: 30),
+                //githubに飛ばす
+                githubLinkText(context),
+                const SizedBox(height: 30),
               ],
             ),
           ),
@@ -125,7 +130,7 @@ class DetailPage extends StatelessWidget {
                 DetailElement(
                   icon: Icons.language,
                   elementLabel: S.of(context).language,
-                  element: repoData.language ?? "No Language",
+                  element: repoData.language ?? 'No Language',
                   iconBackgroundColor: Colors.blueAccent,
                   iconColor: Colors.white,
                 ),
@@ -154,14 +159,50 @@ class DetailPage extends StatelessWidget {
                   icon: Icons.info_outline,
                   elementLabel: S.of(context).issue,
                   element: issuesCount,
-                  iconBackgroundColor: Colors.greenAccent,
+                  iconBackgroundColor: Colors.green,
                   iconColor: Colors.white,
                 ),
+                const SizedBox(height: 30),
+                //githubに飛ばす
+                githubLinkText(context),
+                const SizedBox(height: 30),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  //githubページに飛ばすテキスト
+  Widget githubLinkText(context) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: GestureDetector(
+        onTap: () => _openGitHubUrl(Uri.parse(repoData.htmlUrl)),
+        child: Text(
+          S.of(context).viewOnGitHub,
+          style: const TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+            color: Colors.blueAccent,
+            decoration: TextDecoration.underline,
+            decorationColor: Colors.blueAccent,
+          ),
+        ),
+      ),
+    );
+  }
+
+  //GitHubのリンク先に飛ばす
+  Future<void> _openGitHubUrl(Uri url) async {
+    if (await canLaunchUrl(url)) {
+      await launchUrl(
+        url,
+        mode: LaunchMode.inAppWebView,
+      );
+    } else {
+      throw 'このURLにはアクセスできません';
+    }
   }
 }

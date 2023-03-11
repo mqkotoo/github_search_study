@@ -34,7 +34,7 @@ class VerRepoHeader extends StatelessWidget {
             ),
           ),
           Text(
-            description ?? "No Description",
+            description ?? 'No Description',
             style: Theme.of(context).textTheme.titleSmall,
           ),
         ],
