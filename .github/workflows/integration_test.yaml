@@ -53,6 +53,8 @@ jobs:
         target: [default]
     steps:
       - uses: actions/checkout@v3
+        with:
+          java-version: "11.x"
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.7.6'
