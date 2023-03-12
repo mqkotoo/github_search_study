@@ -3,66 +3,65 @@ on: pull_request
 
 jobs:
 
-  ios:
+#  ios:
+#    runs-on: macos-latest
+#    timeout-minutes: 20
+#    strategy:
+#      matrix:
+#        device:
+#          - "iPhone 14"
+#          - "iPad Pro (12.9-inch) (6th generation)"
+#      fail-fast: true
+#
+#    steps:
+#      - name: List all simulators
+#        run: xcrun xctrace list devices
+#      # get UUID  simulator and boot a simulator on mac from  command line
+#      - name: Start Simulator
+#        run: |
+#          UDID=$(
+#            xcrun xctrace list devices |
+#            awk \
+#              -F ' *[][]' \
+#              -v 'device=${{ matrix.device }}' \
+#              '$1 == device { print $2 }'
+#          )
+#          xcrun simctl boot "${UDID:?No Simulator with this name found}"
+#
+#      #set up flutter
+#      # https://github.com/marketplace/actions/flutter-action
+#      - uses: actions/checkout@v3
+#      - uses: subosito/flutter-action@v2
+#        with:
+#          flutter-version: '3.7.6'
+#          channel: 'stable'
+#
+#      # Run flutter integrate tests
+#      - name: run integration test
+#        run: flutter test integration_test
+
+
+
+
+  android:
     runs-on: macos-latest
-    timeout-minutes: 20
+    #creates a build matrix for your jobs
     strategy:
+      #set of different configurations of the virtual environment.
       matrix:
-        device:
-          - "iPhone 14"
-          - "iPad Pro (12.9-inch) (6th generation)"
-      fail-fast: true
-
+        api-level: [21, 31]
+        target: [default]
     steps:
-      - name: List all simulators
-        run: xcrun simctl list devices
-      # get UUID  simulator and boot a simulator on mac from  command line
-      - name: Start Simulator
-        run: |
-          UDID=$(
-            xcrun simctl list devices |
-            awk \
-              -F ' *[][]' \
-              -v 'device=${{ matrix.device }}' \
-              '$1 == device { print $2 }'
-          )
-          xcrun simctl boot "${UDID:?No Simulator with this name found}"
-
-      #set up flutter
-      # https://github.com/marketplace/actions/flutter-action
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.7.6'
+          flutter-version: '1.12.14'
           channel: 'stable'
-
-      # Run flutter integrate tests
-      - name: run integration test
-        run: flutter test integration_test
-
-
-
-
-#  drive_android:
-#    runs-on: macos-latest
-#    #creates a build matrix for your jobs
-#    strategy:
-#      #set of different configurations of the virtual environment.
-#      matrix:
-#        api-level: [21, 29]
-#        target: [default]
-#    needs: test
-#    steps:
-#      - uses: actions/checkout@v1
-#      - uses: subosito/flutter-action@v1
-#        with:
-#          flutter-version: '1.12.14'
-#          channel: 'dev'
-#      - name: Run Flutter Driver tests
-#        uses: reactivecircus/android-emulator-runner@v1
-#        with:
-#          api-level: ${{ matrix.api-level }}
-#          target: ${{ matrix.target }}
-#          arch: x86_64
-#          profile: Nexus 6
-#          script: flutter drive --target=test_driver/app.dart
+      - name: Run Flutter Driver tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          target: ${{ matrix.target }}
+          arch: x86_64
+          profile: Nexus 6
+          script: flutter test integration_test
