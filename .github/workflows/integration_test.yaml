@@ -56,7 +56,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.7.6'
-          channel: 'stable'
+          channel: stable
       - name: Install Flutter dependencies
         run: flutter pub get
       - name: android integration tests
