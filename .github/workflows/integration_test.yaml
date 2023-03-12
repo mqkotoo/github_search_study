@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: List all simulators
-        run: xcrun instruments -s
+        run: xcrun xctrace list devices
       # get UUID  simulator and boot a simulator on mac from  command line
       - name: Start Simulator
         run: |
