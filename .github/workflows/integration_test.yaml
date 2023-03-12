@@ -20,7 +20,7 @@ jobs:
       - name: Start Simulator
         run: |
           UDID=$(
-            xcrun instruments -s |
+            xcrun xctrace list devices |
             awk \
               -F ' *[][]' \
               -v 'device=${{ matrix.device }}' \
