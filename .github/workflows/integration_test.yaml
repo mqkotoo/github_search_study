@@ -57,7 +57,7 @@ jobs:
         with:
           flutter-version: '3.7.6'
           channel: 'stable'
-      - name: Run Flutter Driver tests
+      - name: android integration tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
