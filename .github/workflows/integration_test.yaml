@@ -19,14 +19,17 @@ jobs:
       # get UUID  simulator and boot a simulator on mac from  command line
       - name: Start Simulator
         run: |
-          UDID=$(
-            xcrun xctrace list devices |
-            awk \
-              -F ' *[][]' \
-              -v 'device=${{ matrix.device }}' \
-              '$1 == device { print $2 }'
-          )
+          UDID=$(xcrun xctrace list devices | grep "^${{ matrix.device }}" | awk '{gsub(/[()]/,""); print $NF}')
+          echo $UDID
           xcrun simctl boot "${UDID:?No Simulator with this name found}"
+#          UDID=$(
+#            xcrun xctrace list devices |
+#            awk \
+#              -F ' *[][]' \
+#              -v 'device=${{ matrix.device }}' \
+#              '$1 == device { print $2 }'
+#          )
+#          xcrun simctl boot "${UDID:?No Simulator with this name found}"
 
       #set up flutter
       # https://github.com/marketplace/actions/flutter-action
