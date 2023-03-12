@@ -58,7 +58,7 @@ jobs:
           flutter-version: '3.7.6'
           channel: 'stable'
       - name: Install Flutter dependencies
-          run: flutter pub get
+        run: flutter pub get
       - name: android integration tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
