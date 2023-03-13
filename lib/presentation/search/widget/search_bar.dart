@@ -29,7 +29,7 @@ class SearchBarState extends ConsumerState<SearchBar> {
   @override
   Widget build(BuildContext context) {
     //通信状況
-    final connectivity = ref.watch(connectivityProvider);
+    // final connectivity = ref.watch(connectivityProvider);
 
     return SafeArea(
       top: false,
@@ -69,20 +69,21 @@ class SearchBarState extends ConsumerState<SearchBar> {
               textInputAction: TextInputAction.search,
               //search押したらデータ取得
               onFieldSubmitted: (text) async {
-                // エラーメッセージに値が入るかをエラー表示のフラグにしているから検索ごとに初期化
-                // android studioのバグなのか、refreshが使われていない判定になる
-                // ignore: unused_result
-                ref.refresh(errorMessageProvider);
 
-                final connectivityResult =
-                    await connectivity.checkConnectivity();
-                //通信がなかったら何もその後の処理はせず、エラーを出す
-                if (connectivityResult == ConnectivityResult.none) {
-                  ref
-                      .read(errorMessageProvider.notifier)
-                      .update((state) => S.of(context).networkError);
-                  return;
-                }
+                // // エラーメッセージに値が入るかをエラー表示のフラグにしているから検索ごとに初期化
+                // // android studioのバグなのか、refreshが使われていない判定になる
+                // // ignore: unused_result
+                // ref.refresh(errorMessageProvider);
+                //
+                // final connectivityResult =
+                //     await connectivity.checkConnectivity();
+                // //通信がなかったら何もその後の処理はせず、エラーを出す
+                // if (connectivityResult == ConnectivityResult.none) {
+                //   ref
+                //       .read(errorMessageProvider.notifier)
+                //       .update((state) => S.of(context).networkError);
+                //   return;
+                // }
                 ref
                     .read(inputRepoNameProvider.notifier)
                     .update((state) => text);
